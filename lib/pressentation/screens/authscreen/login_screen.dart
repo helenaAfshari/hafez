@@ -1,5 +1,5 @@
 
-import 'package:autharization_hanna/core/resource/constants/my_strings/my_strings.dart';
+import 'package:autharization_hanna/core/resource/constants/my_strings.dart';
 import 'package:autharization_hanna/pressentation/screens/authscreen/check_otp_screen.dart';
 import 'package:autharization_hanna/pressentation/blocs/bloc_login/event_login.dart';
 import 'package:autharization_hanna/pressentation/blocs/bloc_login/login_bloc.dart';

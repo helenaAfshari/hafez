@@ -1,5 +1,4 @@
-import 'package:autharization_hanna/pressentation/screens/authscreen/check_otp_screen.dart';
-import 'package:autharization_hanna/pressentation/screens/authscreen/login_screen.dart';
+import 'package:autharization_hanna/core/resource/constants/theme/my_theme.dart';
 import 'package:autharization_hanna/pressentation/screens/home_screen/home_screen.dart';
 import 'package:autharization_hanna/service_locator.dart';
 import 'package:flutter/material.dart';
@@ -12,15 +11,12 @@ void main()async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home:  HomeScreen(),
+      theme: MyTHeme.lightTheme(),
+      home:  const HomeScreen(),
     );
   }
 }

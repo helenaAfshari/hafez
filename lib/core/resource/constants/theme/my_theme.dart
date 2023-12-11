@@ -1,5 +1,5 @@
 
-import 'package:autharization_hanna/core/resource/constants/mycolor/my_colors.dart';
+import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
 import 'package:flutter/material.dart';
 
 class MyTHeme {
@@ -9,7 +9,9 @@ class MyTHeme {
           titleLarge: TextStyle(
             fontFamily: 'IranSans',
             fontWeight: FontWeight.w400,
-            color: MyColor.textColor,
-            fontSize: 23,
+            color: MyColors.textColor,
+            fontSize: 20,
           )));
+
+             
 }
