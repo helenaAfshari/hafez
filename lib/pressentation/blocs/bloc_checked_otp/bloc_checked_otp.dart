@@ -41,10 +41,11 @@ class CheckedOtpBloc extends Bloc<EventChecked, CheckedOtpState> {
       }
     });
   }
-  Future<String> getOtpToken() async {
-    FlutterSecureStorage storage = const FlutterSecureStorage();
-    return await storage.read(key: 'otpToken') ?? '';
-  }
+  //use save token with SecureStorage
+  // Future<String> getOtpToken() async {
+  //   FlutterSecureStorage storage = const FlutterSecureStorage();
+  //   return await storage.read(key: 'otpToken') ?? '';
+  // }
   int get countDown => _countDown;
 
   void startExpirationTimer() {

@@ -1,14 +1,13 @@
 
 import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navigation.dart';
-import 'package:autharization_hanna/core/components/customwidgets/custom_button.dart';
 import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
-import 'package:autharization_hanna/core/resource/constants/theme/my_theme.dart';
 import 'package:autharization_hanna/core/utils/ui_utils.dart';
+import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez.dart';
+import 'package:autharization_hanna/pressentation/screens/home_screen/component/list_buttoms_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,14 +29,13 @@ class HomeScreen extends StatelessWidget {
               child: ListView.separated(
                 physics: const ScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return _buildListItems(index,context);
+                  return listBottomsWidget(index,context);
                 },
                 separatorBuilder: (context, index) => const Gap(5),
-                itemCount: 2,
+                itemCount: 1,
               ),
             ),
             const Gap(30),
-          
             const MyBottomNavigation(),
           ],
         ),
@@ -45,24 +43,5 @@ class HomeScreen extends StatelessWidget {
     ),
   ),
 );
-
   }
-}
-
-Widget _buildListItems(int index,BuildContext context){
-  return 
-  CustomButtonWidget(
-       margin: const EdgeInsets.only(left: 67.0,right: 67.0),
-     height: UIUtils.getConvertedHeight(context,53),
-     width: UIUtils.getConvertedWidth(context,226),
-     borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-     color: MyColors.boxBottomColor,
-     border: Border.all(color: MyColors.borderBottomColor),
-      text: "غزلیات حافظ",
-    textStyle:Theme.of(context)
-    .textTheme
-    .titleLarge,
-    onPress: () {
-    
-  },);
 }

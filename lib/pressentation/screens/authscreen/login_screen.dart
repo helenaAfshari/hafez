@@ -36,7 +36,6 @@ class LoginScreen extends StatelessWidget {
      ),
     );
   } else if (state is LoginOtpError) {
-    // اضافه کردن چک کنید که در صورت خطا، پیام خطا نمایش داده شود
     print("Error: ${state.errorMessage}");
 
   }
@@ -59,7 +58,7 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
         ),
-        Gap(30),
+        const Gap(30),
             InkWell(
           onTap: () {
             context.read<LoginOtpBloc>().add(

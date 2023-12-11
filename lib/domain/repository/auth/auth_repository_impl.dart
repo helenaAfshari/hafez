@@ -3,7 +3,6 @@ import 'package:autharization_hanna/data/remote/auth/auth_api.dart';
 import 'package:autharization_hanna/domain/repository/auth/auth_repository.dart';
 import 'package:autharization_hanna/service_locator.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthRepositoryImp extends AuthRepository {
  @override
@@ -13,8 +12,6 @@ class AuthRepositoryImp extends AuthRepository {
     print("ggggggg${otpToken}");
     return checkOtpResponse;
   }
-
-
 
   @override
   Future<Response> loginOtp(String mobileNumber) async {

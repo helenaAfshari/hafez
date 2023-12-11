@@ -1,16 +1,11 @@
 import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navbar_item.dart';
-import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
 import 'package:autharization_hanna/core/resource/constants/my_pading.dart';
 import 'package:autharization_hanna/core/utils/ui_utils.dart';
-import 'package:autharization_hanna/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
 class MyBottomNavigation extends StatelessWidget {
   const MyBottomNavigation({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     return Positioned(
