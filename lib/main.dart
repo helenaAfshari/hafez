@@ -1,7 +1,8 @@
 import 'package:autharization_hanna/core/resource/constants/theme/my_theme.dart';
-import 'package:autharization_hanna/pressentation/screens/home_screen/home_screen.dart';
+import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:autharization_hanna/service_locator.dart';
 import 'package:flutter/material.dart';
+
 
 void main()async {
    WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: MyTHeme.lightTheme(),
-      home:  const HomeScreen(),
+      home:  const GhazaliatHafezScreen(),
     );
   }
 }

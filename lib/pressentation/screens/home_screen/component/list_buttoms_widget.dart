@@ -3,7 +3,7 @@
 import 'package:autharization_hanna/core/components/customwidgets/custom_button.dart';
 import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
 import 'package:autharization_hanna/core/utils/ui_utils.dart';
-import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez.dart';
+import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:flutter/material.dart';
 
 Widget listBottomsWidget(int index,BuildContext context){
@@ -20,6 +20,6 @@ Widget listBottomsWidget(int index,BuildContext context){
     .textTheme
     .titleLarge,
     onPress: () {
-     Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const GhazaliatHafez(),));
+    // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const GhazaliatHafez(),));
   },);
 }
