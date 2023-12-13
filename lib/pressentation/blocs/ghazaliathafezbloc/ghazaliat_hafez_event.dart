@@ -1,15 +1,64 @@
 
+import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazal_hafez.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class GhazaliatHafezEvent extends Equatable{GhazaliatHafezEvent();}
+// abstract class GhazaliatHafezEvent extends Equatable{
+//   GhazaliatHafezEvent();}
 
-class LoadedEvent extends GhazaliatHafezEvent{
- final int perPage;
- final int page;
-  LoadedEvent({required this.perPage, required this.page});
+//   class InisialEvent extends GhazaliatHafezEvent{
+//   @override
+//   List<Object?> get props => [];
+//   }
+  
+// class LoadedEvent extends GhazaliatHafezEvent{
+//   final int perPage;
+//  final int page;
+//  final List<GhazaliatHafez> ghazaliatHafez;
+//   LoadedEvent( this.perPage, this.page, this.ghazaliatHafez);
+//   @override
+//   List<Object?> get props => [perPage,page,ghazaliatHafez];
+// }
+
+
+
+abstract class GhazaliatHafezEvent extends Equatable{
+  GhazaliatHafezEvent();}
+
+  class InisialEvent extends GhazaliatHafezEvent{
   @override
-  List<Object?> get props => [perPage,page];
+  List<Object?> get props => [];
+  }
+  
+class LoadedEvent extends GhazaliatHafezEvent{
+  
+//  final List<GhazaliatHafez> ghazaliatHafez;
+  @override
+  List<Object?> get props => [];
 }
+
+
+
+
+
+
+
+// class LoadedEvent extends GhazaliatHafezEvent {
+//   final int perPage;
+//   final int page;
+//   final List<GhazaliatHafez> ghazaliatHafez;
+
+//   LoadedEvent({
+//     int? perPage,
+//     int? page,
+//     List<GhazaliatHafez>? ghazaliatHafez,
+//   })  : perPage = perPage ?? 0,
+//         page = page ?? 0,
+//         ghazaliatHafez = ghazaliatHafez ?? [];
+
+//   @override
+//   List<Object?> get props => [perPage, page, ghazaliatHafez];
+// }
+
 
 
 

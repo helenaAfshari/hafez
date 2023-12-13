@@ -1,107 +1,133 @@
 
-
-
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazal_hafez.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
 import 'package:autharization_hanna/domain/repository/ghazaliathafezrepo/ghazaliathafez_repository.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
 import 'package:autharization_hanna/service_locator.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent,GhazaliatHafezState>{
+// class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent,GhazaliatHafezState>{
 
- GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
-   on<GhazaliatHafezEvent>((event, emit) async {
-    if(event is LoadedEvent){
-      try{
-        emit(GhazaliatHafezLoadingState());
-      final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>().ghazaliathafez(event.page,event.perPage);
-      if(ghazaliatResponse.statusCode == 200){
-      // emit(GhazaliatHafezSuccesState());
-        List<GhazaliatHafez> ghazaliatDataList = List.from(ghazaliatResponse.data);
-  emit(GhazaliatHafezSuccesState(ghazaliatDataList));
-          // ارسال دستور به UI با اطلاعات مورد نظر
-         // emit(GhazaliatHafezSuccessState(ghazaliatData));
-      }else if(ghazaliatResponse.statusCode != 200){
+//  GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
+   
+//    on<GhazaliatHafezEvent>((event, emit) async {
+//     if(event is LoadedEvent){
+//       try{
+//         emit(GhazaliatHafezLoadingState());
+//       final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>().ghazaliathafez(event.page,event.perPage);
+//       if(ghazaliatResponse.statusCode == 200){
+//       // emit(GhazaliatHafezSuccesState());
+//         //List<GhazaliatHafez> ghazaliatDataList = List.from(ghazaliatResponse.data);
+//          emit(GhazaliatHafezSuccesState(event.ghazaliatHafez));
+//           // ارسال دستور به UI با اطلاعات مورد نظر
+//          // emit(GhazaliatHafezSuccessState(ghazaliatData));
+//       }else if(ghazaliatResponse.statusCode != 200){
+//       emit(GhazaliatHafezErrorState("معتبر نیست"));
+//       }
+//       }catch(e){
+//        GhazaliatHafezErrorState("دسترسی به اینترنت قطع شده است");
+//       }
+//     //   try{
+//     //    final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>().ghazaliathafez(event.page,event.perPage);
+//     //  if(ghazaliatResponse.statusCode == 200){
+//     //   print("ذریافت شد statuseCode200");
+//     //   List<GhazaliatHafezModel> ghazaliatHafezList =[];
+//     //   emit(GhazaliatHafezSuccesState(ghazaliatHafezList));
+
+//     //  }else if(ghazaliatResponse.statusCode != 200){
+//     //    print("معتبر نیست");
+//     //    emit(GhazaliatHafezErrorState( "معتبر نیست"));
+//     //  }
+//     //   }catch(e){
+//     //     print(e);
+//     //     emit(GhazaliatHafezErrorState( "معتبر نیست"));
+//     //   }  
+//     }
+//    }
+//    );
+// }
+// }
+
+
+class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> {
+
+  GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
+ on<GhazaliatHafezEvent>((event, emit) async {
+  int page =2;
+  int perPage=9;
+//List<GhazaliatHafez> ghazaliatHafez =[] ;
+List<GhazaliatHafez> ghazaliatHafez =[] ;
+
+if (event is LoadedEvent) {
+  print("kkkkkk");
+  try {
+    print("llllll");
+    emit(GhazaliatHafezLoadingState());
+    final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>().ghazaliathafez(page, perPage);
+    print("jjjjj${ghazaliatResponse}");
+    
+    if (ghazaliatResponse.statusCode == 200) {
+      // فرض بر این است که متد ghazaliathafez یک لیست از نوع GhazaliatHafez را برمی‌گرداند
+      // ghazaliatHafez = ghazaliatResponse.data; // این خط را بر اساس ساختار واقعی پاسخ API تغییر دهید
+      print("55555555");
+      emit(GhazaliatHafezSuccesState(ghazaliatHafez));
+      print("kooooooooo${ghazaliatHafez}");
+    } else {
       emit(GhazaliatHafezErrorState("معتبر نیست"));
-      }
-      }catch(e){
-       GhazaliatHafezErrorState("دسترسی به اینترنت قطع شده است");
-      }
-    //   try{
-    //    final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>().ghazaliathafez(event.page,event.perPage);
-    //  if(ghazaliatResponse.statusCode == 200){
-    //   print("ذریافت شد statuseCode200");
-    //   List<GhazaliatHafezModel> ghazaliatHafezList =[];
-    //   emit(GhazaliatHafezSuccesState(ghazaliatHafezList));
-
-    //  }else if(ghazaliatResponse.statusCode != 200){
-    //    print("معتبر نیست");
-    //    emit(GhazaliatHafezErrorState( "معتبر نیست"));
-    //  }
-    //   }catch(e){
-    //     print(e);
-    //     emit(GhazaliatHafezErrorState( "معتبر نیست"));
-    //   }  
     }
-   });
+  } catch (e) {
+  // ignore: deprecated_member_use
+  if (e is DioError) {
+    if (e.response != null) {
+      print("Response data: ${e.response!.data}");
+      print("Response status: ${e.response!.statusCode}");
+      // دیگر اطلاعات مفید
+    } else {
+      print("No response from the server${e.toString()}");
+    }
+  } else {
+    print("Unexpected error: $e");
+  }
 }
+
+}});
+  }
 }
-
-
-
-
-
 
 
 
 // class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent,GhazaliatHafezState>{
-//   List<GhazaliatHafezModel> ghazaliatData = [];
-//   //این عدد به هر لود بدیم  عددشو که بعدش صفحه بعدی را برای ما بیاره 
-//   int _perPageNumber = 0;
-//   int _PageNumber = 0;
-//   //GhazaliatHafezRepository postRepository= GhazaliatHafezRepository();
-//  final ghazaliatResponse =  serviceLocator<GhazaliatHafezRepository>().ghazaliathafez(0,0);
-//   GhazaliatHafezBloc(): super(GhazaliatHafezInitialState()){
-//   on<InitialLoadEvent>(_loadInisialData);
-//   on<LoadMoreEvent>(_loadMoreEvent);
-// }
 
-//    _loadInisialData(InitialLoadEvent event, Emitter<GhazaliatHafezState> emit)async {
-//     emit(GhazaliatHafezLoadingState());
-//   try{
-//     final response =await serviceLocator<GhazaliatHafezRepository>().ghazaliathafez(_perPageNumber,_PageNumber);
-//     if(response.statusCode == 200){
-//       List<dynamic> rowData = response.data;
+//  GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
+   
+//    on<GhazaliatHafezEvent>((event, emit) async {
+//     if(event is LoadedEvent){
+//       try{
+//         emit(GhazaliatHafezLoadingState());
+//       final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>().ghazaliathafez(event.page,event.perPage);
+//       if(ghazaliatResponse.statusCode == 200){
+//       // emit(GhazaliatHafezSuccesState());
+//         //List<GhazaliatHafez> ghazaliatDataList = List.from(ghazaliatResponse.data);
+//          emit(GhazaliatHafezSuccesState(event.ghazaliatHafez));
+//           // ارسال دستور به UI با اطلاعات مورد نظر
+//          // emit(GhazaliatHafezSuccessState(ghazaliatData));
+//       }else if(ghazaliatResponse.statusCode != 200){
+//       emit(GhazaliatHafezErrorState("معتبر نیست"));
+//       }
+//       }catch(e){
+//        GhazaliatHafezErrorState("دسترسی به اینترنت قطع شده است");
+//       }}
+//       });
       
-//       ghazaliatData = 
-//       rowData.map((e) => GhazaliatHafezModel.fromJason(e)).toList();
-//       emit(GhazaliatHafezSuccesState(ghazaliatData));
-//     }
-//   }catch(e){
-//    emit(GhazaliatHafezErrorState(e.toString()));
-
-//      }
-//   }
-// _loadMoreEvent(LoadMoreEvent event, Emitter<GhazaliatHafezState> emit)async {
-//     _perPageNumber++;
-//     _PageNumber++;
-//       emit(GhazaliatHafezLoadMoreState());
-//   try{
-//     final response =await serviceLocator<GhazaliatHafezRepository>().ghazaliathafez(_perPageNumber,_PageNumber);
-//     if(response.statusCode == 200){
-//       List<dynamic> rowData = response.data;
+//       }
+//       }
       
-//      List<GhazaliatHafezModel> loadedData= 
-//       rowData.map((e) => GhazaliatHafezModel.fromJason(e)).toList();
-//       //اینجا اینو نوشتیم که لیست به اخرش رسید addکنیم بعد از نمایش لودینگ دوباره دیتا بیلد
-//       ghazaliatData.addAll(loadedData);
-//       emit(GhazaliatHafezSuccesState(ghazaliatData));
-//     }
-//   }catch(e){
-//    emit(GhazaliatHafezErrorState(e.toString()));
+    
+      
 
-//      }
-//   }
-// }
+
+
+

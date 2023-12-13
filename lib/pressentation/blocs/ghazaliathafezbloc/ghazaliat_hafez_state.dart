@@ -27,7 +27,7 @@ class GhazaliatHafezErrorState extends GhazaliatHafezState{
 }
 
 class GhazaliatHafezSuccesState extends GhazaliatHafezState{
-  final List<GhazaliatHafez> ghazaliatHafez;
+  List<GhazaliatHafez> ghazaliatHafez=[];
   GhazaliatHafezSuccesState(this.ghazaliatHafez);
   @override
   List<Object?> get props => [ghazaliatHafez];

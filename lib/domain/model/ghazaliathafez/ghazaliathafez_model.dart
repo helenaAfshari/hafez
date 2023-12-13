@@ -2,10 +2,9 @@
 class GhazalItemModelEntity {
   int? id;
   String? title;
-  GhazalItemModelEntity.fromJason(Map<dynamic,dynamic> json)
+  GhazalItemModelEntity.fromJason(Map<String,dynamic> json)
   : id = json['id'],
     title=json['title'];
-    
     static List<GhazalItemModelEntity>parseGhazalTo(
       List<dynamic>ghazalTojason){
        final List<GhazalItemModelEntity>ghazalToList=[];

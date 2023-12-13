@@ -15,8 +15,7 @@ class LoginOtpBloc extends Bloc<LoginOtpEvent, LoginOtpState> {
             emit(LoginOtpError(errorMessage:"شماره موبایل باید 11 رقم و با 0 شروع شود" ) );
           } else {
             emit(LoginOtpLoading());
-            final loginOtpResponse = await serviceLocator<AuthRepository>()
-                .loginOtp(event.mobileNumber);
+            final loginOtpResponse = await serviceLocator<AuthRepository>().loginOtp(event.mobileNumber);
             if (loginOtpResponse.statusCode == 200) {
               print("درست هستتتتت");
               emit(LoginOtpSuccess());

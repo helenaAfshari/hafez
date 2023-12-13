@@ -7,11 +7,10 @@ import 'package:dio/src/response.dart';
 class GhazaliatHafezApiImpl extends GhazaliatHafezApi{
   @override
   Future<Response> poems(int perPage, int page)async {
-    perPage ?? 0;
-    page ?? 0;
    final poemsResponse = await serviceLocator<ApiProviderImp>().get(
-     'https://api.hafezname.ir/api/poems?per_page=$perPage&page=$page',
+     'https://api.hafezname.ir/api/poems?page=$page&per_page=$perPage',
    );
+  // print("pppppppp${poemsResponse}");
    return poemsResponse;
   }
 }
