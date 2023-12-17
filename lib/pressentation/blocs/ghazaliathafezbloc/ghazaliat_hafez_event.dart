@@ -21,15 +21,20 @@ import 'package:equatable/equatable.dart';
 
 
 
-abstract class GhazaliatHafezEvent extends Equatable{
-  GhazaliatHafezEvent();}
+abstract class GhazaliatHafezEvent extends Equatable{}
+class GhazaliatHafezStart extends GhazaliatHafezEvent{
+  @override
+  // TODO: implement props
+  List<Object?> get props =>[];
 
-  class InisialEvent extends GhazaliatHafezEvent{
+}
+
+  class InisialEvent extends GhazaliatHafezStart{
   @override
   List<Object?> get props => [];
   }
   
-class LoadedEvent extends GhazaliatHafezEvent{
+class LoadedEvent extends GhazaliatHafezStart{
   
 //  final List<GhazaliatHafez> ghazaliatHafez;
   @override

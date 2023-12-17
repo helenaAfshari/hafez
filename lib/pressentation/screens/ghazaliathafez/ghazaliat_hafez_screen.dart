@@ -52,55 +52,97 @@ import 'package:flutter_bloc/flutter_bloc.dart';
       
 //   }
 // }
-//////////////////////////
 
 class GhazaliatHafezScreen extends StatelessWidget {
   const GhazaliatHafezScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GhazaliatHafezBloc(),
-      child: SafeArea(
-        child: Scaffold(
-          body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
-            builder: (context, state) {
-              if (state is GhazaliatHafezInitialState ) {
-                return const Center(
-                  child: CircularProgressIndicator(color: Colors.blue),
-                );
-              } else if (state is GhazaliatHafezSuccesState) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: ListView.builder(
-                    itemCount: state.ghazaliatHafez.length,
-                    itemBuilder: (context, index) {
-                    //GhazaliatHafez ghazalItem = state.ghazaliatHafez[index];
-                      return Card(
-                        child: ListTile(
-                          title: Text(
-                           "vvvvvv${ state.ghazaliatHafez[index].ghazaliatHafezToList[0].title!}"),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              } else if (state is GhazaliatHafezErrorState) {
-                return Center(
-                  child: Text(state.errorText),
-                );
-              } else {
-                // در صورتی که حالت دیگری وجود دارد
-                return Container();
-              }
-            },
-          ),
+    return BlocProvider<GhazaliatHafezBloc>(
+      create: (_) => GhazaliatHafezBloc()..add(LoadedEvent()),
+      child: Scaffold(
+        body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
+          builder: (context, state) {
+            if (state is GhazaliatHafezLoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(color: Colors.blue),
+              );
+            } else if (state is GhazaliatHafezSuccesState) {
+              print("state.ghazaliatHafez ${state.ghazaliatHafez}");
+              return ListView.builder(
+                itemCount: state.ghazaliatHafez.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      title: Text(state.ghazaliatHafez[index].title),
+                    ),
+                  );
+                },
+              );
+            } else if (state is GhazaliatHafezErrorState) {
+              return Center(
+                child: Text(state.errorText),
+              );
+            } else {
+              print('cannot detect state');
+              return Container();
+            }
+          },
         ),
       ),
     );
   }
 }
+
+
+//////////////////////////
+//درسته
+// class GhazaliatHafezScreen extends StatelessWidget {
+//   const GhazaliatHafezScreen({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return  Scaffold(
+//           floatingActionButton: FloatingActionButton(onPressed: (){
+//             context.read<GhazaliatHafezBloc>().add(LoadedEvent());
+//           }),
+//           body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
+//             builder: (context, state) {
+//               if (state is GhazaliatHafezLoadingState ) {
+//                 return const Center(
+//                   child: CircularProgressIndicator(color: Colors.blue),
+//                 );
+//               } else if (state is GhazaliatHafezSuccesState) {
+//                 print("state.ghazaliatHafez ${state.ghazaliatHafez}");
+//                 return ListView.builder(
+//                     itemCount: state.ghazaliatHafez.length,
+//                     itemBuilder: (context, index) {
+//                     //GhazaliatHafez ghazalItem = state.ghazaliatHafez[index];
+//                       return Card(
+//                         child: ListTile(
+//                           title: Text(
+//                            state.ghazaliatHafez[index].title),
+//                         ),
+//                       );
+//                     },
+//                   )
+//                 ;
+//               } else if (state is GhazaliatHafezErrorState) {
+//                 return Center(
+//                   child: Text(state.errorText),
+//                 );
+//               } else {
+//                 // در صورتی که حالت دیگری وجود دارد
+
+//                 print('cannot detect state');
+//                 return Container();
+//               }
+//             },
+//           ),
+//         )
+//       ;
+//   }
+// }
 
 // ////////////////////////////
 // ///

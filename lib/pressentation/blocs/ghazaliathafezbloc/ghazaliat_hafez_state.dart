@@ -4,7 +4,6 @@ import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_m
 import 'package:equatable/equatable.dart';
 
 abstract class GhazaliatHafezState extends Equatable{}
-
 class GhazaliatHafezInitialState extends GhazaliatHafezState{
   GhazaliatHafezInitialState();
   @override
@@ -27,7 +26,7 @@ class GhazaliatHafezErrorState extends GhazaliatHafezState{
 }
 
 class GhazaliatHafezSuccesState extends GhazaliatHafezState{
-  List<GhazaliatHafez> ghazaliatHafez=[];
+  final List<GhazalItemModelEntity> ghazaliatHafez;
   GhazaliatHafezSuccesState(this.ghazaliatHafez);
   @override
   List<Object?> get props => [ghazaliatHafez];
