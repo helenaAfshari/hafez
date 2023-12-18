@@ -37,3 +37,20 @@ class GhazaliatHafezLoadMoreState extends GhazaliatHafezState{
   @override
   List<Object?> get props => [];
 }
+
+class UpdatedCategoryState extends GhazaliatHafezState {
+  final bool isHeartIcon;
+  UpdatedCategoryState(this.isHeartIcon);
+  @override
+  List<Object> get props => [isHeartIcon];
+}
+
+class GhazaliatHafezToggleState extends GhazaliatHafezState {
+  final bool isHeartSelected;
+
+   GhazaliatHafezToggleState(this.isHeartSelected);
+
+  @override
+  List<Object?> get props => [isHeartSelected];
+}
+

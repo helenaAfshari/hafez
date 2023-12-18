@@ -11,7 +11,8 @@ class MyTHeme {
             fontWeight: FontWeight.w400,
             color: MyColors.textColor,
             fontSize: 20,
-          )));
+          )),
+          );
 
              
 }

@@ -50,15 +50,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // }
 // }
 
-class GhazaliatHafezBloc
-    extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> {
+class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> {
   GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
     on<GhazaliatHafezEvent>((event, emit) async {
       int page = 2;
-      int perPage = 9;
+      int perPage = 3;
 //List<GhazaliatHafez> ghazaliatHafez =[] ;
       List<GhazalItemModelEntity> ghazaliatHafez = [];
-
       print(event);
       if (event is LoadedEvent) {
             
@@ -83,22 +81,57 @@ class GhazaliatHafezBloc
           }
         } catch (e) {
           // ignore: deprecated_member_use
-          if (e is DioError) {
-            if (e.response != null) {
-              print("Response data: ${e.response!.data}");
-              print("Response status: ${e.response!.statusCode}");
-              // دیگر اطلاعات مفید
-            } else {
-              print("No response from the server${e.toString()}");
-            }
-          } else {
-            print("Unexpected error: $e");
-          }
+          print(" متصل نیست به اینترت");
+          } 
         }
-      }
-    });
+    //     else if (event is ToggleIconEvent) {
+    //   // Toggle the icon or any other state
+    //   final currentState = state;
+
+    //   if (currentState is GhazaliatHafezSuccesState) {
+    //     final updatedState = GhazaliatHafezSuccesState(
+    //       currentState.ghazaliatHafez,
+    //       isIconToggled: !currentState.isIconToggled,
+    //     );
+    //     yield updatedState;
+    //   }
+    // }
+      });
+    }
   }
-}
+
+////////////////////////
+
+// BLoC
+// class GhazaliatHafezBloc
+//     extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> {
+//   GhazaliatHafezBloc() : super(GhazaliatHafezInitialState());
+
+//   @override
+//   Stream<GhazaliatHafezState> mapEventToState(
+//       GhazaliatHafezEvent event) async* {
+//     if (event is LoadedEvent) {
+//       // Handle the loaded event
+//       // Emit the appropriate state
+//     } else if (event is ToggleIconEvent) {
+//       // Toggle the icon or any other state
+//       final currentState = state;
+
+//       if (currentState is GhazaliatHafezSuccesState) {
+//         final updatedState = GhazaliatHafezSuccesState(
+//           currentState.ghazaliatHafez,
+//           isIconToggled: !currentState.isIconToggled,
+//         );
+//         yield updatedState;
+//       }
+//     }
+//   }
+// }
+
+
+
+
+
 
 // class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent,GhazaliatHafezState>{
 
