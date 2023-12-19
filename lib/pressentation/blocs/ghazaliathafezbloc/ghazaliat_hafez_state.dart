@@ -54,3 +54,16 @@ class GhazaliatHafezToggleState extends GhazaliatHafezState {
   List<Object?> get props => [isHeartSelected];
 }
 
+class postLoadMoreState extends GhazaliatHafezState{
+  @override
+  List<Object?> get props => [];
+}
+
+class GhazaliatHafezEndOfListState extends GhazaliatHafezState {
+  final String message;
+
+  GhazaliatHafezEndOfListState({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

@@ -7,16 +7,12 @@ import 'package:autharization_hanna/core/components/customwidgets/custom_divider
 import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
 import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
 import 'package:autharization_hanna/core/utils/ui_utils.dart';
-import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazal_hafez.dart';
-import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:share_plus/share_plus.dart';
-
 // class GhazaliatHafezScreen extends StatelessWidget {
 //   const GhazaliatHafezScreen({super.key});
 
@@ -63,176 +59,174 @@ import 'package:share_plus/share_plus.dart';
 //   }
 // }
 
-class GhazaliatHafezScreen extends StatelessWidget {
+class GhazaliatHafezScreen extends StatefulWidget {
   const GhazaliatHafezScreen({super.key});
 
   @override
+  State<GhazaliatHafezScreen> createState() => _GhazaliatHafezScreenState();
+}
+
+class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
+//  bool loadingMore = false;
+
+  ScrollController scrollController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() {
+  if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+      BlocProvider.of<GhazaliatHafezBloc>(context).add(LoadMoreEvent());
+  }
+});
+
+    
+  }
+  @override
   Widget build(BuildContext context) {
     bool isHeartSelected =false;
-    bool isShare =false;
-  
-    return BlocProvider<GhazaliatHafezBloc>(
-      create: (_) => GhazaliatHafezBloc()..add(LoadedEvent()),
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: MyColors.primaryColor,
-          body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
-            builder: (context, state) {
-              if (state is GhazaliatHafezLoadingState) {
-                return const Center(
-                  child: CircularProgressIndicator(color: Colors.blue),
-                );
-              } else if (state is GhazaliatHafezSuccesState) {
-                print("state.ghazaliatHafez ${state.ghazaliatHafez}");
-                return
-                SizedBox(
-        height:
-              UIUtils.getConvertedHeight(context, UIUtils.screenHeightInFigma),
-          width: UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-          const MyAppBar(),
-          const Gap(35),
-            Expanded(
-              child: ListView.separated(
-                physics: const ScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return 
-                  Container(
-                    decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: MyColors.boxBottomColor,
-                     border: Border.all(color: MyColors.borderBottomColor)
-                    ),
-                    margin: const EdgeInsets.only(left: 29.0,right: 29.0),
-         height: UIUtils.getConvertedHeight(context,90),
-         width: UIUtils.getConvertedWidth(context,292),
-         
-         child: Padding(
-           padding:  EdgeInsets.only(right: MyDimensions.medium+2),
-           child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 textDirection: TextDirection.rtl,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: MyColors.primaryColor,
+        body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
+          builder: (context, state) {
+             if (state is GhazaliatHafezEndOfListState) {
+      // نمایش پیام یا انجام دیگر اقدامات
+      return Center(
+        child: Text(state.message),
+      );
+    }
+            if (state is GhazaliatHafezLoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(color: Colors.blue),
+              );
+            } else if (state is GhazaliatHafezSuccesState) {
+              print("state.ghazaliatHafez ${state.ghazaliatHafez}");
+              return
+              SizedBox(
+      height:
+            UIUtils.getConvertedHeight(context, UIUtils.screenHeightInFigma),
+        width: UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+        //const MyAppBar(),
+        const Gap(35),
+          Expanded(
+            child: ListView.separated(
+              controller: scrollController,
+              physics: const ScrollPhysics(),
+              itemBuilder: (context, index) {
+           
+                   return 
+                Container(
+                  decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: MyColors.boxBottomColor,
+                   border: Border.all(color: MyColors.borderBottomColor)
+                  ),
+                  margin: const EdgeInsets.only(left: 29.0,right: 29.0),
+       height: UIUtils.getConvertedHeight(context,90),
+       width: UIUtils.getConvertedWidth(context,292),
+       child: Padding(
+         padding:  EdgeInsets.only(right: MyDimensions.medium+2),
+         child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               textDirection: TextDirection.rtl,
+               children: [
+                 //const Gap(10),
+                 Padding(
+               padding: const EdgeInsets.only(left: 5,top: 5),
+               child: Row(
+                 mainAxisAlignment: MainAxisAlignment.start,
                  children: [
-                   //const Gap(10),
-                   Padding(
-                 padding: const EdgeInsets.only(left: 5,top: 5),
-                 child: Row(
-                   mainAxisAlignment: MainAxisAlignment.start,
-                   children: [
-            GestureDetector(
+          
+          const Gap(3),
+          StatefulBuilder(builder: (context, setState) {
+            return GestureDetector(
               onTap: () {
-                
+                setState(() {
+                isHeartSelected=!isHeartSelected;
+                },);
               },
-              child: Image.asset("assets/icons/share.png")),
-  //              StatefulBuilder(builder: (context, setState) {
-  //             return GestureDetector(
-  //               onTap: ()  {
-  //                 final urlPreview = 'https://www.youtube.com/watch?v=CNUBhb_cM6E';
-  //                  //Share.share(urlPreview);
-  //                  setState(() {
-  //                    Share.share(urlPreview);
-  //                  },);
-  // //                 setState(() {
-  // //                   print("444444");
-                  
-  // //              //  String message = 'com.example.hafez-2';
-  // //  // Share.share(message);
-  // //                 },);
-  //               },
-  //               child:  Image.asset(
-  //            "assets/icons/share.png",
-  //             ));
-  //           },),
-            const Gap(3),
-
-            StatefulBuilder(builder: (context, setState) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                  isHeartSelected=!isHeartSelected;
-                  },);
-                },
-                child:  Image.asset(
-            isHeartSelected ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",
-              ));
-            },),
-                   ],
-                 ),
-                   ),
-                   Text(state.ghazaliatHafez[index].title,style: Theme.of(context)
-                     .textTheme
-                     .titleLarge!.copyWith(fontSize: 12),
-                     ),
-                   Text("الی یا ابها",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 10),),
-                   const Gap(10),
-                  CustomDivider(indent: 10,endIndent: 10,),
+              child:  Image.asset(
+          isHeartSelected ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",
+            ));
+          },),
                  ],
                ),
-         ),
-      
-                  );
-                },
-                separatorBuilder: (context, index) => const Gap(10),
-                itemCount: state.ghazaliatHafez.length,
-              ),
-            ),
-            const Gap(30),
-            const MyBottomNavigation(),
-          ],
-        ),
-          );
-              //      Expanded(
-              //   child: ListView.separated(
-              //     physics: const ScrollPhysics(),
-              //     itemBuilder: (context, index) {
-              //       return 
-              //       Container();
-              //     },
-              //     separatorBuilder: (context, index) => const Gap(5),
-              //     itemCount: 1,
-              //   ),
-              // );
-          //          SizedBox(
-          //           height: UIUtils.getConvertedHeight(context,550),
-          //  width: UIUtils.getConvertedWidth(context,226),
-          //            child: ListView.builder(
-          //                itemCount: state.ghazaliatHafez.length,
-          //                itemBuilder: (context, index) {
-          //                  return Container(
-          //                     margin: const EdgeInsets.only(left: 67.0,right: 67.0),
-          //                   height: 50,
-          //                   width: 50,
-          //                   color: Colors.amber,
-          //                  );
-          //                  // return Card(
-          //                  //   // child: ListTile(
-          //                  //   //   title: Text(state.ghazaliatHafez[index].title),
-          //                  //   // ),
-          //                  //   child: Container(
-          //                  //     color: Colors.amber,
-                          
-          //                  //   ),
-          //                  // );
-          //                },
-          //              ),
-          //          );
-              } 
-      //         else if (state is GhazaliatHafezToggleState) {
-      //           isHeartSelected = state.isHeartSelected;
-        
-      // }
-               else if (state is GhazaliatHafezErrorState) {
-                return Center(
-                  child: Text(state.errorText),
+                 ),
+                 Text(state.ghazaliatHafez[index].title,style: Theme.of(context)
+                   .textTheme
+                   .titleLarge!.copyWith(fontSize: 12),
+                   ),
+                 Text("الی یا ابها",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 10),),
+                 const Gap(10),
+                CustomDivider(indent: 10,endIndent: 10,),
+               ],
+             ),
+       ),
+    
                 );
-              } else {
-                print('cannot detect state');
-                return Container();
-              }
-            },
-          ),
+                     
+              },
+              separatorBuilder: (context, index) => const Gap(10),
+              itemCount: state.ghazaliatHafez.length),
+            ),
+          
+          const Gap(30),
+         // const MyBottomNavigation(),
+        ],
+      ),
+        );
+            //      Expanded(
+            //   child: ListView.separated(
+            //     physics: const ScrollPhysics(),
+            //     itemBuilder: (context, index) {
+            //       return 
+            //       Container();
+            //     },
+            //     separatorBuilder: (context, index) => const Gap(5),
+            //     itemCount: 1,
+            //   ),
+            // );
+        //          SizedBox(
+        //           height: UIUtils.getConvertedHeight(context,550),
+        //  width: UIUtils.getConvertedWidth(context,226),
+        //            child: ListView.builder(
+        //                itemCount: state.ghazaliatHafez.length,
+        //                itemBuilder: (context, index) {
+        //                  return Container(
+        //                     margin: const EdgeInsets.only(left: 67.0,right: 67.0),
+        //                   height: 50,
+        //                   width: 50,
+        //                   color: Colors.amber,
+        //                  );
+        //                  // return Card(
+        //                  //   // child: ListTile(
+        //                  //   //   title: Text(state.ghazaliatHafez[index].title),
+        //                  //   // ),
+        //                  //   child: Container(
+        //                  //     color: Colors.amber,
+                        
+        //                  //   ),
+        //                  // );
+        //                },
+        //              ),
+        //          );
+            } 
+    //         else if (state is GhazaliatHafezToggleState) {
+    //           isHeartSelected = state.isHeartSelected;
+      
+    // }
+             else if (state is GhazaliatHafezErrorState) {
+              return Center(
+                child: Text(state.errorText),
+              );
+            } else {
+              print('cannot detect state');
+              return Container();
+            }
+          },
         ),
       ),
     );

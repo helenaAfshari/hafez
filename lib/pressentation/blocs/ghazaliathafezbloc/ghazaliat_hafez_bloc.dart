@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazal_hafez.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
 import 'package:autharization_hanna/domain/repository/ghazaliathafezrepo/ghazaliathafez_repository.dart';
@@ -51,25 +53,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // }
 
 class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> {
-  GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
-    on<GhazaliatHafezEvent>((event, emit) async {
-      int page = 2;
-      int perPage = 3;
-//List<GhazaliatHafez> ghazaliatHafez =[] ;
+     int page =0;
+     int perPage=1;
+
       List<GhazalItemModelEntity> ghazaliatHafez = [];
+  GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
+    //on<GhazaliatHafezEvent>(_loadInisialData);
+    on<GhazaliatHafezEvent>((event, emit) async {
+      // int page = 2;
+      // int perPage = 3;
+//List<GhazaliatHafez> ghazaliatHafez =[] ;
+      
       print(event);
       if (event is LoadedEvent) {
-            
         print("kkkkkk");
         try {
           print("llllll");
           emit(GhazaliatHafezLoadingState());
           final ghazaliatResponse =
               await serviceLocator<GhazaliatHafezRepository>()
-                  .ghazaliathafez(page, perPage);
+                  .ghazaliathafez(page,perPage);
           print("jjjjj${ghazaliatResponse}");
           ghazaliatHafez = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
-
           if (ghazaliatResponse.statusCode == 200) {
             // فرض بر این است که متد ghazaliathafez یک لیست از نوع GhazaliatHafez را برمی‌گرداند
             // ghazaliatHafez = ghazaliatResponse.data; // این خط را بر اساس ساختار واقعی پاسخ API تغییر دهید
@@ -97,8 +102,141 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
     //   }
     // }
       });
+    //    on<LoadMoreEvent>((event, emit) async {
+    //       List<GhazalItemModelEntity> loadedData = [];
+    //     page++;
+    //     perPage++;
+    //        print(event);
+    //   if (event is LoadMoreEvent) {
+    //     print("kkkkkk");
+    //     try {
+    //       print("llllll");
+    //       emit(postLoadMoreState());
+    //       final ghazaliatResponse =
+    //           await serviceLocator<GhazaliatHafezRepository>()
+    //               .ghazaliathafez(page,perPage);
+    //       print("jjjjj${ghazaliatResponse}");
+
+    //       loadedData = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
+    //     ghazaliatHafez.addAll(loadedData);
+    //       if (ghazaliatResponse.statusCode == 200) {
+    //         // فرض بر این است که متد ghazaliathafez یک لیست از نوع GhazaliatHafez را برمی‌گرداند
+    //         // ghazaliatHafez = ghazaliatResponse.data; // این خط را بر اساس ساختار واقعی پاسخ API تغییر دهید
+    //         print("55555555");
+    //         emit(GhazaliatHafezSuccesState(ghazaliatHafez));
+    //         print("kooooooooo${ghazaliatHafez}");
+    //       } else {
+    //         emit(GhazaliatHafezErrorState("معتبر نیست"));
+    //       }
+    //     } catch (e) {
+    //       // ignore: deprecated_member_use
+    //       print(" متصل نیست به اینترت");
+    //       } 
+    //     }
+    //    });
+
+    // }
+
+   on<LoadMoreEvent>((event, emit) async {
+   String message;
+   List<GhazalItemModelEntity> loadedData = [];
+  page++;
+  perPage++;
+
+  if (event is LoadMoreEvent) {
+    try {
+      emit(postLoadMoreState());
+      final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>()
+          .ghazaliathafez(page, perPage);
+
+      print("jjjjj${ghazaliatResponse}");
+
+      loadedData = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
+      ghazaliatHafez.addAll(loadedData);
+
+      if (loadedData.isEmpty) {
+        // داده جدیدی برای لود وجود ندارد، بنابراین می‌توانید فرض کنید به انتهای لیست رسیده‌اید
+        emit(GhazaliatHafezEndOfListState(message: "ffffff"));
+      } else {
+        if (ghazaliatResponse.statusCode == 200) {
+          emit(GhazaliatHafezSuccesState(ghazaliatHafez));
+          print("kooooooooo${ghazaliatHafez}");
+        } else {
+          emit(GhazaliatHafezErrorState("معتبر نیست"));
+        }
+      }
+    } catch (e) {
+      // ignore: deprecated_member_use
+      print(" متصل نیست به اینترنت");
     }
   }
+});
+}
+  // @override
+  // Stream<GhazaliatHafezState> mapEventToState(GhazaliatHafezEvent event) async* {
+  //   if (event is LoadMoreEvent) {
+  //     yield GhazaliatHafezLoading();
+
+  //     try {
+  //       final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>().ghazaliathafez(page, perPage);
+  //       final loadedData = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
+
+  //       ghazaliatHafez.addAll(loadedData);
+
+  //       if (loadedData.isEmpty) {
+  //         // داده جدیدی برای لود وجود ندارد، بنابراین می‌توانید فرض کنید به انتهای لیست رسیده‌اید
+  //         yield GhazaliatHafezEndOfList(message: "ffffff");
+  //       } else {
+  //         if (ghazaliatResponse.statusCode == 200) {
+  //           yield GhazaliatHafezSucces(ghazaliatHafez);
+  //         } else {
+  //           yield GhazaliatHafezError("معتبر نیست");
+  //         }
+  //       }
+  //     } catch (e) {
+  //       // ignore: deprecated_member_use
+  //       print("متصل نیست به اینترنت");
+  //     }
+  //   }
+  // }
+}
+
+  
+//   _loadInisialData(GhazaliatHafezEvent event, Emitter<GhazaliatHafezState> emit) async {
+//     emit(GhazaliatHafezLoadingState());
+//      int page = 2;
+//       int perPage = 3;
+// //List<GhazaliatHafez> ghazaliatHafez =[] ;
+//       List<GhazalItemModelEntity> ghazaliatHafez = [];
+//       print(event);
+//       if (event is LoadedEvent) {
+        
+//         print("kkkkkk");
+//         try {
+//           print("llllll");
+//           emit(GhazaliatHafezLoadingState());
+//           final ghazaliatResponse =
+//               await serviceLocator<GhazaliatHafezRepository>()
+//                   .ghazaliathafez(page, perPage);
+//           print("jjjjj${ghazaliatResponse}");
+//           ghazaliatHafez = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
+
+//           if (ghazaliatResponse.statusCode == 200) {
+//             // فرض بر این است که متد ghazaliathafez یک لیست از نوع GhazaliatHafez را برمی‌گرداند
+//             // ghazaliatHafez = ghazaliatResponse.data; // این خط را بر اساس ساختار واقعی پاسخ API تغییر دهید
+//             print("55555555");
+//             emit(GhazaliatHafezSuccesState(ghazaliatHafez));
+//             print("kooooooooo${ghazaliatHafez}");
+//           } else {
+//             emit(GhazaliatHafezErrorState("معتبر نیست"));
+//           }
+//         } catch (e) {
+//           // ignore: deprecated_member_use
+//           print(" متصل نیست به اینترت");
+//           } 
+//         }
+//   }
+
 
 ////////////////////////
 

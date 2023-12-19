@@ -1,5 +1,6 @@
 import 'package:autharization_hanna/core/resource/constants/theme/my_theme.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
+import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:autharization_hanna/service_locator.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +20,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: MyTHeme.lightTheme(),
-      home: GhazaliatHafezScreen(),
-      // home: BlocProvider(
-      //   create: (_) =>GhazaliatHafezBloc(),
-      //   child: const GhazaliatHafezScreen()
-      // ),
+     // home: GhazaliatHafezScreen(),
+      home: BlocProvider(
+        create: (context) =>GhazaliatHafezBloc()..add(LoadedEvent()),
+        child: const GhazaliatHafezScreen()
+      ),
     );
   }
 }

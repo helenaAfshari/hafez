@@ -39,6 +39,10 @@ class LoadedEvent extends GhazaliatHafezStart{
   @override
   List<Object?> get props => [];
 }
+class LoadMoreEvent extends GhazaliatHafezStart {
+  @override
+  List<Object?> get props => [];
+}
 
 // class ToggleIcon extends GhazaliatHafezStart {
 //  final bool isSelect;
