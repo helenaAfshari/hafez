@@ -6,8 +6,8 @@ import 'package:dio/dio.dart';
 
 class GhazalHafezRepositoryImplement extends GhazaliatHafezRepository{
   @override
-  Future<Response> ghazaliathafez(int perPage, int page)async {
-     final ghazalHafezResponse = await serviceLocator<GhazaliatHafezApi>().poems(perPage,page);
+  Future<Response> ghazaliathafez(int page, int perPage)async {
+     final ghazalHafezResponse = await serviceLocator<GhazaliatHafezApi>().poems(page,perPage);
     return ghazalHafezResponse;
   }
   }

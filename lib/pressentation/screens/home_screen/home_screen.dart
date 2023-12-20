@@ -2,7 +2,6 @@
 import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navigation.dart';
 import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
 import 'package:autharization_hanna/core/utils/ui_utils.dart';
-import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:autharization_hanna/pressentation/screens/home_screen/component/list_buttoms_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';

@@ -21,27 +21,24 @@ import 'package:equatable/equatable.dart';
 
 
 
-abstract class GhazaliatHafezEvent extends Equatable{}
+abstract class GhazaliatHafezEvent{}
 class GhazaliatHafezStart extends GhazaliatHafezEvent{
-  @override
-  // TODO: implement props
-  List<Object?> get props =>[];
 
 }
 
   class InisialEvent extends GhazaliatHafezStart{
-  @override
-  List<Object?> get props => [];
   }
   
 class LoadedEvent extends GhazaliatHafezStart{
 //  final List<GhazaliatHafez> ghazaliatHafez;
-  @override
-  List<Object?> get props => [];
+
 }
 class LoadMoreEvent extends GhazaliatHafezStart {
-  @override
-  List<Object?> get props => [];
+}
+
+class ItemSelectedEvent  extends GhazaliatHafezStart {
+   final int selectedItemId;
+  ItemSelectedEvent(this.selectedItemId);
 }
 
 // class ToggleIcon extends GhazaliatHafezStart {

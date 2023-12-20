@@ -8,5 +8,6 @@ abstract class MyColors{
   static const Color boxBottomColor = Color(0xFFFFFFFF);
   static const Color borderBottomColor = Color(0xFF514D4D);
   static const Color dividerColor = Color(0xFF979797);
+  static const Color musicBoxColor = Color(0xFFD7CEBD);
   
 }

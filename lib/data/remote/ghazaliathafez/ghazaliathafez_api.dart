@@ -4,6 +4,6 @@ import 'package:dio/dio.dart';
 
  abstract class GhazaliatHafezApi{
 //   Future<List<GhazaliatHafezModel>> poems
-Future<Response> poems(int perPage, int page);
+Future<Response> poems(int page, int perPage);
 
  }
