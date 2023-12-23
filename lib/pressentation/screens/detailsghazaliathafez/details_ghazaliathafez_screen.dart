@@ -9,7 +9,7 @@ import 'package:gap/gap.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class DetailsGhazaliatHafezScreen extends StatelessWidget {
-   DetailsGhazaliatHafezScreen({Key? key});
+  DetailsGhazaliatHafezScreen(int id);
      final List<String> texts = [
     'Text 1',
     'Text 1',

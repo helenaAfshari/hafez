@@ -9,6 +9,7 @@ import 'package:autharization_hanna/core/utils/ui_utils.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
+import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -37,7 +38,11 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
           builder: (context, state) {
             if(state is ItemSelectedState){
               final selectedItemId = state.selectedItemId;
+              //اشتباهه مثل nav که نوشتم باید بنویسم و داخل کانستراکتوذ اسکرین هم باید ایدی را بزارم که بتونم بگیرم 
                    Navigator.pushNamed(context, '/DetailsGhazaliatHafezScreen', arguments: selectedItemId);
+
+                 
+
     }
             
             if (state is GhazaliatHafezLoadingState) {
