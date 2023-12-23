@@ -35,6 +35,11 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
         backgroundColor: MyColors.primaryColor,
         body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
           builder: (context, state) {
+            if(state is ItemSelectedState){
+              final selectedItemId = state.selectedItemId;
+                   Navigator.pushNamed(context, '/DetailsGhazaliatHafezScreen', arguments: selectedItemId);
+    }
+            
             if (state is GhazaliatHafezLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(color: Colors.blue),
@@ -56,60 +61,67 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
               physics: const ScrollPhysics(),
               itemBuilder: (context, index) {
                return 
-                Container(
-                  decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: MyColors.boxBottomColor,
-                   border: Border.all(color: MyColors.borderBottomColor)
-                  ),
-                  margin: const EdgeInsets.only(left: 29.0,right: 29.0),
-       height: UIUtils.getConvertedHeight(context,90),
-       width: UIUtils.getConvertedWidth(context,292),
-       child: Padding(
-         padding:  EdgeInsets.only(right: MyDimensions.medium+2),
-         child: Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               textDirection: TextDirection.rtl,
-               children: [
-                 Padding(
-               padding: const EdgeInsets.only(left: 5,top: 5),
-               child: Row(
-                 mainAxisAlignment: MainAxisAlignment.start,
-                 children: [
-          const Gap(3),
-          Row(
-             children: [
-              StatefulBuilder(builder: (context, setState) {
-              return GestureDetector(
-                onTap: ()async {
-                  await Share.share(MyStrings.shareText);
-                 },
-                child:  Image.asset(
-          "assets/icons/share.png",
-              ));
-            },),
-               StatefulBuilder(builder: (context, setState) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                  isHeartSelected=!isHeartSelected;
-                  },);},
-                child:  Image.asset(
-            isHeartSelected ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",
-              ));
-            },),
-             ],
-          ),],),
-                 ),
-                 Text(state.ghazaliatHafez[index].title,style: Theme.of(context)
-                   .textTheme
-                   .titleLarge!.copyWith(fontSize: 12),
+                GestureDetector(
+                  onTap: () {
+               BlocProvider.of<GhazaliatHafezBloc>(context).add(ItemSelectedEvent(index));
+               print("iddddddddddd:::::::$index");
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: MyColors.boxBottomColor,
+                     border: Border.all(color: MyColors.borderBottomColor)
+                    ),
+                    margin: const EdgeInsets.only(left: 29.0,right: 29.0),
+                       height: UIUtils.getConvertedHeight(context,90),
+                       width: UIUtils.getConvertedWidth(context,292),
+                       child: Padding(
+                         padding:  EdgeInsets.only(right: MyDimensions.medium+2),
+                         child: Column(
+                               crossAxisAlignment: CrossAxisAlignment.start,
+                               textDirection: TextDirection.rtl,
+                               children: [
+                   Padding(
+                               padding: const EdgeInsets.only(left: 5,top: 5),
+                               child: Row(
+                   mainAxisAlignment: MainAxisAlignment.start,
+                   children: [
+                          const Gap(3),
+                          Row(
+                             children: [
+                              StatefulBuilder(builder: (context, setState) {
+                              return GestureDetector(
+                  onTap: ()async {
+                    await Share.share(MyStrings.shareText);
+                   },
+                  child:  Image.asset(
+                          "assets/icons/share.png",
+                              ));
+                            },),
+                            const Gap(5),
+                               StatefulBuilder(builder: (context, setState) {
+                              return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                    isHeartSelected=!isHeartSelected;
+                    },);},
+                  child:  Image.asset(
+                            isHeartSelected ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",
+                              ));
+                            },),
+                             ],
+                          ),],),
                    ),
-                 Text("الی یا ابها",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 10),),
-                 const Gap(10),
-                Expanded(child: CustomDivider(indent: 10,endIndent: 10,)),
-               ],
-             ),),);},
+                   Text(state.ghazaliatHafez[index].title,style: Theme.of(context)
+                     .textTheme
+                     .titleLarge!.copyWith(fontSize: 12),
+                     ),
+                   Text("الی یا ابها",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 10),),
+                   const Gap(10),
+                  Expanded(child: CustomDivider(indent: 10,endIndent: 10,)),
+                               ],
+                             ),),),
+                );},
               separatorBuilder: (context, index) => const Gap(10),
               itemCount: state.ghazaliatHafez.length),
             ),

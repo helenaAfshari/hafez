@@ -6,8 +6,6 @@ import 'package:equatable/equatable.dart';
 abstract class GhazaliatHafezState{}
 class GhazaliatHafezInitialState extends GhazaliatHafezState{
   GhazaliatHafezInitialState();
- 
-
 }
 class GhazaliatHafezLoadingState extends GhazaliatHafezState{
 
@@ -16,19 +14,14 @@ class GhazaliatHafezLoadingState extends GhazaliatHafezState{
 class GhazaliatHafezErrorState extends GhazaliatHafezState{
  final String errorText;
   GhazaliatHafezErrorState( this.errorText);
-  
-
 }
 
 class GhazaliatHafezSuccesState extends GhazaliatHafezState{
   final List<GhazalItemModelEntity> ghazaliatHafez;
   GhazaliatHafezSuccesState(this.ghazaliatHafez);
-
 }
-
-//ما میخواییم کل صفحه در لودینگ نره فقط پایینش لود بشه مثل اینستاگرام
 class GhazaliatHafezLoadMoreState extends GhazaliatHafezState{
- 
+
 }
 
 class UpdatedCategoryState extends GhazaliatHafezState {

@@ -4,10 +4,14 @@ import 'package:autharization_hanna/core/network/api_provider_impl.dart';
 import 'package:autharization_hanna/core/network/dio_wraper.dart';
 import 'package:autharization_hanna/data/remote/auth/auth_api.dart';
 import 'package:autharization_hanna/data/remote/auth/auth_api_impl.dart';
+import 'package:autharization_hanna/data/remote/detailsghazaliathafez/details_ghazaliat_hafez_api.dart';
+import 'package:autharization_hanna/data/remote/detailsghazaliathafez/details_ghazaliat_hafez_api_impl.dart';
 import 'package:autharization_hanna/data/remote/ghazaliathafez/ghazaliathafez_api.dart';
 import 'package:autharization_hanna/data/remote/ghazaliathafez/ghazaliathafez_api_impl.dart';
 import 'package:autharization_hanna/domain/repository/auth/auth_repository.dart';
 import 'package:autharization_hanna/domain/repository/auth/auth_repository_impl.dart';
+import 'package:autharization_hanna/domain/repository/detailsghazaliathafez_repo/details_ghazaliat_hafez_repository.dart';
+import 'package:autharization_hanna/domain/repository/detailsghazaliathafez_repo/details_ghazaliat_hafez_repository_impl.dart';
 import 'package:autharization_hanna/domain/repository/ghazaliathafezrepo/ghazaliathafez_repository.dart';
 import 'package:autharization_hanna/domain/repository/ghazaliathafezrepo/ghazaliathafez_repository_impl.dart';
 import 'package:dio/dio.dart';
@@ -21,5 +25,7 @@ injector() {
    serviceLocator.registerSingleton<Dio>(ViolationDioWrapper.provide());
    serviceLocator.registerSingleton<ApiProviderImp>(ApiProviderImp());
    serviceLocator.registerSingleton<GhazaliatHafezApi>(GhazaliatHafezApiImpl());
+   serviceLocator.registerSingleton<DetailsGhazaliatHafezApi>(DetailsGhazaliatHafezApiImpl());
     serviceLocator.registerSingleton<GhazaliatHafezRepository>(GhazalHafezRepositoryImplement());
+    serviceLocator.registerSingleton<DetailsGhazaliatHafezRepository>(DetailsGhazaliatHafezRepositoryImplement());
 }

@@ -10,11 +10,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main()async {
    WidgetsFlutterBinding.ensureInitialized();
   await injector();
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return 
@@ -24,9 +23,9 @@ class MyApp extends StatelessWidget {
           create: (context) => GhazaliatHafezBloc()..add(LoadedEvent()),
         ),
       ],
-      child: MaterialApp(
+      child:  MaterialApp(
         title: 'Your App Title',
-        home: DetailsGhazaliatHafezScreen(),
+        home: GhazaliatHafezScreen(),
       ),
     );
   }
