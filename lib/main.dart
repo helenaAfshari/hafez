@@ -17,19 +17,19 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: MyTHeme.lightTheme(),
-//       home: MultiBlocProvider(
-//   providers: [
-//     BlocProvider<GhazaliatHafezBloc>(
-//       create: (context) => GhazaliatHafezBloc()..add(LoadedEvent()),
-//     ),
-//   ],
-//   child: const GhazaliatHafezScreen(),
-// )
-home: const DetailsGhazaliatHafezScreen (),
-
+    return 
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<GhazaliatHafezBloc>(
+          create: (context) => GhazaliatHafezBloc()..add(LoadedEvent()),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Your App Title',
+        home: DetailsGhazaliatHafezScreen(),
+      ),
     );
   }
 }
+
+

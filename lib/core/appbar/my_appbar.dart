@@ -22,44 +22,18 @@ class MyAppBar extends StatelessWidget {
        decoration: const BoxDecoration(
          color:  MyColors.primaryColor,
        ),
-       // child: Row(
-       //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-       //   crossAxisAlignment: CrossAxisAlignment.start,
-       //   children: [
-       //     MyAppBarItems(
-       //       onTap:() {
-               
-       //       },
-       //       icon: 'assets/icons/history.png', 
-         
-       //       ),
-       //       MyAppBarItems(
-       //       onTap:() {
-               
-       //       },
-       //       icon: 'assets/icons/home.png', 
-         
-       //       ),
-       //       MyAppBarItems(
-       //       onTap:() {
-               
-       //       },
-       //       icon: 'assets/icons/support.png', 
-         
-       //       ),
-       //       ]
-       //       ),
        child:  Row(
            mainAxisAlignment: MainAxisAlignment.spaceAround,
            children: [
-               Icon(Icons.arrow_back,size: MyDimensions.medium+5),
+               GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Icon(Icons.arrow_back,size: MyDimensions.medium+5)),
              const Gap(20),
              Text("غزلیات حافظ",style: Theme.of(context)
                 .textTheme
                 .titleLarge,),
              const Gap(11),
                Icon(Icons.menu,size: MyDimensions.medium+5),
-               
            ],
          ),
            );

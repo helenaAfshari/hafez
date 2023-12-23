@@ -4,6 +4,7 @@ import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navigatio
 import 'package:autharization_hanna/core/components/customwidgets/custom_divider.dart';
 import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
 import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
+import 'package:autharization_hanna/core/resource/constants/my_strings.dart';
 import 'package:autharization_hanna/core/utils/ui_utils.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
@@ -11,6 +12,7 @@ import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghaza
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:share_plus/share_plus.dart';
 class GhazaliatHafezScreen extends StatefulWidget {
   const GhazaliatHafezScreen({super.key});
   @override
@@ -75,16 +77,21 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                  mainAxisAlignment: MainAxisAlignment.start,
                  children: [
           const Gap(3),
-          StatefulBuilder(builder: (context, setState) {
-            return GestureDetector(
-              onTap: () {
-                setState(() {
-                isHeartSelected=!isHeartSelected;
-                },);},
-              child:  Image.asset(
-          isHeartSelected ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",
-            ));
-          },),],),
+          Row(
+             children: [
+              //Share.share(MyStrings.shareText),
+               StatefulBuilder(builder: (context, setState) {
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                  isHeartSelected=!isHeartSelected;
+                  },);},
+                child:  Image.asset(
+            isHeartSelected ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",
+              ));
+            },),
+             ],
+          ),],),
                  ),
                  Text(state.ghazaliatHafez[index].title,style: Theme.of(context)
                    .textTheme
@@ -99,7 +106,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
               itemCount: state.ghazaliatHafez.length),
             ),
           const Gap(30),
-          const MyBottomNavigation(),
+           MyBottomNavigation(),
         ], ),);} 
              else if (state is GhazaliatHafezErrorState) {
               return Center(
