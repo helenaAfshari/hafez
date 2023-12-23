@@ -79,7 +79,15 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
           const Gap(3),
           Row(
              children: [
-              //Share.share(MyStrings.shareText),
+              StatefulBuilder(builder: (context, setState) {
+              return GestureDetector(
+                onTap: ()async {
+                  await Share.share(MyStrings.shareText);
+                 },
+                child:  Image.asset(
+          "assets/icons/share.png",
+              ));
+            },),
                StatefulBuilder(builder: (context, setState) {
               return GestureDetector(
                 onTap: () {
