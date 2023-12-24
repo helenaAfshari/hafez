@@ -36,15 +36,12 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
         backgroundColor: MyColors.primaryColor,
         body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
           builder: (context, state) {
+         
             if(state is ItemSelectedState){
               final selectedItemId = state.selectedItemId;
-              //اشتباهه مثل nav که نوشتم باید بنویسم و داخل کانستراکتوذ اسکرین هم باید ایدی را بزارم که بتونم بگیرم 
-                   Navigator.pushNamed(context, '/DetailsGhazaliatHafezScreen', arguments: selectedItemId);
+     Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsGhazaliatHafezScreen(id: selectedItemId),));
 
-                 
-
-    }
-            
+            }
             if (state is GhazaliatHafezLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(color: Colors.blue),
@@ -131,7 +128,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
               itemCount: state.ghazaliatHafez.length),
             ),
           const Gap(30),
-           MyBottomNavigation(),
+           MyBottomNavigation(context: context,),
         ], ),);} 
              else if (state is GhazaliatHafezErrorState) {
               return Center(

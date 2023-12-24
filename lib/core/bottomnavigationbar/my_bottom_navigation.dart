@@ -6,11 +6,10 @@ import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazali
 import 'package:autharization_hanna/pressentation/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 class MyBottomNavigation extends StatelessWidget {
-  const MyBottomNavigation({
-    super.key,
-  });
+  const MyBottomNavigation({super.key,required BuildContext context});
   @override
   Widget build(BuildContext context) {
+   late int id;
     return Container(
        width:
            UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
@@ -39,13 +38,16 @@ class MyBottomNavigation extends StatelessWidget {
              },
              icon: 'assets/icons/home.png', 
              ),
-             MyBottomNavigationBarItem(
-             onTap:() {
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsGhazaliatHafezScreen(),));
-             },
-             icon: 'assets/icons/support.png', 
-         
-             ),
+ MyBottomNavigationBarItem(
+  onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => DetailsGhazaliatHafezScreen()),
+      );
+  },
+  icon: 'assets/icons/support.png',
+),
+
          ]
        ),
              );

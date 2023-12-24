@@ -13,6 +13,7 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
      int page =1;
      int perPage=50;
       List<GhazalItemModelEntity> ghazaliatHafez = [];
+      
   GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
     on<GhazaliatHafezEvent>((event, emit) async {
       print(event);
@@ -25,7 +26,7 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
               await serviceLocator<GhazaliatHafezRepository>()
                   .ghazaliathafez(page,perPage);
           print("jjjjj${ghazaliatResponse}");
-          ghazaliatHafez = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
+    ghazaliatHafez = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
           if (ghazaliatResponse.statusCode == 200) {
             print("55555555");
             emit(GhazaliatHafezSuccesState(ghazaliatHafez));

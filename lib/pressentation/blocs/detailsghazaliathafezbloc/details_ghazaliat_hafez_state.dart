@@ -1,4 +1,7 @@
 
+import 'package:autharization_hanna/domain/model/detailsghazaliathafez/details_ghazaliat_hafez_model.dart';
+import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
+
 abstract class DetailsGhazaliatHafezState{}
 
 class DetailsGhazaliatHafezInitialState extends DetailsGhazaliatHafezState{
@@ -8,11 +11,11 @@ class DetailsGhazaliatHafezLoadingState extends DetailsGhazaliatHafezState{
 }
 
 class DetailsGhazaliatHafezErrorState extends DetailsGhazaliatHafezState{
- final String errorText;
-  DetailsGhazaliatHafezErrorState( this.errorText);
+ final String error;
+  DetailsGhazaliatHafezErrorState(this.error);
 }
 
 class DetailsGhazaliatHafezSuccesState extends DetailsGhazaliatHafezState{
- // final List<GhazalItemModelEntity> ghazaliatHafez;
-  DetailsGhazaliatHafezSuccesState();
+ final List<DetailsGhazaliatHafezModel> detailsghazaliatHafez;
+  DetailsGhazaliatHafezSuccesState(this.detailsghazaliatHafez);
 }

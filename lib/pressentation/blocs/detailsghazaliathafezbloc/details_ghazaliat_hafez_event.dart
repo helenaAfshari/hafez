@@ -3,6 +3,6 @@ abstract class DetailsGhazaliatHafezEvent{}
 
 class DetailsGhazaliatHafezStart extends DetailsGhazaliatHafezEvent{}
 
-class InisialEvent extends DetailsGhazaliatHafezStart{}
-class LoadedEvent extends DetailsGhazaliatHafezStart{}
+class InisiallEvent extends DetailsGhazaliatHafezStart{}
+class LoadedddEvent extends DetailsGhazaliatHafezStart{}
 

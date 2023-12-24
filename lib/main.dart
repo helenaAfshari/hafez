@@ -1,4 +1,6 @@
 import 'package:autharization_hanna/core/resource/constants/theme/my_theme.dart';
+import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
+import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
@@ -21,7 +23,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<GhazaliatHafezBloc>(
           create: (context) => GhazaliatHafezBloc()..add(LoadedEvent()),
-        ),
+        ),  
+        BlocProvider<DetailsGhazaliatHafezBloc>(
+          create: (context) => DetailsGhazaliatHafezBloc()..add(LoadedddEvent())),
       ],
       child:  MaterialApp(
         title: 'Your App Title',

@@ -9,7 +9,7 @@ class DetailsGhazaliatHafezApiImpl extends DetailsGhazaliatHafezApi{
   @override
   Future<Response> poemsStanzas(int id)async {
    final responsePoemsStanzas = await serviceLocator<ApiProviderImp>().get(
-     'https://api.hafezname.ir/api/poems/$id/stanzas',
+     'https://api.hafezname.ir/api/poems/1/stanzas?id=2',
    );
    return responsePoemsStanzas;
   }
