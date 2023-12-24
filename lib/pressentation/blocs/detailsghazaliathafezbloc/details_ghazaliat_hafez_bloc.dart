@@ -11,6 +11,7 @@ class DetailsGhazaliatHafezBloc extends Bloc<DetailsGhazaliatHafezEvent,DetailsG
  DetailsGhazaliatHafezBloc() : super(DetailsGhazaliatHafezInitialState()) {
     int id = 0;
      List<DetailsGhazaliatHafezModel> detailsGhazaliatHafez = [];
+     List<GhazalItemModelEntity> gGhazaliatHafez = [];
     on<DetailsGhazaliatHafezEvent>((event, emit)async {
       print(event);
       if(event is LoadedddEvent){
@@ -22,10 +23,13 @@ class DetailsGhazaliatHafezBloc extends Bloc<DetailsGhazaliatHafezEvent,DetailsG
                     print("DetailsGhazaliatRespons${detailsGhazaliatResponse}");
  detailsGhazaliatHafez = (detailsGhazaliatResponse.data['data'] as List).map((e) =>
   DetailsGhazaliatHafezModel.fromJason(e)).toList();
+
+
+
   if (detailsGhazaliatResponse.statusCode == 200) {
             print("55555555");
-            emit(DetailsGhazaliatHafezSuccesState(detailsGhazaliatHafez));
-            print("kooooooooo${detailsGhazaliatHafez}");
+            emit(DetailsGhazaliatHafezSuccesState(detailsGhazaliatHafez,gGhazaliatHafez));
+            print("koohhhhho${detailsGhazaliatHafez}");
           } else {
             emit(DetailsGhazaliatHafezErrorState("معتبر نیست"));
           }

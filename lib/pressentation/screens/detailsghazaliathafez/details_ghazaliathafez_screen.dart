@@ -4,6 +4,7 @@ import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navigatio
 import 'package:autharization_hanna/core/components/customwidgets/custom_divider.dart';
 import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
 import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
+import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_state.dart';
@@ -12,29 +13,38 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class DetailsGhazaliatHafezScreen extends StatefulWidget {
-   int? id ;
-    
-
-   DetailsGhazaliatHafezScreen({super.key,  this.id});
-
-  @override
-  State<DetailsGhazaliatHafezScreen> createState() => _DetailsGhazaliatHafezScreenState();
-}
-
-class _DetailsGhazaliatHafezScreenState extends State<DetailsGhazaliatHafezScreen> {
+class DetailsGhazaliatHafezScreen extends StatelessWidget {
+    int? id ;
+   String? titlee;
+  //List<GhazalItemModelEntity>titlee = [];
+  
+   DetailsGhazaliatHafezScreen({super.key,  this.id,});
+     final List<String> texts = [
+    'Text 1',
+    'Text 1',
+    'Text 1',
+    'Text 1',
+    'Text 1',
+    'Text 1',
+  ];  
   final List<String> texts1 = [
     'اااااااااااااااااااااااااااااااااااااااااااااااااااافففففففففففففففففففففففففففففففففففففف',
   ];
-  @override
-  void initState() {    
-    super.initState();
-    BlocProvider(create: (context) => DetailsGhazaliatHafezBloc()..add(LoadedddEvent()),);
-    
-  }
+
+  List<GhazalItemModelEntity> k = [
+    GhazalItemModelEntity(id: 1, title: "عنوان ۱"),
+    GhazalItemModelEntity(id: 2, title: "عنوان ۲"),
+    GhazalItemModelEntity(id: 3, title: "عنوان ۳"),
+  ];
+
+
+  
 
   @override
   Widget build(BuildContext context) {
+       // final firstTitle = titlee?.isNotEmpty == true ? titlee![1].title : 'عنوان پیشفرض';
+      //  print("yyyyyyyyyyyyy:::::::$firstTitle");
+
       final List<String> texts = [
      "Text1",
      "Text1",
@@ -74,7 +84,7 @@ class _DetailsGhazaliatHafezScreenState extends State<DetailsGhazaliatHafezScree
        child:  Column(
          children: [
            const Gap(22),
-           Text("غزل شماره 1",style: Theme.of(context)
+           Text("fffff",style: Theme.of(context)
                 .textTheme
                 .titleLarge!.copyWith(fontSize: 12),),
 SizedBox(

@@ -15,10 +15,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:share_plus/share_plus.dart';
 class GhazaliatHafezScreen extends StatefulWidget {
-  const GhazaliatHafezScreen({super.key});
+   String? title;
+   GhazaliatHafezScreen({super.key,this.title});
   @override
   State<GhazaliatHafezScreen> createState() => _GhazaliatHafezScreenState();
 }
+
 class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
   ScrollController scrollController = ScrollController();
   @override
@@ -36,12 +38,23 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
         backgroundColor: MyColors.primaryColor,
         body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
           builder: (context, state) {
-         
-            if(state is ItemSelectedState){
-              final selectedItemId = state.selectedItemId;
-     Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsGhazaliatHafezScreen(id: selectedItemId),));
+  if (state is ItemSelectedState ) {
+  final selectedItemId = state.selectedItemId;
+  // final t = state.ghazaliatHafez
 
-            }
+  // final ghazaliatHafezState = state as GhazaliatHafezSuccesState;
+  //  final titles = ghazaliatHafezState.ghazaliatHafez;
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => DetailsGhazaliatHafezScreen(id: selectedItemId, ),
+    ),
+  );
+ // print("ggggggggggggggg:::::::::::::$titles$selectedItemId");
+}
+
+
             if (state is GhazaliatHafezLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(color: Colors.blue),
