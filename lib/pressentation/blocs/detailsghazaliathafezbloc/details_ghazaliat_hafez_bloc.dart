@@ -8,24 +8,25 @@ import 'package:autharization_hanna/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailsGhazaliatHafezBloc extends Bloc<DetailsGhazaliatHafezEvent,DetailsGhazaliatHafezState>{
+  int id =1;
+  int poemId =2;
  DetailsGhazaliatHafezBloc() : super(DetailsGhazaliatHafezInitialState()) {
-    int id = 0;
      List<DetailsGhazaliatHafezModel> detailsGhazaliatHafez = [];
      List<GhazalItemModelEntity> gGhazaliatHafez = [];
     on<DetailsGhazaliatHafezEvent>((event, emit)async {
       print(event);
+     
+      print("poemI?iddddd::::::::::::$poemId");
       if(event is LoadedddEvent){
         print("ggggg");
        try{
-         emit(DetailsGhazaliatHafezLoadingState());
+         //emit(DetailsGhazaliatHafezLoadingState());
           final detailsGhazaliatResponse =
-              await serviceLocator<DetailsGhazaliatHafezRepository>().detailsGhazaliatHafezRepository(id);
+              await serviceLocator<DetailsGhazaliatHafezRepository>().detailsGhazaliatHafezRepository(id,poemId);
                     print("DetailsGhazaliatRespons${detailsGhazaliatResponse}");
- detailsGhazaliatHafez = (detailsGhazaliatResponse.data['data'] as List).map((e) =>
-  DetailsGhazaliatHafezModel.fromJason(e)).toList();
-
-
-
+  detailsGhazaliatHafez = (detailsGhazaliatResponse.data['data'] as List).map((e) =>
+   DetailsGhazaliatHafezModel.fromJason(e)).toList();
+  
   if (detailsGhazaliatResponse.statusCode == 200) {
             print("55555555");
             emit(DetailsGhazaliatHafezSuccesState(detailsGhazaliatHafez,gGhazaliatHafez));

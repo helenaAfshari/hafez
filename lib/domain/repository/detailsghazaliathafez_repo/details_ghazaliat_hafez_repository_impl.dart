@@ -6,8 +6,8 @@ import 'package:autharization_hanna/service_locator.dart';
 
 class DetailsGhazaliatHafezRepositoryImplement extends DetailsGhazaliatHafezRepository{
   @override
-  Future<Response> detailsGhazaliatHafezRepository(int id)async {
-   final detailsGhazalHafezResponse = await serviceLocator<DetailsGhazaliatHafezApi>().poemsStanzas(id);
+  Future<Response> detailsGhazaliatHafezRepository(int id,int poemId)async {
+   final detailsGhazalHafezResponse = await serviceLocator<DetailsGhazaliatHafezApi>().poemsStanzas(id,poemId);
     return detailsGhazalHafezResponse;
   }
 }

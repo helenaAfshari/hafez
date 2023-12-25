@@ -7,9 +7,9 @@ import 'details_ghazaliat_hafez_api.dart';
 
 class DetailsGhazaliatHafezApiImpl extends DetailsGhazaliatHafezApi{
   @override
-  Future<Response> poemsStanzas(int id)async {
+  Future<Response> poemsStanzas(int id,int poemId)async {
    final responsePoemsStanzas = await serviceLocator<ApiProviderImp>().get(
-     'https://api.hafezname.ir/api/poems/1/stanzas?id=2',
+     'https://api.hafezname.ir/api/poems/$poemId/stanzas?id=$id',
    );
    return responsePoemsStanzas;
   }

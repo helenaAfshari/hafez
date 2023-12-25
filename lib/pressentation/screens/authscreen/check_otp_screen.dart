@@ -218,7 +218,8 @@ class _CheckedOtpScreenState extends State<CheckedOtpScreen> {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text("کد وارد شده اشتباه هست"),
               backgroundColor: Colors.blue,
-              ));}}),],),),),),);}
+              ));}}
+              ),],),),),),);}
 }
 
 // class HomeScreen extends StatelessWidget {

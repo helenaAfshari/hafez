@@ -1,6 +1,7 @@
 
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazal_hafez.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
+import 'package:autharization_hanna/domain/model/ghazaliathafez/stanzas.dart';
 import 'package:autharization_hanna/domain/repository/ghazaliathafezrepo/ghazaliathafez_repository.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
@@ -13,6 +14,7 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
      int page =1;
      int perPage=50;
       List<GhazalItemModelEntity> ghazaliatHafez = [];
+      List<StanzasModel> s = [];
       
   GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
     on<GhazaliatHafezEvent>((event, emit) async {
@@ -26,11 +28,14 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
               await serviceLocator<GhazaliatHafezRepository>()
                   .ghazaliathafez(page,perPage);
           print("jjjjj${ghazaliatResponse}");
-    ghazaliatHafez = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
+    ghazaliatHafez = (ghazaliatResponse.data['data']as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
+    s = (ghazaliatResponse.data['stanzas']as List).map((e) => StanzasModel.fromJson(e)).toList();
+
           if (ghazaliatResponse.statusCode == 200) {
             print("55555555");
-            emit(GhazaliatHafezSuccesState(ghazaliatHafez));
+            emit(GhazaliatHafezSuccesState(ghazaliatHafez,s));
             print("kooooooooo${ghazaliatHafez}");
+            print("SSSSSSSSTTTTTTTTTTAAAAAAAA${s}");
           } else {
             emit(GhazaliatHafezErrorState("معتبر نیست"));
           }
@@ -38,24 +43,16 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
           // ignore: deprecated_member_use
           print(" متصل نیست به اینترت");
           } 
+      
         }else if (event is ItemSelectedEvent) {
-        emit(ItemSelectedState(event.selectedItemId));
-        //این برای اسکرین هست
-      //  BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
-//   builder: (context, state) {
-//     if (state is ItemSelectedState) {
-//       final selectedItemId = state.selectedItemId;
-//       Navigator.pushNamed(context, '/detail_screen', arguments: selectedItemId);
-//     }
-//     // Handle other states here
-//   },
-// ),
+        emit(ItemSelectedState(event.selectedItemId,event.selectedPoemId));
   }});
  
 
    on<LoadMoreEvent>((event, emit) async {
    String message;
    List<GhazalItemModelEntity> loadedData = [];
+    List<StanzasModel> s = [];
   page++;
 
   if (event is LoadMoreEvent) {
@@ -65,14 +62,17 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
 
       print("jjjjj${ghazaliatResponse}");
 
-      loadedData = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
-      ghazaliatHafez.addAll(loadedData);
+       loadedData = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
+           s = (ghazaliatResponse.data['stanzas']as List).map((e) => StanzasModel.fromJson(e)).toList();
 
-      if (loadedData.isEmpty) {
+      ghazaliatHafez.addAll(loadedData);
+      s.addAll(s);
+
+      if (loadedData.isEmpty || s.isEmpty) {
         emit(GhazaliatHafezEndOfListState());
       } else {
         if (ghazaliatResponse.statusCode == 200) {
-          emit(GhazaliatHafezSuccesState(ghazaliatHafez));
+          emit(GhazaliatHafezSuccesState(ghazaliatHafez,s));
           print("kooooooooo${ghazaliatHafez}");
         } else {
           emit(GhazaliatHafezErrorState("معتبر نیست"));

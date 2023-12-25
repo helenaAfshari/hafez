@@ -14,31 +14,37 @@ import 'package:gap/gap.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class DetailsGhazaliatHafezScreen extends StatelessWidget {
-    int? id ;
-   String? titlee;
-  //List<GhazalItemModelEntity>titlee = [];
-  
-   DetailsGhazaliatHafezScreen({super.key,  this.id,});
-     final List<String> texts = [
-    'Text 1',
-    'Text 1',
-    'Text 1',
-    'Text 1',
-    'Text 1',
-    'Text 1',
-  ];  
+ final int? id ;
+ final int? poemId ;
+  String? titlee;
+  static var title;
+
+// GhazalItemModelEntity? model;
+
+  DetailsGhazaliatHafezScreen({Key? key, this.id,this.poemId})
+      : super(key: key) {
+    
+
+  }
+
+  //    final List<String> texts = [
+  //   'Text 1',
+  //   'Text 1',
+  //   'Text 1',
+  //   'Text 1',
+  //   'Text 1',
+  //   'Text 1',
+  // ];  
   final List<String> texts1 = [
     'اااااااااااااااااااااااااااااااااااااااااااااااااااافففففففففففففففففففففففففففففففففففففف',
   ];
 
-  List<GhazalItemModelEntity> k = [
-    GhazalItemModelEntity(id: 1, title: "عنوان ۱"),
-    GhazalItemModelEntity(id: 2, title: "عنوان ۲"),
-    GhazalItemModelEntity(id: 3, title: "عنوان ۳"),
-  ];
+  // List<GhazalItemModelEntity> k = [
+  //   GhazalItemModelEntity(id: 1, title: "عنوان ۱"),
+  //   GhazalItemModelEntity(id: 2, title: "عنوان ۲"),
+  //   GhazalItemModelEntity(id: 3, title: "عنوان ۳"),
+  // ];
 
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +61,7 @@ class DetailsGhazaliatHafezScreen extends StatelessWidget {
         backgroundColor: MyColors.primaryColor,
        body:  BlocBuilder<DetailsGhazaliatHafezBloc,DetailsGhazaliatHafezState>(
        builder: (context, state) {
+        print("StateDetails::::::::$state");
           if (state is DetailsGhazaliatHafezLoadingState) {
             return const Center(
               child: CircularProgressIndicator(color: Colors.blue),
@@ -84,7 +91,7 @@ class DetailsGhazaliatHafezScreen extends StatelessWidget {
        child:  Column(
          children: [
            const Gap(22),
-           Text("fffff",style: Theme.of(context)
+           Text("hhh",style: Theme.of(context)
                 .textTheme
                 .titleLarge!.copyWith(fontSize: 12),),
 SizedBox(
@@ -189,14 +196,13 @@ height: MediaQuery.of(context).size.height * 0.10,
               child: Text(state.error),
             );
           } else {
-            print('cannot detect state');
+            print('cannot detect state DetailsGhazaliat');
             return Container();
           }
        }),
       ),
     );
   }
+
+
 }
- 
-
-

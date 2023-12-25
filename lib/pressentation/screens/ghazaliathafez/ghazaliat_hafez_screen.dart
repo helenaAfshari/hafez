@@ -6,6 +6,7 @@ import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
 import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
 import 'package:autharization_hanna/core/resource/constants/my_strings.dart';
 import 'package:autharization_hanna/core/utils/ui_utils.dart';
+import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
@@ -23,13 +24,14 @@ class GhazaliatHafezScreen extends StatefulWidget {
 
 class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
   ScrollController scrollController = ScrollController();
-  @override
-  void initState() {
+  void inisial() {
     super.initState();
     scrollController.addListener(() {
   if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
       BlocProvider.of<GhazaliatHafezBloc>(context).add(LoadMoreEvent());
-  }});}
+  }});
+  
+  }
   @override
   Widget build(BuildContext context) {
     bool isHeartSelected =false;
@@ -38,22 +40,23 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
         backgroundColor: MyColors.primaryColor,
         body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
           builder: (context, state) {
-  if (state is ItemSelectedState ) {
+if (state is ItemSelectedState) {
+    //final selectedItemId = (state as ItemSelectedState).selectedItemId;
+    //final title = (state as GhazaliatHafezSuccesState).ghazaliatHafez;
+
   final selectedItemId = state.selectedItemId;
-  // final t = state.ghazaliatHafez
-
+  final poemIdd = state.poemId;
   // final ghazaliatHafezState = state as GhazaliatHafezSuccesState;
-  //  final titles = ghazaliatHafezState.ghazaliatHafez;
-
+  // final titles = ghazaliatHafezState.ghazaliatHafez;
+  
+  print("kfghd:::::::::::$selectedItemId");
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (context) => DetailsGhazaliatHafezScreen(id: selectedItemId, ),
+      builder: (context) => DetailsGhazaliatHafezScreen(id: selectedItemId, poemId: poemIdd,),
     ),
   );
- // print("ggggggggggggggg:::::::::::::$titles$selectedItemId");
 }
-
 
             if (state is GhazaliatHafezLoadingState) {
               return const Center(
@@ -78,7 +81,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                return 
                 GestureDetector(
                   onTap: () {
-               BlocProvider.of<GhazaliatHafezBloc>(context).add(ItemSelectedEvent(index));
+               BlocProvider.of<GhazaliatHafezBloc>(context).add(ItemSelectedEvent(index,index));
                print("iddddddddddd:::::::$index");
                   },
                   child: Container(
@@ -127,7 +130,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                              ],
                           ),],),
                    ),
-                   Text(state.ghazaliatHafez[index].title,style: Theme.of(context)
+                   Text(state.sanataz[index].text!,style: Theme.of(context)
                      .textTheme
                      .titleLarge!.copyWith(fontSize: 12),
                      ),
@@ -138,7 +141,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                              ),),),
                 );},
               separatorBuilder: (context, index) => const Gap(10),
-              itemCount: state.ghazaliatHafez.length),
+              itemCount: state.sanataz.length),
             ),
           const Gap(30),
            MyBottomNavigation(context: context,),
@@ -148,7 +151,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                 child: Text(state.errorText),
               );
             } else {
-              print('cannot detect state');
+              print('cannot detect state GhazaliatHafezScreen');
               return Container();
             }
           },
