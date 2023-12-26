@@ -6,7 +6,10 @@ import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
 import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
 import 'package:autharization_hanna/core/resource/constants/my_strings.dart';
 import 'package:autharization_hanna/core/utils/ui_utils.dart';
+import 'package:autharization_hanna/domain/model/detailsghazaliathafez/details_ghazaliat_hafez_model.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
+import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
+import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_state.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
@@ -15,20 +18,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:share_plus/share_plus.dart';
+late int? idd;
 class GhazaliatHafezScreen extends StatefulWidget {
-   String? title;
-   GhazaliatHafezScreen({super.key,this.title});
   @override
   State<GhazaliatHafezScreen> createState() => _GhazaliatHafezScreenState();
 }
 
 class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
+
   ScrollController scrollController = ScrollController();
   void inisial() {
     super.initState();
     scrollController.addListener(() {
   if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
       BlocProvider.of<GhazaliatHafezBloc>(context).add(LoadMoreEvent());
+      // BlocProvider.of<DetailsGhazaliatHafezBloc>(context).add());
   }});
   
   }
@@ -40,29 +44,32 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
         backgroundColor: MyColors.primaryColor,
         body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
           builder: (context, state) {
-if (state is ItemSelectedState) {
-    //final selectedItemId = (state as ItemSelectedState).selectedItemId;
-    //final title = (state as GhazaliatHafezSuccesState).ghazaliatHafez;
+// if (state is ItemSelectedState) {
+//     //final selectedItemId = (state as ItemSelectedState).selectedItemId;
+//     //final title = (state as GhazaliatHafezSuccesState).ghazaliatHafez;
 
-  final selectedItemId = state.selectedItemId;
-  final poemIdd = state.poemId;
-  // final ghazaliatHafezState = state as GhazaliatHafezSuccesState;
-  // final titles = ghazaliatHafezState.ghazaliatHafez;
+//  // final selectedItemId = state.selectedItemId;
+//   final poemIdd = state.poemId;
+//   // final ghazaliatHafezState = state as GhazaliatHafezSuccesState;
+//   // final titles = ghazaliatHafezState.ghazaliatHafez;
   
-  print("kfghd:::::::::::$selectedItemId");
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => DetailsGhazaliatHafezScreen(id: selectedItemId, poemId: poemIdd,),
-    ),
-  );
-}
+//   print("kfghd:::::::::::$poemIdd");
+//   Navigator.push(
+//     context,
+//     MaterialPageRoute(
+//       builder: (context) => DetailsGhazaliatHafezScreen(poemId: poemIdd,),
+//     ),
+//   );
+// }
 
             if (state is GhazaliatHafezLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(color: Colors.blue),
               );
             } else if (state is GhazaliatHafezSuccesState) {
+              List<GhazalItemModelEntity>k = state.ghazaliatHafez;
+             // List<DetailsGhazaliatHafezModel>l = state.detailsGhazaliat;
+            
               return
               SizedBox(
              height:
@@ -81,7 +88,16 @@ if (state is ItemSelectedState) {
                return 
                 GestureDetector(
                   onTap: () {
-               BlocProvider.of<GhazaliatHafezBloc>(context).add(ItemSelectedEvent(index,index));
+                    
+                    
+                    setState(() {
+                      idd = k[index].id;
+                    print(idd);
+                    });
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                     DetailsGhazaliatHafezScreen(e: k[index]),));
+              // BlocProvider.of<GhazaliatHafezBloc>(context).add(ItemSelectedEvent(index));
+
                print("iddddddddddd:::::::$index");
                   },
                   child: Container(
@@ -130,7 +146,7 @@ if (state is ItemSelectedState) {
                              ],
                           ),],),
                    ),
-                   Text(state.sanataz[index].text!,style: Theme.of(context)
+                   Text(state.ghazaliatHafez[index].title!,style: Theme.of(context)
                      .textTheme
                      .titleLarge!.copyWith(fontSize: 12),
                      ),
@@ -141,7 +157,7 @@ if (state is ItemSelectedState) {
                              ),),),
                 );},
               separatorBuilder: (context, index) => const Gap(10),
-              itemCount: state.sanataz.length),
+              itemCount: state.ghazaliatHafez.length),
             ),
           const Gap(30),
            MyBottomNavigation(context: context,),

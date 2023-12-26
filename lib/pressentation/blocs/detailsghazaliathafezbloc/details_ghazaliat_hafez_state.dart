@@ -17,6 +17,6 @@ class DetailsGhazaliatHafezErrorState extends DetailsGhazaliatHafezState{
 
 class DetailsGhazaliatHafezSuccesState extends DetailsGhazaliatHafezState{
  final List<DetailsGhazaliatHafezModel> detailsghazaliatHafez;
- final List<GhazalItemModelEntity> gdetailsghazaliatHafez;
-  DetailsGhazaliatHafezSuccesState(this.detailsghazaliatHafez,this.gdetailsghazaliatHafez);
+//  final List<GhazalItemModelEntity> gdetailsghazaliatHafez;
+  DetailsGhazaliatHafezSuccesState(this.detailsghazaliatHafez,);
 }

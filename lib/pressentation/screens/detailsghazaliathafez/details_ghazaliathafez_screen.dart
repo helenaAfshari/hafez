@@ -1,61 +1,34 @@
 
+import 'dart:math';
+
 import 'package:autharization_hanna/core/appbar/my_appbar.dart';
 import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navigation.dart';
 import 'package:autharization_hanna/core/components/customwidgets/custom_divider.dart';
 import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
 import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
+import 'package:autharization_hanna/domain/model/detailsghazaliathafez/details_ghazaliat_hafez_model.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_state.dart';
+import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+
 class DetailsGhazaliatHafezScreen extends StatelessWidget {
- final int? id ;
- final int? poemId ;
-  String? titlee;
-  static var title;
-
-// GhazalItemModelEntity? model;
-
-  DetailsGhazaliatHafezScreen({Key? key, this.id,this.poemId})
-      : super(key: key) {
-    
-
-  }
-
-  //    final List<String> texts = [
-  //   'Text 1',
-  //   'Text 1',
-  //   'Text 1',
-  //   'Text 1',
-  //   'Text 1',
-  //   'Text 1',
-  // ];  
-  final List<String> texts1 = [
-    'اااااااااااااااااااااااااااااااااااااااااااااااااااافففففففففففففففففففففففففففففففففففففف',
-  ];
-
-  // List<GhazalItemModelEntity> k = [
-  //   GhazalItemModelEntity(id: 1, title: "عنوان ۱"),
-  //   GhazalItemModelEntity(id: 2, title: "عنوان ۲"),
-  //   GhazalItemModelEntity(id: 3, title: "عنوان ۳"),
-  // ];
-
+     GhazalItemModelEntity? e;
+     
+    // DetailsGhazaliatHafezModel? texts  ; 
+   // DetailsGhazaliatHafezModel ?gGhazaliatHafez ;
+  DetailsGhazaliatHafezScreen({Key? key, this.e});
+     
 
   @override
   Widget build(BuildContext context) {
-       // final firstTitle = titlee?.isNotEmpty == true ? titlee![1].title : 'عنوان پیشفرض';
-      //  print("yyyyyyyyyyyyy:::::::$firstTitle");
-
-      final List<String> texts = [
-     "Text1",
-     "Text1",
-     "Text1",
-     ]; 
+     
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.primaryColor,
@@ -91,24 +64,28 @@ class DetailsGhazaliatHafezScreen extends StatelessWidget {
        child:  Column(
          children: [
            const Gap(22),
-           Text("hhh",style: Theme.of(context)
+           Text(e!.title!,style: Theme.of(context)
                 .textTheme
-                .titleLarge!.copyWith(fontSize: 12),),
+                .titleLarge!.copyWith(fontSize: 12),), 
+                //   Text(gGhazaliatHafez!.text!,style: Theme.of(context)
+                // .textTheme
+                // .titleLarge!.copyWith(fontSize: 12),),
+
 SizedBox(
   height:346,
   width: double.infinity,
   child: ListView.builder(
-      itemCount: state.detailsghazaliatHafez.length,
+      itemCount:state.detailsghazaliatHafez.length,
       itemBuilder: (context, index) {
        //final text = texts[index];
-         final text = state.detailsghazaliatHafez[index];
+        // final text = state.detailsghazaliatHafez[index];
          final isEvenIndex = index.isEven;
        return 
           Padding(
            padding: EdgeInsets.all(8.0),
            child: Text(
            textAlign: isEvenIndex ? TextAlign.right : TextAlign.left,
-                text.text,
+                state.detailsghazaliatHafez[index].text,
              style: const TextStyle(fontSize: 16.0),
            ),
          );
@@ -125,27 +102,27 @@ SizedBox(
                 .textTheme
                 .titleLarge!.copyWith(fontSize: 12),),
     const Gap(20),
-    SizedBox(
-  height:100,
-  width: double.infinity,
-  child: ListView.builder(
-      itemCount: state.detailsghazaliatHafez.length,
-      itemBuilder: (context, index) {
-       final text = state.detailsghazaliatHafez[index];
-       return 
-          Padding(
-           padding: const EdgeInsets.only(left: 20,right:20 ),
-           child: Text(
-             textAlign: TextAlign.right,
-             text.text,
-             style: Theme.of(context)
-                .textTheme
-                .titleLarge!.copyWith(fontSize: 10),
-           ),
-                   );
-      },
-    ),
-),
+//     SizedBox(
+//   height:100,
+//   width: double.infinity,
+//   child: ListView.builder(
+//       itemCount: state.detailsghazaliatHafez.length,
+//       itemBuilder: (context, index) {
+//        final text = state.detailsghazaliatHafez[index];
+//        return 
+//           Padding(
+//            padding: const EdgeInsets.only(left: 20,right:20 ),
+//            child: Text(
+//              textAlign: TextAlign.right,
+//              text.text,
+//              style: Theme.of(context)
+//                 .textTheme
+//                 .titleLarge!.copyWith(fontSize: 10),
+//            ),
+//                    );
+//       },
+//     ),
+// ),
 const Gap(100),
          ],
        ),

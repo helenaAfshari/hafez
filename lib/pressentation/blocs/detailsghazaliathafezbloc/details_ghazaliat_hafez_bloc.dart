@@ -4,32 +4,33 @@ import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_m
 import 'package:autharization_hanna/domain/repository/detailsghazaliathafez_repo/details_ghazaliat_hafez_repository.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_state.dart';
+import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:autharization_hanna/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailsGhazaliatHafezBloc extends Bloc<DetailsGhazaliatHafezEvent,DetailsGhazaliatHafezState>{
-  int id =1;
-  int poemId =2;
+   int? poemId = idd;
  DetailsGhazaliatHafezBloc() : super(DetailsGhazaliatHafezInitialState()) {
      List<DetailsGhazaliatHafezModel> detailsGhazaliatHafez = [];
-     List<GhazalItemModelEntity> gGhazaliatHafez = [];
+    //  List<GhazalItemModelEntity> gGhazaliatHafez = [];
     on<DetailsGhazaliatHafezEvent>((event, emit)async {
-      print(event);
-     
+      // print(event);
+  emit(DetailsGhazaliatHafezLoadingState());
+
       print("poemI?iddddd::::::::::::$poemId");
       if(event is LoadedddEvent){
+        //  poemId++;
         print("ggggg");
        try{
-         //emit(DetailsGhazaliatHafezLoadingState());
           final detailsGhazaliatResponse =
-              await serviceLocator<DetailsGhazaliatHafezRepository>().detailsGhazaliatHafezRepository(id,poemId);
+              await serviceLocator<DetailsGhazaliatHafezRepository>().detailsGhazaliatHafezRepository(poemId!);
                     print("DetailsGhazaliatRespons${detailsGhazaliatResponse}");
   detailsGhazaliatHafez = (detailsGhazaliatResponse.data['data'] as List).map((e) =>
    DetailsGhazaliatHafezModel.fromJason(e)).toList();
   
   if (detailsGhazaliatResponse.statusCode == 200) {
             print("55555555");
-            emit(DetailsGhazaliatHafezSuccesState(detailsGhazaliatHafez,gGhazaliatHafez));
+            emit(DetailsGhazaliatHafezSuccesState(detailsGhazaliatHafez,));
             print("koohhhhho${detailsGhazaliatHafez}");
           } else {
             emit(DetailsGhazaliatHafezErrorState("معتبر نیست"));

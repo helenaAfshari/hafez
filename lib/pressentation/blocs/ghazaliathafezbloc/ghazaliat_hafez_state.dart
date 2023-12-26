@@ -1,7 +1,7 @@
 
+import 'package:autharization_hanna/domain/model/detailsghazaliathafez/details_ghazaliat_hafez_model.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazal_hafez.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
-import 'package:autharization_hanna/domain/model/ghazaliathafez/stanzas.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class GhazaliatHafezState{}
@@ -18,8 +18,8 @@ class GhazaliatHafezErrorState extends GhazaliatHafezState{
 
 class GhazaliatHafezSuccesState extends GhazaliatHafezState{
   final List<GhazalItemModelEntity> ghazaliatHafez;
-  final List<StanzasModel> sanataz;
-  GhazaliatHafezSuccesState(this.ghazaliatHafez,this.sanataz);
+  final List<DetailsGhazaliatHafezModel> detailsGhazaliat;
+  GhazaliatHafezSuccesState(this.ghazaliatHafez,this.detailsGhazaliat);
 }
 class GhazaliatHafezLoadMoreState extends GhazaliatHafezState{
 
@@ -44,8 +44,7 @@ class postLoadMoreState extends GhazaliatHafezState{
 class GhazaliatHafezEndOfListState extends GhazaliatHafezState {}
 
 class ItemSelectedState extends GhazaliatHafezState {
-  final int selectedItemId;
   final int poemId;
-  ItemSelectedState(this.selectedItemId,this.poemId);
+  ItemSelectedState({required this.poemId});
 }
 
