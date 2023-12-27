@@ -2,9 +2,10 @@
 class GhazalItemModelEntity {
  final int? id;
 final  String? title;
-  GhazalItemModelEntity({ this.id, this.title,});
+final  String? tafsir;
+  GhazalItemModelEntity({ this.id, this.title,this.tafsir});
   factory GhazalItemModelEntity.fromJson(Map<String,dynamic>json)=>
-  GhazalItemModelEntity(id: json['id'], title: json['title'],);
+  GhazalItemModelEntity(id: json['id'], title: json['title'],tafsir: json['tafsir']);
 }
 // class GhazalModelItems {
 //   final int? id;

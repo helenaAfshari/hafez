@@ -21,8 +21,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 class DetailsGhazaliatHafezScreen extends StatefulWidget {
      GhazalItemModelEntity? e;
      int index;
-    // DetailsGhazaliatHafezModel? texts  ; 
-   // DetailsGhazaliatHafezModel ?gGhazaliatHafez ;
+   
   DetailsGhazaliatHafezScreen({Key? key, this.e,required this.index});
 
   @override
@@ -38,7 +37,8 @@ class _DetailsGhazaliatHafezScreenState extends State<DetailsGhazaliatHafezScree
   }
   @override
   Widget build(BuildContext context) {
-     
+  bool isVisible = false;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.primaryColor,
@@ -52,107 +52,179 @@ class _DetailsGhazaliatHafezScreenState extends State<DetailsGhazaliatHafezScree
           }else if (state is DetailsGhazaliatHafezSuccesState) {
             return   
             Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const MyAppBar(),
-       Expanded(
-  child: Stack(
-    clipBehavior: Clip.none,
-    children: [
-    Positioned(
-      top: 5,
-      left: 29,
-      right: 29,
-      bottom: 13,
-      child: Container(
-        decoration:  BoxDecoration(
-          border: Border.all(color: MyColors.borderBottomColor),
-          color: MyColors.boxBottomColor,
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-        ),
-        height: MediaQuery.of(context).size.height * 0.8, 
-       child:  Column(
-         children: [
-           const Gap(22),
-           Text(widget.e!.title!,style: Theme.of(context)
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const MyAppBar(),
+                 Expanded(
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+              Positioned(
+                top: 5,
+                left: 29,
+                right: 29,
+                bottom: 13,
+                child: Container(
+                  decoration:  BoxDecoration(
+                    border: Border.all(color: MyColors.borderBottomColor),
+                    color: MyColors.boxBottomColor,
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.8, 
+                 child:  Column(
+                   children: [
+                     const Gap(22),
+                     Text(widget.e!.title!,style: Theme.of(context)
                 .textTheme
                 .titleLarge!.copyWith(fontSize: 12),), 
                 //   Text(gGhazaliatHafez!.text!,style: Theme.of(context)
                 // .textTheme
                 // .titleLarge!.copyWith(fontSize: 12),),
-
-SizedBox(
-  height:346,
-  width: double.infinity,
-  child: ListView.builder(
-      itemCount:state.detailsghazaliatHafez.length,
-      itemBuilder: (context, index) {
-       //final text = texts[index];
-        // final text = state.detailsghazaliatHafez[index];
-         final isEvenIndex = index.isEven;
-       return 
-          GestureDetector(
+            
+            SizedBox(
+            height:346,
+            width: double.infinity,
+            child: ListView.builder(
+                itemCount:state.detailsghazaliatHafez.length,
+                itemBuilder: (context, index) {
+                 //final text = texts[index];
+                  // final text = state.detailsghazaliatHafez[index];
+                   final isEvenIndex = index.isEven;
+                 return 
+                    GestureDetector(
             onTap: () {
             },
             child: Padding(
              padding: EdgeInsets.all(8.0),
              child: Text(
              textAlign: isEvenIndex ? TextAlign.right : TextAlign.left,
-                  state.detailsghazaliatHafez[index].poemId.toString(),
+                  state.detailsghazaliatHafez[index].text,
                style: const TextStyle(fontSize: 16.0),
              ),
                    ),
-          );
-      },
-    ),
-),
-  Expanded(
-  child: Padding(
-    padding:  EdgeInsets.only(bottom: MyDimensions.xlarge*5),
-    child: CustomDivider(endIndent: 50, indent: 50),
-  )),
-
-  Text(widget.e!.title!.toString(),style: Theme.of(context)
-                .textTheme
-                .titleLarge!.copyWith(fontSize: 12),),
-    const Gap(20),
-//     SizedBox(
-//   height:100,
-//   width: double.infinity,
-//   child: ListView.builder(
-//       itemCount: state.detailsghazaliatHafez.length,
-//       itemBuilder: (context, index) {
-//        final text = state.detailsghazaliatHafez[index];
-//        return 
-//           Padding(
-//            padding: const EdgeInsets.only(left: 20,right:20 ),
-//            child: Text(
-//              textAlign: TextAlign.right,
-//              text.text,
-//              style: Theme.of(context)
-//                 .textTheme
-//                 .titleLarge!.copyWith(fontSize: 10),
-//            ),
-//                    );
-//       },
-//     ),
-// ),
-const Gap(100),
-         ],
-       ),
-      ),
-    ),
-      Positioned(
-        bottom: -10,
-        left: 47,
-        right: 47,
-        child: Container(
-          decoration: const BoxDecoration(
+                    );
+                },
+              ),
+            ),
+            Expanded(
+            child: Padding(
+              padding:  EdgeInsets.only(bottom: MyDimensions.xlarge*5),
+              child: CustomDivider(endIndent: 50, indent: 50),
+            )),
+            
+            
+            
+            // Column(
+            //   children: [
+            //     Text("تفسیر"),
+                
+            //     Padding(
+            //       padding: const EdgeInsets.only(left: 5,right: 5),
+            //       child: Text(widget.e!.tafsir!.toString(),style: Theme.of(context)
+            //                     .textTheme
+            //                     .titleLarge!.copyWith(fontSize: 12),),
+            //     ),
+            //   ],
+            // ),
+            
+            
+            StatefulBuilder(
+              builder: (context, setState) {
+              return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Visibility(
+                visible: isVisible,
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                child: Text(
+                  widget.e!.tafsir!,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+              .textTheme
+              .titleLarge!.copyWith(fontSize: 12),
+                ),
+              ),
+               TextButton(
+                onPressed: () {
+            setState(() {
+              isVisible = !isVisible;
+            });
+            print("visible::::$isVisible");
+                },
+                child: Text("تفسیر"),
+             ),
+               
+              ],
+              );
+                                                  },
+                                                ),
+            // Column(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Visibility(
+            //       visible: isVisible,
+            //       maintainSize: true,
+            //       maintainAnimation: true,
+            //       maintainState: true,
+            //       child: Text(
+            //         "llll", // You can replace this with your actual text
+            //         // style: Theme.of(context)
+            //         //       .textTheme
+            //         //       .titleLarge!.copyWith(fontSize: 12),
+            //       ),
+            //     ),
+            //     TextButton(
+            //       onPressed: () {
+            //         setState(() {
+            //           isVisible = !isVisible;
+            //         });
+            //         print("visible::::$isVisible");
+            //       },
+            //       child: Text("Toggle Visibility"),
+            //     ),
+            //   ],
+            // ),
+            
+              const Gap(20),
+            //     SizedBox(
+            //   height:100,
+            //   width: double.infinity,
+            //   child: ListView.builder(
+            //       itemCount: state.detailsghazaliatHafez.length,
+            //       itemBuilder: (context, index) {
+            //        final text = state.detailsghazaliatHafez[index];
+            //        return 
+            //           Padding(
+            //            padding: const EdgeInsets.only(left: 20,right:20 ),
+            //            child: Text(
+            //              textAlign: TextAlign.right,
+            //              text.text,
+            //              style: Theme.of(context)
+            //                 .textTheme
+            //                 .titleLarge!.copyWith(fontSize: 10),
+            //            ),
+            //                    );
+            //       },
+            //     ),
+            // ),
+            const Gap(100),
+                   ],
+                 ),
+                ),
+              ),
+                Positioned(
+                  bottom: -10,
+                  left: 47,
+                  right: 47,
+                  child: Container(
+                    decoration: const BoxDecoration(
               color: MyColors.musicBoxColor,
             borderRadius: BorderRadius.all(Radius.circular(8))
-          ),
-height: MediaQuery.of(context).size.height * 0.10,          
-          child: Column(
+                    ),
+            height: MediaQuery.of(context).size.height * 0.10,          
+                    child: Column(
             children: [
               const Gap(5),
               Row(
@@ -170,16 +242,16 @@ height: MediaQuery.of(context).size.height * 0.10,
                 progressColor: MyColors.percentMusicColor,
               )
             ],
-          ),
-      ),
-    ),
-    ],
-  ),
-),
-          const Gap(20),
+                    ),
+                ),
+              ),
+              ],
+            ),
+            ),
+                    const Gap(20),
             MyBottomNavigation(context: context,),
-        ],
-      );
+                  ],
+                );
          
        }
        else if (state is DetailsGhazaliatHafezErrorState) {
@@ -195,3 +267,27 @@ height: MediaQuery.of(context).size.height * 0.10,
     );
   }
 }
+
+
+// import 'package:flutter/material.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Show/Hide Widget',
+//       theme: ThemeData(
+//         primarySwatch: Colors.green,
+//         visualDensity: VisualDensity.adaptivePlatformDensity,
+//       ),
+//       home: HomeScreen(),
+//     );
+//   }
+// }
+
+
+

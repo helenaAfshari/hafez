@@ -39,6 +39,66 @@ class MyApp extends StatelessWidget {
 
 
 
+// import 'package:flutter/material.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Show/Hide Widget',
+//       theme: ThemeData(
+//         primarySwatch: Colors.green,
+//         visualDensity: VisualDensity.adaptivePlatformDensity,
+//       ),
+//       home: HomeScreen(),
+//     );
+//   }
+// }
+
+// class HomeScreen extends StatefulWidget {
+//   @override
+//   _HomeScreenState createState() => _HomeScreenState();
+// }
+
+// class _HomeScreenState extends State<HomeScreen> {
+//   bool isVisible = true;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+     
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Visibility(
+//               visible: isVisible,
+//               maintainSize: true,
+//               maintainAnimation: true,
+//               maintainState: true,
+//               child: Text(
+//                 'Hello, this is some text!',
+//                 style: TextStyle(fontSize: 20, color: Colors.green),
+//               ),
+//             ),
+//             ElevatedButton(
+//               onPressed: () {
+//                 setState(() {
+//                   isVisible = !isVisible;
+//                 });
+//               },
+//               child: Text("Toggle Visibility"),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 
 

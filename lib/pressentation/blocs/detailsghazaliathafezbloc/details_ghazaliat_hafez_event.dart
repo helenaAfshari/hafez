@@ -10,7 +10,4 @@ class LoadedddEvent extends DetailsGhazaliatHafezStart{
   LoadedddEvent(this.selectedPoemIdd);
 }
 
-// class ItemSelectedEvent  extends DetailsGhazaliatHafezEvent {
-//    final int selectedPoemIdd;
-//   ItemSelectedEvent( this.selectedPoemIdd);
-// }
+
