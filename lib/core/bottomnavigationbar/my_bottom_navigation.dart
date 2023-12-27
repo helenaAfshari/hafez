@@ -38,15 +38,15 @@ class MyBottomNavigation extends StatelessWidget {
              },
              icon: 'assets/icons/home.png', 
              ),
-//  MyBottomNavigationBarItem(
-//   onTap: () {
-//       Navigator.push(
-//         context,
-//         MaterialPageRoute(builder: (context) => DetailsGhazaliatHafezScreen()),
-//       );
-//   },
-//   icon: 'assets/icons/support.png',
-// ),
+ MyBottomNavigationBarItem(
+  onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => DetailsGhazaliatHafezScreen(index: 0,)),
+      );
+  },
+  icon: 'assets/icons/support.png',
+),
 
          ]
        ),

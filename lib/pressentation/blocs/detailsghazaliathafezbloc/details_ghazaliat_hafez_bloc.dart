@@ -23,7 +23,7 @@ class DetailsGhazaliatHafezBloc extends Bloc<DetailsGhazaliatHafezEvent,DetailsG
         print("ggggg");
        try{
           final detailsGhazaliatResponse =
-              await serviceLocator<DetailsGhazaliatHafezRepository>().detailsGhazaliatHafezRepository(event.selectedPoemIdd);
+              await serviceLocator<DetailsGhazaliatHafezRepository>().detailsGhazaliatHafezRepository(event.selectedPoemIdd!);
                     print("DetailsGhazaliatRespons${detailsGhazaliatResponse}");
   detailsGhazaliatHafez = (detailsGhazaliatResponse.data['data'] as List).map((e) =>
    DetailsGhazaliatHafezModel.fromJason(e)).toList();

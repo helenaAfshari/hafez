@@ -20,10 +20,10 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class DetailsGhazaliatHafezScreen extends StatefulWidget {
      GhazalItemModelEntity? e;
-     int? index = 0;
+     int index;
     // DetailsGhazaliatHafezModel? texts  ; 
    // DetailsGhazaliatHafezModel ?gGhazaliatHafez ;
-  DetailsGhazaliatHafezScreen({Key? key, this.e,this.index});
+  DetailsGhazaliatHafezScreen({Key? key, this.e,required this.index});
 
   @override
   State<DetailsGhazaliatHafezScreen> createState() => _DetailsGhazaliatHafezScreenState();
@@ -33,7 +33,7 @@ class _DetailsGhazaliatHafezScreenState extends State<DetailsGhazaliatHafezScree
   @override
   void initState() {
     super.initState();
- BlocProvider.of<DetailsGhazaliatHafezBloc>(context).add(LoadedddEvent(widget.index!));
+ BlocProvider.of<DetailsGhazaliatHafezBloc>(context).add(LoadedddEvent(widget.index));
 
   }
   @override

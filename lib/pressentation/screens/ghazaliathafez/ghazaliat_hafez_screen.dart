@@ -91,7 +91,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                               onTap: () {
                                 print("Index tapped: $index");
                                 print("Selected item: ${k[index].id}");
-                 int adjustedIndex = index <= 15 ? index+1  : index ;
+                 int adjustedIndex = index < 17 ? index+1  : index+1 ;
 
 
                                 // setState(() {
