@@ -11,6 +11,8 @@ class LoadedEvent extends GhazaliatHafezStart{
 class LoadMoreEvent extends GhazaliatHafezStart {}
 
 class ItemSelectedEvent  extends GhazaliatHafezStart {
+    // int idd =10;
+
    final int selectedPoemId;
-  ItemSelectedEvent({required this.selectedPoemId});
+  ItemSelectedEvent(this.selectedPoemId);
 }

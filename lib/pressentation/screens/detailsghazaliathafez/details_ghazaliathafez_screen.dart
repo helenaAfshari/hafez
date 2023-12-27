@@ -18,14 +18,24 @@ import 'package:gap/gap.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 
-class DetailsGhazaliatHafezScreen extends StatelessWidget {
+class DetailsGhazaliatHafezScreen extends StatefulWidget {
      GhazalItemModelEntity? e;
-     
+     int? index = 0;
     // DetailsGhazaliatHafezModel? texts  ; 
    // DetailsGhazaliatHafezModel ?gGhazaliatHafez ;
-  DetailsGhazaliatHafezScreen({Key? key, this.e});
-     
+  DetailsGhazaliatHafezScreen({Key? key, this.e,this.index});
 
+  @override
+  State<DetailsGhazaliatHafezScreen> createState() => _DetailsGhazaliatHafezScreenState();
+}
+
+class _DetailsGhazaliatHafezScreenState extends State<DetailsGhazaliatHafezScreen> {
+  @override
+  void initState() {
+    super.initState();
+ BlocProvider.of<DetailsGhazaliatHafezBloc>(context).add(LoadedddEvent(widget.index!));
+
+  }
   @override
   Widget build(BuildContext context) {
      
@@ -64,7 +74,7 @@ class DetailsGhazaliatHafezScreen extends StatelessWidget {
        child:  Column(
          children: [
            const Gap(22),
-           Text(e!.title!,style: Theme.of(context)
+           Text(widget.e!.title!,style: Theme.of(context)
                 .textTheme
                 .titleLarge!.copyWith(fontSize: 12),), 
                 //   Text(gGhazaliatHafez!.text!,style: Theme.of(context)
@@ -81,14 +91,18 @@ SizedBox(
         // final text = state.detailsghazaliatHafez[index];
          final isEvenIndex = index.isEven;
        return 
-          Padding(
-           padding: EdgeInsets.all(8.0),
-           child: Text(
-           textAlign: isEvenIndex ? TextAlign.right : TextAlign.left,
-                state.detailsghazaliatHafez[index].text,
-             style: const TextStyle(fontSize: 16.0),
-           ),
-         );
+          GestureDetector(
+            onTap: () {
+            },
+            child: Padding(
+             padding: EdgeInsets.all(8.0),
+             child: Text(
+             textAlign: isEvenIndex ? TextAlign.right : TextAlign.left,
+                  state.detailsghazaliatHafez[index].poemId.toString(),
+               style: const TextStyle(fontSize: 16.0),
+             ),
+                   ),
+          );
       },
     ),
 ),
@@ -98,7 +112,7 @@ SizedBox(
     child: CustomDivider(endIndent: 50, indent: 50),
   )),
 
-  Text("تفسیر",style: Theme.of(context)
+  Text(widget.e!.title!.toString(),style: Theme.of(context)
                 .textTheme
                 .titleLarge!.copyWith(fontSize: 12),),
     const Gap(20),
@@ -180,6 +194,4 @@ height: MediaQuery.of(context).size.height * 0.10,
       ),
     );
   }
-
-
 }

@@ -9,7 +9,7 @@ import 'package:autharization_hanna/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailsGhazaliatHafezBloc extends Bloc<DetailsGhazaliatHafezEvent,DetailsGhazaliatHafezState>{
-   int? poemId = idd;
+  //  int poemId =5;
  DetailsGhazaliatHafezBloc() : super(DetailsGhazaliatHafezInitialState()) {
      List<DetailsGhazaliatHafezModel> detailsGhazaliatHafez = [];
     //  List<GhazalItemModelEntity> gGhazaliatHafez = [];
@@ -17,13 +17,13 @@ class DetailsGhazaliatHafezBloc extends Bloc<DetailsGhazaliatHafezEvent,DetailsG
       // print(event);
   emit(DetailsGhazaliatHafezLoadingState());
 
-      print("poemI?iddddd::::::::::::$poemId");
+    //  print("poemI?iddddd::::::::::::$poemId");
       if(event is LoadedddEvent){
         //  poemId++;
         print("ggggg");
        try{
           final detailsGhazaliatResponse =
-              await serviceLocator<DetailsGhazaliatHafezRepository>().detailsGhazaliatHafezRepository(poemId!);
+              await serviceLocator<DetailsGhazaliatHafezRepository>().detailsGhazaliatHafezRepository(event.selectedPoemIdd);
                     print("DetailsGhazaliatRespons${detailsGhazaliatResponse}");
   detailsGhazaliatHafez = (detailsGhazaliatResponse.data['data'] as List).map((e) =>
    DetailsGhazaliatHafezModel.fromJason(e)).toList();
@@ -36,10 +36,12 @@ class DetailsGhazaliatHafezBloc extends Bloc<DetailsGhazaliatHafezEvent,DetailsG
             emit(DetailsGhazaliatHafezErrorState("معتبر نیست"));
           }
        }catch (e) {
-          // ignore: deprecated_member_use
           print(" متصل نیست به اینترت");
-          } 
+          }
       }
+      // else if(event is ItemSelectedEvent){
+      //       event.selectedPoemIdd;
+      //   }
     },);
 }
 }

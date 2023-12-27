@@ -10,7 +10,6 @@ import 'package:autharization_hanna/service_locator.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> {
      int page =1;
      int perPage=50;
@@ -39,21 +38,15 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
             emit(GhazaliatHafezErrorState("معتبر نیست"));
           }
         } catch (e) {
-          // ignore: deprecated_member_use
           print(" متصل نیست به اینترت");
           } 
-        }else if(event is ItemSelectedEvent){
-          idd;
         }
   });
  
-
    on<LoadMoreEvent>((event, emit) async {
-   String message;
    List<GhazalItemModelEntity> loadedData = [];
- 
   page++;
-
+  
   if (event is LoadMoreEvent) {
     try {
       final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>()
@@ -63,7 +56,7 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
 
        loadedData = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
        ghazaliatHafez.addAll(loadedData);
-
+       print("LoadedEvent$loadedData");
       if (loadedData.isEmpty) {
         emit(GhazaliatHafezEndOfListState());
       } else {
@@ -80,56 +73,56 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
   }
 });
 
-on<ItemSelectedEvent>((event, emit) async {
-   String message;
-   List<GhazalItemModelEntity> loadedData = [];
-  page++;
-       if(event is ItemSelectedEvent){
-          try {
-      final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>()
-          .ghazaliathafez(page, perPage);
+// on<ItemSelectedEvent>((event, emit) async {
+//    String message;
+//    List<GhazalItemModelEntity> loadedData = [];
+//   page++;
+//        if(event is ItemSelectedEvent){
+//           try {
+//       final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>()
+//           .ghazaliathafez(page, perPage);
 
-      print("jjjjj${ghazaliatResponse}");
+//       print("jjjjj${ghazaliatResponse}");
 
-       loadedData = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
-       ghazaliatHafez.addAll(loadedData);
- {
-        if (ghazaliatResponse.statusCode == 200) {
-          emit(GhazaliatHafezSuccesState(ghazaliatHafez,detailsGhazaliatHafez));
-          print("kooooooooo${ghazaliatHafez}");
-        } else {
-          emit(GhazaliatHafezErrorState("معتبر نیست"));
-        }
-      }
-    } catch (e) {
-      print(" متصل نیست به اینترنت");
-    }
-       }
-  // if (event is LoadMoreEvent) {
-  //   try {
-  //     final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>()
-  //         .ghazaliathafez(page, perPage);
+//        loadedData = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
+//        ghazaliatHafez.addAll(loadedData);
+//  {
+//         if (ghazaliatResponse.statusCode == 200) {
+//           emit(GhazaliatHafezSuccesState(ghazaliatHafez,detailsGhazaliatHafez));
+//           print("kooooooooo${ghazaliatHafez}");
+//         } else {
+//           emit(GhazaliatHafezErrorState("معتبر نیست"));
+//         }
+//       }
+//     } catch (e) {
+//       print(" متصل نیست به اینترنت");
+//     }
+//        }
+//   // if (event is LoadMoreEvent) {
+//   //   try {
+//   //     final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>()
+//   //         .ghazaliathafez(page, perPage);
 
-  //     print("jjjjj${ghazaliatResponse}");
+//   //     print("jjjjj${ghazaliatResponse}");
 
-  //      loadedData = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
-  //      ghazaliatHafez.addAll(loadedData);
+//   //      loadedData = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
+//   //      ghazaliatHafez.addAll(loadedData);
 
-  //     if (loadedData.isEmpty) {
-  //       emit(GhazaliatHafezEndOfListState());
-  //     } else {
-  //       if (ghazaliatResponse.statusCode == 200) {
-  //         emit(GhazaliatHafezSuccesState(ghazaliatHafez,detailsGhazaliatHafez));
-  //         print("kooooooooo${ghazaliatHafez}");
-  //       } else {
-  //         emit(GhazaliatHafezErrorState("معتبر نیست"));
-  //       }
-  //     }
-  //   } catch (e) {
-  //     print(" متصل نیست به اینترنت");
-  //   }
-  // }
-});
+//   //     if (loadedData.isEmpty) {
+//   //       emit(GhazaliatHafezEndOfListState());
+//   //     } else {
+//   //       if (ghazaliatResponse.statusCode == 200) {
+//   //         emit(GhazaliatHafezSuccesState(ghazaliatHafez,detailsGhazaliatHafez));
+//   //         print("kooooooooo${ghazaliatHafez}");
+//   //       } else {
+//   //         emit(GhazaliatHafezErrorState("معتبر نیست"));
+//   //       }
+//   //     }
+//   //   } catch (e) {
+//   //     print(" متصل نیست به اینترنت");
+//   //   }
+//   // }
+// });
 
   }
 

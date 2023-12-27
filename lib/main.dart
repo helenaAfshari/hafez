@@ -16,6 +16,7 @@ void main()async {
 }
 
 class MyApp extends StatelessWidget {
+ 
   @override
   Widget build(BuildContext context) {
     return 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           create: (context) => GhazaliatHafezBloc()..add(LoadedEvent()),
         ),  
         BlocProvider<DetailsGhazaliatHafezBloc>(
-          create: (context) => DetailsGhazaliatHafezBloc()..add(LoadedddEvent())),
+          create: (context) => DetailsGhazaliatHafezBloc()..add(LoadedddEvent(0))),
       ],
       child:  MaterialApp(
         title: 'Your App Title',
