@@ -249,7 +249,7 @@ class _DetailsGhazaliatHafezScreenState extends State<DetailsGhazaliatHafezScree
             ),
             ),
                     const Gap(20),
-            MyBottomNavigation(context: context,),
+            MyBottomNavigation(),
                   ],
                 );
          

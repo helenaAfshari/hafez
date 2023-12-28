@@ -1,18 +1,20 @@
 
-import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazal_hafez.dart';
-import 'package:equatable/equatable.dart';
+
 
 abstract class GhazaliatHafezEvent{}
-class GhazaliatHafezStart extends GhazaliatHafezEvent{}
-class InisialEvent extends GhazaliatHafezStart{}
-class LoadedEvent extends GhazaliatHafezStart{
+class GhazaliatHafezStart extends GhazaliatHafezEvent{
+
+}
+
+  class InisialEvent extends GhazaliatHafezStart{
+  }
   
-}
-class LoadMoreEvent extends GhazaliatHafezStart {}
+class LoadedEvent extends GhazaliatHafezStart{
 
-class ItemSelectedEvent  extends GhazaliatHafezStart {
-    // int idd =10;
-
-   final int selectedPoemId;
-  ItemSelectedEvent(this.selectedPoemId);
 }
+class LoadMoreEvent extends GhazaliatHafezStart {
+}
+
+
+
+

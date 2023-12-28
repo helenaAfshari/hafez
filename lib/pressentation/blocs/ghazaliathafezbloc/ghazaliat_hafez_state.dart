@@ -18,8 +18,8 @@ class GhazaliatHafezErrorState extends GhazaliatHafezState{
 
 class GhazaliatHafezSuccesState extends GhazaliatHafezState{
   final List<GhazalItemModelEntity> ghazaliatHafez;
-  final List<DetailsGhazaliatHafezModel> detailsGhazaliat;
-  GhazaliatHafezSuccesState(this.ghazaliatHafez,this.detailsGhazaliat);
+  // final List<DetailsGhazaliatHafezModel> detailsGhazaliat;
+  GhazaliatHafezSuccesState(this.ghazaliatHafez,);
 }
 class GhazaliatHafezLoadMoreState extends GhazaliatHafezState{
 
@@ -43,8 +43,5 @@ class postLoadMoreState extends GhazaliatHafezState{
 
 class GhazaliatHafezEndOfListState extends GhazaliatHafezState {}
 
-class ItemSelectedState extends GhazaliatHafezState {
-  final int poemId;
-  ItemSelectedState({required this.poemId});
-}
+
 

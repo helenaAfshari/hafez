@@ -12,7 +12,7 @@ class Test extends StatelessWidget {
           Container(),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: MyBottomNavigation(context: context),
+            child: MyBottomNavigation(),
           )
         ],
       ),

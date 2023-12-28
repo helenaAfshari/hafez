@@ -6,10 +6,12 @@ import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazali
 import 'package:autharization_hanna/pressentation/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 class MyBottomNavigation extends StatelessWidget {
-  const MyBottomNavigation({super.key,required BuildContext context});
+  const MyBottomNavigation({
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
-   late int id;
+  
     return Container(
        width:
            UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
