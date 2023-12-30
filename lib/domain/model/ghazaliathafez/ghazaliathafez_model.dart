@@ -3,9 +3,10 @@ class GhazalItemModelEntity {
   int? id;
   String? title;
   String? tafsir;
-  GhazalItemModelEntity({ this.id, this.title, this.tafsir});
+  String? tafsirAudio;
+  GhazalItemModelEntity({ this.id, this.title, this.tafsir,this.tafsirAudio});
   factory GhazalItemModelEntity.fromJson(Map<String,dynamic>json)=>
-  GhazalItemModelEntity(id: json['id'], title: json['title'],tafsir: json['tafsir']);
+  GhazalItemModelEntity(id: json['id'], title: json['title'],tafsir: json['tafsir'],tafsirAudio: json['tafsir_audio']);
 }
 // class GhazalModelItems {
 //   final int? id;

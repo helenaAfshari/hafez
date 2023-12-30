@@ -1,17 +1,19 @@
 import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navbar_item.dart';
 import 'package:autharization_hanna/core/resource/constants/my_pading.dart';
 import 'package:autharization_hanna/core/utils/ui_utils.dart';
+import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
 import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
 import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:autharization_hanna/pressentation/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 class MyBottomNavigation extends StatelessWidget {
+  
   const MyBottomNavigation({
     super.key,
   });
   @override
   Widget build(BuildContext context) {
-  
+   
     return Container(
        width:
            UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
@@ -44,7 +46,8 @@ class MyBottomNavigation extends StatelessWidget {
   onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => DetailsGhazaliatHafezScreen(index: 0,)),
+        MaterialPageRoute(builder: (context) => DetailsGhazaliatHafezScreen(index: 0,)
+      )
       );
   },
   icon: 'assets/icons/support.png',

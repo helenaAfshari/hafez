@@ -1,6 +1,7 @@
 import 'package:autharization_hanna/core/resource/constants/theme/my_theme.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
+import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_state.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
@@ -32,8 +33,373 @@ class MyApp extends StatelessWidget {
       child:  MaterialApp(
         title: 'Your App Title',
         home: GhazaliatHafezScreen(),
+     
       ),
     );
   }
 }
+
+
+// import 'package:flutter/material.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: MyHomePage(),
+//     );
+//   }
+// }
+
+// class MyHomePage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('BottomSheet Example'),
+//       ),
+//       body: Center(
+//         child: GestureDetector(
+//           onTap: () {
+//             _showBottomSheet(context);
+//           },
+//           child: Text(
+//             'hhh',
+//             style: TextStyle(
+//               fontSize: 24,
+//               color: Colors.blue,
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   void _showBottomSheet(BuildContext context) {
+//     showModalBottomSheet(
+//       context: context,
+//       builder: (BuildContext builder) {
+//         return Container(
+//           height: 200,
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               Text(
+//                 'This is a BottomSheet',
+//                 style: TextStyle(fontSize: 20),
+//               ),
+//               SizedBox(height: 20),
+//               ElevatedButton(
+//                 onPressed: () {
+//                   Navigator.of(context).pop();
+//                 },
+//                 child: Text('Close'),
+//               ),
+//             ],
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
+
+
+
+
+// import 'package:flutter/material.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: MyHomePage(),
+//     );
+//   }
+// }
+
+// class MyHomePage extends StatefulWidget {
+//   @override
+//   _MyHomePageState createState() => _MyHomePageState();
+// }
+
+// class _MyHomePageState extends State<MyHomePage> {
+//   bool isVisible = true;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Animated List Example'),
+//       ),
+//       body: Stack(
+//         children: [
+//           Visibility(
+//             visible: isVisible,
+//             child: Container(
+//               height: 200,
+//               child: ListView.builder(
+//                 itemCount: 10,
+//                 itemBuilder: (context, index) {
+//                   return ListTile(
+//                     title: Text('آیتم $index'),
+//                   );
+//                 },
+//               ),
+//             ),
+//           ),
+//           Padding(
+//             padding: const EdgeInsets.only(top: 210),
+//             child: TextButton(
+//               onPressed: () {
+//                 setState(() {
+//                   isVisible = !isVisible;
+//                 });
+//                 print("visible::::$isVisible");
+//               },
+//               child: Text("تفسیر"),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+
+
+// import 'package:flutter/material.dart';
+
+// void main() => runApp(MyApp());
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'ExpansionTile Collapse',
+//       theme: ThemeData(
+//         primarySwatch: Colors.blue,
+//       ),
+//       home: MyHomePage(title: 'ExpansionTile Collapse'),
+//     );
+//   }
+// }
+
+// class MyHomePage extends StatefulWidget {
+//   MyHomePage({ required this.title}) : super();
+
+//   final String title;
+
+//   @override
+//   _MyHomePageState createState() => _MyHomePageState();
+// }
+
+// class _MyHomePageState extends State<MyHomePage> {
+
+//   // selected's value = 0. For default first item is open.
+//   int selected = 0; //attention
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         centerTitle: true,title: Text('ExpansionTile Collapse', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+//       ),
+//       body: Container(color: Colors.white,
+//           child: SingleChildScrollView(
+//               child : Column( 
+//                 children : [                  
+//                   ListView.builder(
+
+//                       key: Key('builder ${selected.toString()}'), //attention
+
+//                       padding: EdgeInsets.only(left: 13.0, right: 13.0, bottom: 25.0),
+//                       shrinkWrap: true,
+//                       physics: NeverScrollableScrollPhysics(),
+//                       itemCount: 5,
+//                       itemBuilder: (context, index) {                        
+//                         return Column(
+//                           children: <Widget>[
+//                             Divider(
+//                               height: 17.0,
+//                               color: Colors.white,
+//                             ), 
+//                                   ExpansionTile(  
+
+//                                         key: Key(index.toString()), //attention                                                                  
+//                                         initiallyExpanded : index==selected, //attention
+
+//                                         leading: Icon(Icons.person, size: 50.0, color: Colors.black,),
+//                                         title: Text('Faruk AYDIN ${index}',style: TextStyle(color: Color(0xFF09216B), fontSize: 17.0, fontWeight: FontWeight.bold)), 
+//                                         subtitle: Text('Software Engineer', style: TextStyle(color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.bold),),
+//                                         children: <Widget>[                                       
+//                                           Padding(padding: EdgeInsets.all(25.0), 
+//                                                       child : Text('DETAİL ${index} \n' + 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here", making it look like readable English.',)
+//                                                       ) 
+//                                         ],
+//                                         onExpansionChanged: ((newState){
+//                                             if(newState)
+//                                                 setState(() {
+//                                                   Duration(seconds:  20000);
+//                                                   selected = index; 
+//                                                 });
+//                                                 else setState(() {
+//                                                   selected = -1; 
+//                                                 });        
+//                                         })
+//                                       ),
+
+//                               ]
+//                             );
+//                       },
+//                         )
+//                 ]
+//                     ),
+//           )           
+//         )
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+// import 'package:flutter/material.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: MyHomePage(),
+//     );
+//   }
+// }
+
+// class MyHomePage extends StatefulWidget {
+//   @override
+//   _MyHomePageState createState() => _MyHomePageState();
+// }
+
+// class _MyHomePageState extends State<MyHomePage> {
+//   final GlobalKey<_CustomExpansionTileState> expansionTileKey =
+//       GlobalKey<_CustomExpansionTileState>();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Custom Expansion Tile'),
+//       ),
+//       body: Column(
+//         children: [
+//           CustomExpansionTile(
+//             key: expansionTileKey,
+//             title: Text("تفسیر"),
+//             children: [
+//               Text("kkkkk"),
+//               Text("kkkkk"),
+//               Text("kkkkk"),
+//             ],
+//           ),
+//         ],
+//       ),
+//       floatingActionButton: FloatingActionButton(
+//         onPressed: () {
+//           // با فراخوانی toggleExpansion می‌توانید وضعیت باز یا بسته بودن را تغییر دهید
+//           expansionTileKey.currentState?.toggleExpansion();
+//         },
+//         child: Icon(Icons.add),
+//       ),
+//     );
+//   }
+// }
+
+// class CustomExpansionTile extends StatefulWidget {
+//   final Widget title;
+//   final List<Widget> children;
+
+//   const CustomExpansionTile({
+//     Key? key,
+//     required this.title,
+//     required this.children,
+//   }) : super(key: key);
+
+//   @override
+//   _CustomExpansionTileState createState() => _CustomExpansionTileState();
+// }
+
+// class _CustomExpansionTileState extends State<CustomExpansionTile>
+//     with SingleTickerProviderStateMixin {
+//   late AnimationController _controller;
+//   late Animation<double> _heightFactor;
+
+//   bool _isExpanded = false;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _controller = AnimationController(
+//       vsync: this,
+//       duration: Duration(milliseconds: 300),
+//     );
+//     _heightFactor = _controller.drive(CurveTween(curve: Curves.bounceInOut));
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         ListTile(
+//           title: widget.title,
+//           onTap: _toggleExpansion,
+//         ),
+//         ClipRect(
+//           child: Align(
+//             heightFactor: _heightFactor.value,
+//             child: Column(
+//               children: widget.children,
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+
+//   void _toggleExpansion() {
+//     setState(() {
+//       _isExpanded = !_isExpanded;
+//     });
+
+//     if (_isExpanded) {
+//     _controller.reverse();
+//     } else {
+//        _controller.forward();
+      
+//     }
+//   }
+
+//   void toggleExpansion() {
+//     _toggleExpansion();
+//   }
+
+//   @override
+//   void dispose() {
+//     _controller.dispose();
+//     super.dispose();
+//   }
+// }
 

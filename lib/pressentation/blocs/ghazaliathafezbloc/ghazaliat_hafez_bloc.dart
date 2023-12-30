@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:autharization_hanna/domain/model/detailsghazaliathafez/details_ghazaliat_hafez_model.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazal_hafez.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
@@ -29,7 +31,7 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
                   .ghazaliathafez(page,perPage);
           print("jjjjj${ghazaliatResponse}");
     ghazaliatHafez = (ghazaliatResponse.data['data']as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
-
+ 
           if (ghazaliatResponse.statusCode == 200) {
             print("55555555");
             emit(GhazaliatHafezSuccesState(ghazaliatHafez,));

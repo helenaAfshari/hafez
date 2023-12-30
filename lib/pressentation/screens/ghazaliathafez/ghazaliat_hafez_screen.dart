@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:autharization_hanna/core/appbar/my_appbar.dart';
 import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navigation.dart';
 import 'package:autharization_hanna/core/components/customwidgets/custom_divider.dart';
@@ -7,6 +9,7 @@ import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
 import 'package:autharization_hanna/core/resource/constants/my_strings.dart';
 import 'package:autharization_hanna/core/utils/ui_utils.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
+import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_state.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
@@ -66,6 +69,8 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                                 print("Selected item: ${k[index].id}");
                  int adjustedIndex = index < 17 ? index+1  : index+1 ;
 
+                    // Navigator.of(context).pushNamed('detailsGhazaliatHafezScreen',
+                    // arguments: state.ghazaliatHafez[index].id,e[index]]);
 
                                 // setState(() {
                                 //   k[index].id;
@@ -80,7 +85,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                                     create: (context) => GhazaliatHafezBloc(),
                                     child: DetailsGhazaliatHafezScreen(
                                       e: k[index],
-                                      index:adjustedIndex
+                                      index:adjustedIndex,
 
                                     ),
                                   ),

@@ -26,6 +26,7 @@ dependencies:
   infinite_scroll_pagination: ^4.0.0
   percent_indicator: ^4.2.3
   share_plus: ^4.0.10
+  just_audio: ^0.9.36
 
 
 dev_dependencies:
