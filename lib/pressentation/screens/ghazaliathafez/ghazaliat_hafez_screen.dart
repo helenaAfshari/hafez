@@ -66,7 +66,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                 GestureDetector(
                   onTap: () {
                        print("Index tapped: $index");
-                                print("Selected item: ${k[index].id}");
+                       print("Selected item: ${k[index].id}");
                  int adjustedIndex = index < 17 ? index+1  : index+1 ;
 
                     // Navigator.of(context).pushNamed('detailsGhazaliatHafezScreen',

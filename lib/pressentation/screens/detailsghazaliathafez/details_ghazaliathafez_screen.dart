@@ -1,5 +1,8 @@
 
 
+import 'dart:async';
+import 'dart:math';
+
 import 'package:autharization_hanna/core/appbar/my_appbar.dart';
 import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navigation.dart';
 import 'package:autharization_hanna/core/components/customwidgets/custom_divider.dart';
@@ -14,6 +17,7 @@ import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazali
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -23,7 +27,7 @@ class DetailsGhazaliatHafezScreen extends StatefulWidget {
      int index;
      
    
-  DetailsGhazaliatHafezScreen({Key? key,  this.e,required this.index});
+  DetailsGhazaliatHafezScreen({Key? key,  this.e, required this.index});
 
   @override
   State<DetailsGhazaliatHafezScreen> createState() => _DetailsGhazaliatHafezScreenState();
@@ -33,21 +37,25 @@ class _DetailsGhazaliatHafezScreenState extends State<DetailsGhazaliatHafezScree
   @override
   void initState() {
     super.initState();
-     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _playAudio('https://api.hafezname.ir/voices/001.mp3');
-    });
- BlocProvider.of<DetailsGhazaliatHafezBloc>(context).add(LoadedddEvent(widget.index));
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+_playAudio(widget.e?.tafsirAudio?? "");
+    startProgress();
+  });
+   
+ BlocProvider.of<DetailsGhazaliatHafezBloc>(context).add(LoadedddEvent(widget.index??0));
 // _playAudio('https://api.hafezname.ir/voices/001.mp3');
   }
 
- 
+  Timer? timer;
   AudioPlayer _audioPlayer =AudioPlayer();
    bool isPlaying = false;
+    double progressValue = 0.0;
+
 
     Future<void> _playAudio(String url) async {
     try {
       await _audioPlayer.setUrl(url);
-      await _audioPlayer.play();
+      await _audioPlayer.pause();
       _audioPlayer.playerStateStream.listen((playerState) {
         setState(() {
           isPlaying = playerState.playing;
@@ -58,20 +66,44 @@ class _DetailsGhazaliatHafezScreenState extends State<DetailsGhazaliatHafezScree
       print("Error playing audio: $e");
     }
   }
-
-   Future<void> _togglePlayback() async {
-    if (isPlaying) {
-      await _audioPlayer.pause();
-    } else {
-      await _audioPlayer.pause();
-    }
-  }
-
   @override
   void dispose() {
     _audioPlayer.dispose();
     super.dispose();
   }
+
+startProgress() {
+  const tick = Duration(seconds: 1);
+  int duration = _audioPlayer.duration!.inSeconds;
+  var step =  1 / duration;
+  timer = Timer.periodic(tick, (timer) {
+    duration--;
+    progressValue += step;
+
+    // اگر مقدار progressValue از 1.0 بیشتر شد، آن را به 1.0 تنظیم کنید
+    if (progressValue > 1.0) {
+      progressValue = 1.0;
+    }
+
+    if (duration <= 0) {
+      timer.cancel();
+      _audioPlayer.stop();
+      update(1.0);
+      print("musssiiiccc:::");
+    } else {
+      update(progressValue);
+    }
+  });
+}
+
+
+void update(double newValue) {
+  setState(() {
+      // اگر newValue بزرگتر از 0.0 باشد، مقدار progressValue به‌روز شود
+      progressValue = newValue;
+  
+  });
+}
   
   @override
   Widget build(BuildContext context) {
@@ -133,7 +165,7 @@ class _DetailsGhazaliatHafezScreenState extends State<DetailsGhazaliatHafezScree
                padding: EdgeInsets.all(8.0),
                child: Text(
                textAlign: isEvenIndex ? TextAlign.right : TextAlign.left,
-                    state.detailsghazaliatHafez[index].text,
+                    state.detailsghazaliatHafez[index].text??"",
                  style: const TextStyle(fontSize: 16.0),
                ),
                      ),
@@ -321,7 +353,7 @@ class _DetailsGhazaliatHafezScreenState extends State<DetailsGhazaliatHafezScree
           left: 47,
           right: 47,
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: MyColors.musicBoxColor,
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
@@ -332,22 +364,141 @@ class _DetailsGhazaliatHafezScreenState extends State<DetailsGhazaliatHafezScree
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // GestureDetector(
-                    //   onTap: _togglePlayback,
-                    //   child: Image.asset(
-                    //     isPlaying ? 'assets/icons/pause.png' : 'assets/icons/play.png',
-                    //   ),
-                    // ),
-                    Image.asset('assets/icons/Rectangle.png'),
-                    Image.asset('assets/icons/Rectangle.png'),
+
+
+
+
+// GestureDetector(
+//  onTap: () async {
+//   if (isPlaying) {
+//     await _audioPlayer.play();
+//     if (timer != null && timer!.isActive) {
+//       timer!.cancel();
+//     }
+//   } else {
+//     await _audioPlayer.pause();
+
+//     // تنظیم مقدار اولیه اگر تنها برای اولین بار Play می‌شود
+//     if (initialProgress == 1.0) {
+//       initialProgress = progressValue;
+//     }
+    
+//     // شروع تابع startProgress با استفاده از initialProgress به عنوان نقطه شروع
+//     startProgress();
+//   }
+//   setState(() {
+//     isPlaying = !isPlaying;
+//   });
+// },
+
+//   child: Image.asset(isPlaying ? 'assets/icons/pause.png' : 'assets/icons/play.png'),
+// ),
+
+
+// Column(
+//   children: [
+  
+ GestureDetector(
+    onTap: () async {
+      if (isPlaying) {
+        await _audioPlayer.pause();
+        if (timer != null && timer!.isActive) {
+          timer!.cancel();
+        }
+      } 
+   
+      setState(() {
+        isPlaying = !isPlaying;
+      });
+    },
+    child: Image.asset('assets/icons/pause.png'),
+  ),
+     GestureDetector(
+      onTap: () async {
+        if (isPlaying) {
+          await _audioPlayer.play();
+          if (timer != null && timer!.isActive) {
+            timer!.cancel();
+          }
+        } 
+         startProgress();
+        setState(() {
+          isPlaying = !isPlaying;
+        });
+        
+      },
+      child:Image.asset('assets/icons/play.png'),
+    ),
+//       child: Image.asset('assets/icons/play.png'),
+//     ),
+//     GestureDetector(
+//       onTap: () async {
+//         if (isPlaying) {
+//           await _audioPlayer.play();
+//           if (timer != null && timer!.isActive) {
+//             timer!.cancel();
+//           }
+//         } else {
+//           await _audioPlayer.pause();
+
+//           // تنظیم مقدار اولیه اگر تنها برای اولین بار Play می‌شود
+//           if (initialProgress == 0.0) {
+//             initialProgress = pausedProgressValue;
+//           }
+
+//           // شروع تابع startProgress با استفاده از initialProgress به عنوان نقطه شروع
+//           startProgress();
+//         }
+//         setState(() {
+//           isPlaying = !isPlaying;
+//         });
+//       },
+//       child: Image.asset('assets/icons/pause.png'),
+//     ),
+//   ],
+// ),
+
+
+
+
+                  
+                  //     GestureDetector(
+                  //    onTap: () async {
+                  //      await _audioPlayer.play();
+                  //         //startProgress();
+                  //    },
+                  //    child: Image.asset('assets/icons/pause.png'),
+                  // ),
+                  // GestureDetector(
+                  //    onTap: () async {
+                  //      await _audioPlayer.pause();
+                      
+                    
+                  //    },
+                  //    child: Image.asset('assets/icons/play.png'),
+                  // ),  
+                  GestureDetector(
+  onTap: () async {
+    await _audioPlayer.seek(Duration.zero);
+    update(0.0); // یا مقدار اولیه مورد نظر خود
+  },
+  child: Image.asset('assets/icons/Rectangle.png'),
+)
+ 
                   ],
                 ),
                 const Gap(15),
                 LinearPercentIndicator(
-                  percent: 1.0,
-                  backgroundColor: MyColors.backgroundpercentMusicColor,
-                  progressColor: MyColors.percentMusicColor,
-                ),
+                percent: progressValue,
+                lineHeight: 10.0,
+                backgroundColor: MyColors.backgroundpercentMusicColor,
+                progressColor: MyColors.percentMusicColor,
+                )
+                // LinearPercentIndicator(
+                //   percent: progressValue,
+                //   backgroundColor: MyColors.backgroundpercentMusicColor,
+                //   progressColor: MyColors.percentMusicColor,
+                // ),
               ],
             ),
           ),

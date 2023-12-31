@@ -20,6 +20,6 @@ Widget listBottomsWidget(int index,BuildContext context){
     .textTheme
     .titleLarge,
     onPress: () {
-    // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const GhazaliatHafez(),));
+    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => GhazaliatHafezScreen(),));
   },);
 }
