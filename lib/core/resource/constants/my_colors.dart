@@ -11,6 +11,6 @@ abstract class MyColors{
   static const Color musicBoxColor = Color(0xFFD7CEBD);
   static const Color backgroundpercentMusicColor = Color(0xFFFFFFFF);
   static const Color percentMusicColor = Color(0xFFFFDEA4);
-
-  
+  static const Color tafsirTextColor = Colors.blue;
+  static const Color circularProgressIndicatorColor = Colors.blue;
 }

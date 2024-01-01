@@ -6,7 +6,7 @@ class MyProgressBarWidgetMusic extends StatelessWidget {
   final Duration total;
   final Stream<Duration>? stream, buffered;
   final void Function(Duration)? onSeek;
-   MyProgressBarWidgetMusic({super.key,required this.total,this.stream,this.buffered,this.onSeek});
+   const MyProgressBarWidgetMusic({super.key,required this.total,this.stream,this.buffered,this.onSeek});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,6 @@ class MyProgressBarWidgetMusic extends StatelessWidget {
           progress: progress, 
         buffered: snapshot.data?? Duration.zero,
         total: total,
-      
        timeLabelTextStyle: TextStyle(color: MyColors.musicBoxColor),
        bufferedBarColor: MyColors.backgroundpercentMusicColor,
                   thumbColor: MyColors.percentMusicColor,

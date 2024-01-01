@@ -1,6 +1,4 @@
 
-import 'dart:math';
-
 import 'package:autharization_hanna/core/appbar/my_appbar.dart';
 import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navigation.dart';
 import 'package:autharization_hanna/core/components/customwidgets/custom_divider.dart';
@@ -9,7 +7,6 @@ import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
 import 'package:autharization_hanna/core/resource/constants/my_strings.dart';
 import 'package:autharization_hanna/core/utils/ui_utils.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
-import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_state.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
@@ -40,7 +37,6 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
         backgroundColor: MyColors.primaryColor,
         body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
           builder: (context, state) {
-        
             if (state is GhazaliatHafezLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(color: Colors.blue),
@@ -56,7 +52,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
         const MyAppBar(),
-        const Gap(35),
+         Gap(MyDimensions.large+3),
           Expanded(
             child: ListView.separated(
               controller: scrollController,
@@ -65,20 +61,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                return 
                 GestureDetector(
                   onTap: () {
-                       print("Index tapped: $index");
-                       print("Selected item: ${k[index].id}");
                  int adjustedIndex = index < 17 ? index+1  : index+1 ;
-
-                    // Navigator.of(context).pushNamed('detailsGhazaliatHafezScreen',
-                    // arguments: state.ghazaliatHafez[index].id,e[index]]);
-
-                                // setState(() {
-                                //   k[index].id;
-                                //  // print("idd: $idd");
-                                // });
-                                // BlocProvider.of<GhazaliatHafezBloc>(context)
-                                //     .add(ItemSelectedEvent(index));
-
                                 Navigator.of(context).push(MaterialPageRoute(
                                   
                                   builder: (context) => BlocProvider(
@@ -86,18 +69,17 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                                     child: DetailsGhazaliatHafezScreen(
                                       e: k[index],
                                       index:adjustedIndex,
-
                                     ),
                                   ),
                                 ));
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(MyDimensions.small),
                     color: MyColors.boxBottomColor,
                      border: Border.all(color: MyColors.borderBottomColor)
                     ),
-                    margin: const EdgeInsets.only(left: 29.0,right: 29.0),
+                    margin:EdgeInsets.only(left: MyDimensions.semiLarge+5,right: MyDimensions.semiLarge+5),
                        height: UIUtils.getConvertedHeight(context,90),
                        width: UIUtils.getConvertedWidth(context,292),
                        child: Padding(
@@ -107,19 +89,18 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                                textDirection: TextDirection.rtl,
                                children: [
                    Padding(
-                               padding: const EdgeInsets.only(left: 5,top: 5),
+                               padding: EdgeInsets.only(left: MyDimensions.small+1,top:  MyDimensions.small+1),
                                child: Row(
                    mainAxisAlignment: MainAxisAlignment.start,
                    children: [
-                          const Gap(3),
+                           Gap( MyDimensions.small),
                           StatefulBuilder(builder: (context, setState) {
                             return Row(
                               children: [
                   GestureDetector(
                     onTap: ()async {
                       print("shareeee::::::::::");
-                               await Share.share(MyStrings.shareText);
-                
+                      await Share.share(MyStrings.shareText);
                       },
                     child:  Image.asset(
                    "assets/icons/share.png"
@@ -139,19 +120,19 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                    ),
                    Text(state.ghazaliatHafez[index].title!,style: Theme.of(context)
                      .textTheme
-                     .titleLarge!.copyWith(fontSize: 12),
+                     .titleLarge!.copyWith(fontSize: MyDimensions.xLight),
                      ),
-                   Text("الی یا ابها",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 10),),
+                   Text("الی یا ابها",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: MyDimensions.light+2),),
                    const Gap(10),
-                  Expanded(child: CustomDivider(indent: 10,endIndent: 10,)),
+                  Expanded(child: CustomDivider(indent: MyDimensions.light+2,endIndent: MyDimensions.light+2,)),
                                ],
                              ),),),
                 );},
-              separatorBuilder: (context, index) => const Gap(10),
+              separatorBuilder: (context, index) => Gap(MyDimensions.light+2),
               itemCount: state.ghazaliatHafez.length),
             ),
-          const Gap(30),
-           MyBottomNavigation(),
+           Gap(MyDimensions.large-2),
+           const MyBottomNavigation(),
         ], ),);} 
              else if (state is GhazaliatHafezErrorState) {
               return Center(

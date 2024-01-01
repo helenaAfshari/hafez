@@ -1,8 +1,9 @@
 
 import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navigation.dart';
 import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
+import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
 import 'package:autharization_hanna/core/utils/ui_utils.dart';
-import 'package:autharization_hanna/pressentation/screens/home_screen/component/list_buttoms_widget.dart';
+import 'package:autharization_hanna/pressentation/screens/home_screen/widgets/list_buttoms_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 class HomeScreen extends StatelessWidget {
@@ -21,21 +22,21 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Gap(100),
+             Gap(MyDimensions.xlarge+60),
             Center(child: Image.asset('assets/images/hafez.png')),
-            const Gap(95),
+             Gap(MyDimensions.xlarge+55),
             Expanded(
               child: ListView.separated(
                 physics: const ScrollPhysics(),
                 itemBuilder: (context, index) {
                   return listBottomsWidget(index,context);
                 },
-                separatorBuilder: (context, index) => const Gap(5),
+                separatorBuilder: (context, index) =>  Gap(MyDimensions.small+1),
                 itemCount: 1,
               ),
             ),
-            const Gap(30),
-             MyBottomNavigation(),
+             Gap(MyDimensions.large-2),
+             const MyBottomNavigation(),
           ],
         ),
       ),
