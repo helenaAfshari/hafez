@@ -1,8 +1,5 @@
 
-import 'package:autharization_hanna/domain/model/detailsghazaliathafez/details_ghazaliat_hafez_model.dart';
-import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazal_hafez.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
-import 'package:equatable/equatable.dart';
 
 abstract class GhazaliatHafezState{}
 class GhazaliatHafezInitialState extends GhazaliatHafezState{
@@ -18,30 +15,17 @@ class GhazaliatHafezErrorState extends GhazaliatHafezState{
 
 class GhazaliatHafezSuccesState extends GhazaliatHafezState{
   final List<GhazalItemModelEntity> ghazaliatHafez;
-  // final List<DetailsGhazaliatHafezModel> detailsGhazaliat;
   GhazaliatHafezSuccesState(this.ghazaliatHafez,);
 }
-class GhazaliatHafezLoadMoreState extends GhazaliatHafezState{
-
-}
-
 class UpdatedCategoryState extends GhazaliatHafezState {
   final bool isHeartIcon;
   UpdatedCategoryState(this.isHeartIcon);
-
 }
-
 class GhazaliatHafezToggleState extends GhazaliatHafezState {
   final bool isHeartSelected;
 
    GhazaliatHafezToggleState(this.isHeartSelected);
 }
-
-class postLoadMoreState extends GhazaliatHafezState{
- 
-}
-
-class GhazaliatHafezEndOfListState extends GhazaliatHafezState {}
 
 
 

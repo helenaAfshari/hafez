@@ -9,14 +9,11 @@ class DetailsGhazaliatHafezInitialState extends DetailsGhazaliatHafezState{
 }
 class DetailsGhazaliatHafezLoadingState extends DetailsGhazaliatHafezState{
 }
-
 class DetailsGhazaliatHafezErrorState extends DetailsGhazaliatHafezState{
  final String error;
   DetailsGhazaliatHafezErrorState(this.error);
 }
-
 class DetailsGhazaliatHafezSuccesState extends DetailsGhazaliatHafezState{
  final List<DetailsGhazaliatHafezModel> detailsghazaliatHafez;
-//  final List<GhazalItemModelEntity> gdetailsghazaliatHafez;
   DetailsGhazaliatHafezSuccesState(this.detailsghazaliatHafez,);
 }

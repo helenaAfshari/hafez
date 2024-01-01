@@ -7,8 +7,6 @@ import 'package:autharization_hanna/pressentation/blocs/bloc_login/state_login.d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-
-
 class LoginScreen extends StatelessWidget {
    LoginScreen({Key? key});
  TextEditingController controller = TextEditingController();
