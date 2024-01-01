@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:autharization_hanna/core/appbar/my_appbar.dart';
 import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navigation.dart';
 import 'package:autharization_hanna/core/components/customwidgets/custom_divider.dart';
@@ -13,6 +14,7 @@ import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_m
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_state.dart';
+import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/music.dart';
 import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +52,8 @@ _playAudio(widget.e?.tafsirAudio?? "");
   AudioPlayer _audioPlayer =AudioPlayer();
    bool isPlaying = false;
     double progressValue = 0.0;
-
+  Duration progresssValue = Duration(seconds: 0);
+  Duration bufferedValue = Duration(seconds: 0);
 
     Future<void> _playAudio(String url) async {
     try {
@@ -59,7 +62,15 @@ _playAudio(widget.e?.tafsirAudio?? "");
       _audioPlayer.playerStateStream.listen((playerState) {
         setState(() {
           isPlaying = playerState.playing;
+        
         });
+        // if(playerState.playing){
+        //    switch(playerState.processingState){
+        //   case ProcessingState.buffering
+        //     // TODO: Handle this case.
+        // }
+        // }
+      
       });
     } catch (e) {
       // Handle the exception
@@ -71,7 +82,35 @@ _playAudio(widget.e?.tafsirAudio?? "");
     _audioPlayer.dispose();
     super.dispose();
   }
+ 
+ 
 
+
+
+// startProgress(){
+//    const tick  = Duration(seconds:1 );
+//    int duration = _audioPlayer.duration!.inSeconds - _audioPlayer.position.inSeconds;
+//    if(timer!=null){
+//     if(timer!.isActive){
+//       timer!.cancel();
+//       timer=null;
+//     }
+//     timer = Timer.periodic(tick, (timer) { 
+//       duration--;
+//       progresssValue = _audioPlayer.position;
+//       bufferedValue = _audioPlayer.bufferedPosition;
+
+//       if(duration<=0){
+//         timer.cancel();
+//         setState(() {
+//            progresssValue = Duration(seconds: 0);
+//       bufferedValue = Duration(seconds: 0);
+//         });
+        
+//       }
+//     });
+//    }
+// }
 startProgress() {
   const tick = Duration(seconds: 1);
   int duration = _audioPlayer.duration!.inSeconds;
@@ -88,7 +127,7 @@ startProgress() {
     if (duration <= 0) {
       timer.cancel();
       _audioPlayer.stop();
-      update(1.0);
+      update(0.0);
       print("musssiiiccc:::");
     } else {
       update(progressValue);
@@ -413,22 +452,23 @@ void update(double newValue) {
     },
     child: Image.asset('assets/icons/pause.png'),
   ),
-     GestureDetector(
-      onTap: () async {
-        if (isPlaying) {
-          await _audioPlayer.play();
-          if (timer != null && timer!.isActive) {
-            timer!.cancel();
-          }
-        } 
-         startProgress();
-        setState(() {
-          isPlaying = !isPlaying;
-        });
-        
-      },
-      child:Image.asset('assets/icons/play.png'),
-    ),
+GestureDetector(
+  onTap: () async {
+      if (isPlaying) {
+        await _audioPlayer.play();
+        if (timer != null && timer!.isActive) {
+          timer!.cancel();
+        }
+      } 
+    startProgress();
+      setState(() {
+        isPlaying = !isPlaying;
+      });
+    },
+  child: Image.asset('assets/icons/play.png'),
+),
+
+
 //       child: Image.asset('assets/icons/play.png'),
 //     ),
 //     GestureDetector(
@@ -487,13 +527,39 @@ void update(double newValue) {
  
                   ],
                 ),
-                const Gap(15),
-                LinearPercentIndicator(
-                percent: progressValue,
-                lineHeight: 10.0,
-                backgroundColor: MyColors.backgroundpercentMusicColor,
-                progressColor: MyColors.percentMusicColor,
+            
+                // LinearPercentIndicator(
+                // percent: progressValue,
+
+                // lineHeight: 10.0,
+                // backgroundColor: MyColors.backgroundpercentMusicColor,
+                // progressColor: MyColors.percentMusicColor,
+                // )
+                MyProgressBarWidgetMusic(
+                  total: _audioPlayer.duration?? Duration.zero,
+                  stream: _audioPlayer.positionStream,
+                  buffered:_audioPlayer.bufferedPositionStream,
+                  onSeek: (positioned){
+_audioPlayer.seek(positioned);
+                  }
+                  
                 )
+                
+            
+                // ProgressBar(
+                //   thumbCanPaintOutsideBar: false,
+                //   timeLabelTextStyle: TextStyle(color: MyColors.musicBoxColor),
+                //   thumbColor: MyColors.percentMusicColor,
+                //   baseBarColor: MyColors.backgroundpercentMusicColor,
+                //   progressBarColor: MyColors.percentMusicColor,
+                //   progress:progresssValue, 
+                //   buffered: bufferedValue,
+                
+                //   onSeek: (positioned) {
+                //     _audioPlayer.seek(positioned);
+                //     _audioPlayer.playing?startProgress(): timer!.cancel();
+                //   },
+                // total: _audioPlayer.duration??Duration(seconds: 0))
                 // LinearPercentIndicator(
                 //   percent: progressValue,
                 //   backgroundColor: MyColors.backgroundpercentMusicColor,
