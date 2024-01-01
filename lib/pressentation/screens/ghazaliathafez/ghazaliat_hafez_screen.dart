@@ -62,8 +62,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                 GestureDetector(
                   onTap: () {
                  int adjustedIndex = index < 17 ? index+1  : index+1 ;
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  
+                                Navigator.of(context).push(MaterialPageRoute(  
                                   builder: (context) => BlocProvider(
                                     create: (context) => GhazaliatHafezBloc(),
                                     child: DetailsGhazaliatHafezScreen(
@@ -123,7 +122,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                      .titleLarge!.copyWith(fontSize: MyDimensions.xLight),
                      ),
                    Text("الی یا ابها",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: MyDimensions.light+2),),
-                   const Gap(10),
+                    Gap( MyDimensions.xLight-2),
                   Expanded(child: CustomDivider(indent: MyDimensions.light+2,endIndent: MyDimensions.light+2,)),
                                ],
                              ),),),

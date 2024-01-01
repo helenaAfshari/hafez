@@ -125,8 +125,6 @@ void update(double newValue) {
               child: ListView.builder(
                   itemCount:state.detailsghazaliatHafez.length,
                   itemBuilder: (context, index) {
-                   //final text = texts[index];
-                    // final text = state.detailsghazaliatHafez[index];
                      final isEvenIndex = index.isEven;
                    return 
                       GestureDetector(
