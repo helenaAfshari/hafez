@@ -22,6 +22,8 @@ class GhazaliatHafezScreen extends StatefulWidget {
 }
 class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
   ScrollController scrollController = ScrollController();
+    //List<bool> isHeartSelectedList = [];
+
   @override
   void initState() {
     super.initState();
@@ -37,11 +39,31 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
         backgroundColor: MyColors.primaryColor,
         body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
           builder: (context, state) {
-            if (state is GhazaliatHafezLoadingState) {
+//             if(state is GhazaliatHafezToggleState){
+//                            GestureDetector(
+//                     onTap: () {
+//                   //     setState(() {
+//                   //     // isHeartSelected=!isHeartSelected;
+//                   //  isHeartSelectedList[index] = !isHeartSelectedList[index];
+//                   //     },);
+//      BlocProvider.of<GhazaliatHafezBloc>(context).add(ToggleHeartEvent(0));
+
+//                       },
+//                     child:  
+//                     Image.asset(
+//           state.isHeartSelected
+//               ? "assets/icons/selected_heart.png"
+//               : "assets/icons/unselected_heart.png",
+//         ),
+// //                     Image.asset(
+// // isHeartSelectedList[index] ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",)
+// );
+//             }
+            if (state is GhazaliatHafezLoadingState  ) {
               return const Center(
                 child: CircularProgressIndicator(color: Colors.blue),
               );
-            } else if (state is GhazaliatHafezSuccesState) {
+            } else if (state is GhazaliatHafezSuccesState ) {
               List<GhazalItemModelEntity> k = state.ghazaliatHafez;
               return
               SizedBox(
@@ -58,6 +80,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
               controller: scrollController,
               physics: const ScrollPhysics(),
               itemBuilder: (context, index) {
+            List<bool> isHeartSelectedList = List.generate(state.ghazaliatHafez[index].id!, (index) => false);
                return 
                 GestureDetector(
                   onTap: () {
@@ -105,14 +128,45 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                    "assets/icons/share.png"
                   )
                   ),
-                  GestureDetector(
+                  const Gap(10),
+                   GestureDetector(
                     onTap: () {
+                      
                       setState(() {
-                      isHeartSelected=!isHeartSelected;
-                      },);},
-                    child:  Image.asset(
-                          isHeartSelected ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",
-                  )),
+                      // isHeartSelected=!isHeartSelected;
+      isHeartSelectedList[index] = !isHeartSelectedList[index];
+                      },);
+        // BlocProvider.of<GhazaliatHafezBloc>(context).add(ToggleHeartEvent(index));
+                      },
+                    child:  
+                    Image.asset(
+          isHeartSelectedList[index]? "assets/icons/selected_heart.png"
+              : "assets/icons/unselected_heart.png",
+        ),
+//                     Image.asset(
+// isHeartSelectedList[index] ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",)
+)
+
+
+///////////////////////////////////////////////////////////////////////
+//                   GestureDetector(
+//                     onTap: () {
+//                   //     setState(() {
+//                   //     // isHeartSelected=!isHeartSelected;
+//                   //  isHeartSelectedList[index] = !isHeartSelectedList[index];
+//                   //     },);
+//      BlocProvider.of<GhazaliatHafezBloc>(context).add(ToggleHeartEvent(index));
+
+//                       },
+//                     child:  
+//                     Image.asset(
+//           state.
+//               ? "assets/icons/selected_heart.png"
+//               : "assets/icons/unselected_heart.png",
+//         ),
+// //                     Image.asset(
+// // isHeartSelectedList[index] ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",)
+// ),
                               ],
                             );
                           },),],),
@@ -149,3 +203,72 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
 }
 
 
+
+//درست
+// BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
+//   builder: (context, state) {
+//     if (state is GhazaliatHafezToggleState) {
+//       return GestureDetector(
+//         onTap: () {
+//           BlocProvider.of<GhazaliatHafezBloc>(context).add(ToggleHeartEvent(0));
+//         },
+//         child: Image.asset(
+//           state.isHeartSelected
+//               ? "assets/icons/selected_heart.png"
+//               : "assets/icons/unselected_heart.png",
+//         ),
+//       );
+//     } else if (state is GhazaliatHafezLoadingState) {
+//       // Handle loading state UI
+//       return CircularProgressIndicator();
+//     } else {
+//       // Handle other states or provide a default UI
+//       return YourDefaultWidget();
+//     }
+//   },
+// )
+
+
+
+
+
+//////////////////////
+///
+///// یک لیست برای ذخیره وضعیت انتخاب برای هر آیتم ایجاد کنید
+// List<bool> isHeartSelectedList = List.generate(تعداد_آیتم‌ها, (index) => false);
+
+// // ...
+
+// // در GestureDetector برای انتخاب / عدم انتخاب آیکون قلب
+// onTap: () {
+//   setState(() {
+//     // وضعیت انتخاب برای آیتم فعلی را تغییر دهید
+//     isHeartSelectedList[index] = !isHeartSelectedList[index];
+//   });
+// },
+
+// // ...
+
+// // در ویجت Image.asset برای آیکون قلب
+// Image.asset(
+//   isHeartSelectedList[index] ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",
+// ),
+
+// // ...
+
+// // در onTap برای ناوبری به جزئیات
+// GestureDetector(
+//   onTap: () {
+//     int adjustedIndex = index < 17 ? index + 1 : index + 1;
+//     Navigator.of(context).push(MaterialPageRoute(
+//       builder: (context) => BlocProvider(
+//         create: (context) => GhazaliatHafezBloc(),
+//         child: DetailsGhazaliatHafezScreen(
+//           e: k[index],
+//           index: adjustedIndex,
+//           isHeartSelected: isHeartSelectedList[index], // وضعیت انتخاب را به صفحه جزئیات منتقل کنید
+//         ),
+//       ),
+//     ));
+//   },
+// ),

@@ -1,19 +1,23 @@
 import 'package:autharization_hanna/core/resource/constants/theme/my_theme.dart';
+import 'package:autharization_hanna/domain/model/hivemodels/favorite_model.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_state.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
+import 'package:autharization_hanna/pressentation/screens/learn_hive/hive_screen_page.dart';
 import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
 import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
+import 'package:autharization_hanna/pressentation/screens/learn_hive/true_hive_list.dart';
 import 'package:autharization_hanna/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main()async {
    WidgetsFlutterBinding.ensureInitialized();
   await injector();
+  await Hive.initFlutter();
   runApp( MyApp());
 }
 
@@ -38,11 +42,15 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
 // import 'package:flutter/material.dart';
+// import 'package:hive/hive.dart';
+// import 'package:path_provider/path_provider.dart' as path_provider;
 
-// void main() {
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//  await Hive.initFlutter();
+//   await Hive.openBox('shoping_box');
+
 //   runApp(MyApp());
 // }
 
@@ -50,7 +58,101 @@ class MyApp extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
 //     return MaterialApp(
-//       home: MyHomePage(),
+//       home:TrueHiveList (),
+//     );
+//   }
+// }
+
+// class MyHomePage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('دکمه با دیتابیس Hive'),
+//         actions: [
+//           IconButton(
+//             icon: Icon(Icons.list),
+//             onPressed: () {
+//               // نمایش اطلاعات ذخیره شده در دیتابیس Hive
+//               showHiveData(context);
+//             },
+//           ),
+//         ],
+//       ),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: <Widget>[
+//             ElevatedButton(
+//               onPressed: () {
+//                 addToHive(context);
+//               },
+//               child: Text('اضافه کردن به دیتابیس'),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   void addToHive(BuildContext context) {
+//     final myBox = Hive.box('myBox');
+//     myBox.add('اطلاعات جدید: ${DateTime.now()}');
+
+//     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//       content: Text('اطلاعات با موفقیت به دیتابیس اضافه شد.'),
+//     ));
+//   }
+
+//   void showHiveData(BuildContext context) {
+//     final myBox = Hive.box('myBox');
+    
+//     showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           title: Text('اطلاعات ذخیره شده در دیتابیس Hive'),
+//           content: Column(
+//             children: List.generate(
+//               myBox.length,
+//               (index) => ListTile(
+//                 title: Text(myBox.getAt(index)),
+//               ),
+//             ),
+//           ),
+//           actions: [
+//             TextButton(
+//               onPressed: () {
+//                 Navigator.of(context).pop();
+//               },
+//               child: Text('بستن'),
+//             ),
+//           ],
+//         );
+//       },
+//     );
+//   }
+// }
+
+
+
+// import 'package:flutter/material.dart';
+
+// Future<void> main()async {
+//    WidgetsFlutterBinding.ensureInitialized();
+//   await injector();
+//   await Hive.initFlutter();
+//   //Hive.openBox<FavoriteModel>('favorites');
+//  await Hive.openBox('shoping_box');
+//   Hive.registerAdapter(FavoriteModelAdapter());
+//   runApp( MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: MyHiveScreen(),
 //     );
 //   }
 // }

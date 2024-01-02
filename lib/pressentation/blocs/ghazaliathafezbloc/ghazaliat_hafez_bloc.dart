@@ -13,15 +13,27 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
      int perPage=50;
       List<GhazalItemModelEntity> ghazaliatHafez = [];
       List<DetailsGhazaliatHafezModel> detailsGhazaliatHafez = [];
-      
+        List<bool> isHeartSelectedList = [];
+
   GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
     on<GhazaliatHafezEvent>((event, emit) async {
       print(event);
+      
+if (event is ToggleHeartEvent) {
+  print("toggleHeart:::");
+  isHeartSelectedList[event.index] = !isHeartSelectedList[event.index];
+  emit(GhazaliatHafezToggleState(List.from(isHeartSelectedList)));
+}
+
+
       if (event is LoadedEvent) {
+        
         print("kkkkkk");
         try {
           print("llllll");
           emit(GhazaliatHafezLoadingState());
+
+
           final ghazaliatResponse =
               await serviceLocator<GhazaliatHafezRepository>()
                   .ghazaliathafez(page,perPage);
@@ -39,6 +51,7 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
           print(" متصل نیست به اینترت");
           } 
         }
+    
   });
  
    on<LoadMoreEvent>((event, emit) async {
@@ -56,7 +69,7 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
        ghazaliatHafez.addAll(loadedData);
        print("LoadedEvent$loadedData");
         if (ghazaliatResponse.statusCode == 200) {
-          emit(GhazaliatHafezSuccesState(ghazaliatHafez,));
+          emit(GhazaliatHafezSuccesState(ghazaliatHafez));
           print("kooooooooo${ghazaliatHafez}");
         } else {
           emit(GhazaliatHafezErrorState("معتبر نیست"));
@@ -67,6 +80,8 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
     }
   }
 });
+
+     
 
   }
 

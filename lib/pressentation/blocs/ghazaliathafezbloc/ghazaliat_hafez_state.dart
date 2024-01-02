@@ -15,17 +15,16 @@ class GhazaliatHafezErrorState extends GhazaliatHafezState{
 
 class GhazaliatHafezSuccesState extends GhazaliatHafezState{
   final List<GhazalItemModelEntity> ghazaliatHafez;
-  GhazaliatHafezSuccesState(this.ghazaliatHafez,);
+    // final bool isHeartSelected;
+  GhazaliatHafezSuccesState(this.ghazaliatHafez);
 }
-class UpdatedCategoryState extends GhazaliatHafezState {
-  final bool isHeartIcon;
-  UpdatedCategoryState(this.isHeartIcon);
-}
-class GhazaliatHafezToggleState extends GhazaliatHafezState {
-  final bool isHeartSelected;
 
-   GhazaliatHafezToggleState(this.isHeartSelected);
+class GhazaliatHafezToggleState extends GhazaliatHafezState {
+  final List<bool> isHeartSelectedList;
+
+  GhazaliatHafezToggleState(this.isHeartSelectedList);
 }
+
 
 
 
