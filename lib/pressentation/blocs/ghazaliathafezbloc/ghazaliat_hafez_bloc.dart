@@ -13,26 +13,30 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
      int perPage=50;
       List<GhazalItemModelEntity> ghazaliatHafez = [];
       List<DetailsGhazaliatHafezModel> detailsGhazaliatHafez = [];
-        List<bool> isHeartSelectedList = [];
+// List<bool> toggle = List.generate(GhazalItemModelEntity as int, (index) => false);
 
-  GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
-    on<GhazaliatHafezEvent>((event, emit) async {
-      print(event);
-      
-if (event is ToggleHeartEvent) {
-  print("toggleHeart:::");
-  isHeartSelectedList[event.index] = !isHeartSelectedList[event.index];
-  emit(GhazaliatHafezToggleState(List.from(isHeartSelectedList)));
-}
+GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
+  on<GhazaliatHafezEvent>((event, emit) async {
+    print(event);
 
+  //   if (event is ToggleHeartEvent) {
+  //     if (event.index >= 0 && event.index < toggle.length) {
+  //       GhazalItemModelEntity ghazalItem = ghazaliatHafez[event.index]; 
+  //       print("Toggled item at index ${event.index}");
+  //       List<bool> updatedToggle = List.from(toggle);
 
+  //       emit(GhazaliatHafezSuccesState(ghazaliatHafez));
+  //     } else {
+  //       print("Invalid index: ${event.index}");
+  //     }
+  
+  // }
       if (event is LoadedEvent) {
         
         print("kkkkkk");
         try {
           print("llllll");
           emit(GhazaliatHafezLoadingState());
-
 
           final ghazaliatResponse =
               await serviceLocator<GhazaliatHafezRepository>()
@@ -69,7 +73,7 @@ if (event is ToggleHeartEvent) {
        ghazaliatHafez.addAll(loadedData);
        print("LoadedEvent$loadedData");
         if (ghazaliatResponse.statusCode == 200) {
-          emit(GhazaliatHafezSuccesState(ghazaliatHafez));
+          emit(GhazaliatHafezSuccesState(ghazaliatHafez,));
           print("kooooooooo${ghazaliatHafez}");
         } else {
           emit(GhazaliatHafezErrorState("معتبر نیست"));

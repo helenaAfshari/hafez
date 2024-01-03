@@ -17,3 +17,4 @@ class DetailsGhazaliatHafezSuccesState extends DetailsGhazaliatHafezState{
  final List<DetailsGhazaliatHafezModel> detailsghazaliatHafez;
   DetailsGhazaliatHafezSuccesState(this.detailsghazaliatHafez,);
 }
+

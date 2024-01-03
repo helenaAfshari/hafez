@@ -11,6 +11,9 @@ import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghaza
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
 import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
+import 'package:autharization_hanna/pressentation/screens/toggleScreenAndBloc/bloc_toggle.dart';
+import 'package:autharization_hanna/pressentation/screens/toggleScreenAndBloc/event_toggle.dart';
+import 'package:autharization_hanna/pressentation/screens/toggleScreenAndBloc/state_toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -30,10 +33,12 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
     scrollController.addListener(() {
   if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
       BlocProvider.of<GhazaliatHafezBloc>(context).add(LoadMoreEvent());
-  }});}
+  }});
+          BlocProvider.of<GhazaliatHafezBloc>(context).add((ToggleHeartEvent(0)));
+        
+  }
   @override
   Widget build(BuildContext context) {
-    bool isHeartSelected =false;
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.primaryColor,
@@ -129,23 +134,81 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                   )
                   ),
                   const Gap(10),
-                   GestureDetector(
-                    onTap: () {
+                  //یک blocBuilder میزارم 
+                    BlocBuilder<AppBlocs,AppSatate>(
+            builder: (context, state) {
+              return 
+                 Center(
+                child: GestureDetector(
+                  onTap: () {
+                  BlocProvider.of<AppBlocs>(context).add(ChangeTabEvent(index));
+                    print("jjj");
+                  },
+                  child: Container(
+                    width: 50,
+                    height: 50,
+   color: BlocProvider.of<AppBlocs>(context).state.tabStatuse
+                            ? Colors.amber
+                            : Colors.red,                  ),
+                ),
+              );
+            },)
+        //           BlocBuilder<GhazaliatHafezBloc,GhazaliatHafezState>(
+                
+        //           builder: (context, state) {
+                   
+        //              if (state is GhazaliatHafezLoadingState  ) {
+        //             return const Center(
+        //              child: CircularProgressIndicator(color: Colors.blue),
+        //       );
+        //     }
+        // if (state is GhazaliatHafezSuccesState) {
+        //   return ListView.builder(
+        //     itemCount: state.ghazaliatHafez.length,
+        //     itemBuilder: (context, index) {
+            
+        //       final ghazalItem = state.ghazaliatHafez[index];
+        //           // List<bool> toggleList = state.;
+
+        //       return ListTile(
+        //         title: Text('Item ${ghazalItem.id}'), // Adjust as per your model
+        //         // leading: Icon(
+        //         //   isToggled ? Icons.favorite : Icons.favorite_border,
+        //         //   color: isToggled ? Colors.red : null,
+        //         // ),
+        //         onTap: () {
+        //           // Dispatch the toggle event
+        //           context.read<GhazaliatHafezBloc>().add(ToggleHeartEvent(index));
+        //         },
+        //       );
+        //     },
+        //   );
+        // }
+        //     if(state is GhazaliatHafezErrorState){
+        //       Center(
+        //         child: Text(state.errorText),
+        //       );
+        //     }
+        //     return Container();
+        //           },)
+                  //  GestureDetector(
+                  //   onTap: () {
                       
-                      setState(() {
-                      // isHeartSelected=!isHeartSelected;
-      isHeartSelectedList[index] = !isHeartSelectedList[index];
-                      },);
-        // BlocProvider.of<GhazaliatHafezBloc>(context).add(ToggleHeartEvent(index));
-                      },
-                    child:  
-                    Image.asset(
-          isHeartSelectedList[index]? "assets/icons/selected_heart.png"
-              : "assets/icons/unselected_heart.png",
-        ),
-//                     Image.asset(
-// isHeartSelectedList[index] ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",)
-)
+                  //     setState(() {
+                  //     // isHeartSelected=!isHeartSelected;
+                  //      isHeartSelectedList[index] = !isHeartSelectedList[index];
+                   
+                  //     },);
+                  //         BlocProvider.of<GhazaliatHafezBloc>(context).add(ToggleHeartEvent(index));
+                  //     },
+                  //   child:  
+                  //   Image.asset(
+                  //          isHeartSelectedList[index]? "assets/icons/selected_heart.png"
+                  //              : "assets/icons/unselected_heart.png",
+                  //        ),
+                  //  //                     Image.asset(
+                  //  // isHeartSelectedList[index] ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",)
+                  //  )
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -201,7 +264,6 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
     );
   }
 }
-
 
 
 //درست

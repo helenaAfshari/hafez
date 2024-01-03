@@ -9,20 +9,25 @@ import 'package:autharization_hanna/pressentation/screens/learn_hive/hive_screen
 import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
 import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:autharization_hanna/pressentation/screens/learn_hive/true_hive_list.dart';
+import 'package:autharization_hanna/pressentation/screens/toggleScreenAndBloc/bloc_toggle.dart';
+import 'package:autharization_hanna/pressentation/screens/toggleScreenAndBloc/toggle_screen.dart';
 import 'package:autharization_hanna/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'pressentation/screens/toggleScreenAndBloc/event_toggle.dart';
+
 void main()async {
    WidgetsFlutterBinding.ensureInitialized();
   await injector();
   await Hive.initFlutter();
+    await Hive.openBox<FavoriteModel>('favoriteModelBox'); // باز کردن باکس
+
   runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
- 
   @override
   Widget build(BuildContext context) {
     return 
@@ -33,11 +38,12 @@ class MyApp extends StatelessWidget {
         ),  
         BlocProvider<DetailsGhazaliatHafezBloc>(
           create: (context) => DetailsGhazaliatHafezBloc()..add(LoadedddEvent(0))),
+          BlocProvider<AppBlocs>(
+          create: (context) => AppBlocs()..add(ChangeTabEvent(0))),
       ],
       child:  MaterialApp(
         title: 'Your App Title',
-        home: GhazaliatHafezScreen(),
-     
+        home: ToggleScreen(),
       ),
     );
   }
