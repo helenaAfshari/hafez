@@ -20,37 +20,24 @@ class ToggleScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-           BlocBuilder<AppBlocs,AppSatate>(
-            builder: (context, state) {
-              return 
-                 Center(
-                child: GestureDetector(
-                  onTap: () {
-                   //context.read<AppBlocs>().add(ChangeTabEvent(0));
-                   _saveData();
+//      BlocBuilder<AppBlocs, AppSatate>(
+//   builder: (context, state) {
+//     return Center(
+//       child: GestureDetector(
+//         onTap: () {
+//           BlocProvider.of<AppBlocs>(context).add(ChangeTabEvent(1));
+//           print("jjj");
+//         },
+//         child: Container(
+//           width: 50,
+//           height: 50,
+//           color: state.tabStatusList[1] ? Colors.amber : Colors.red,
+//         ),
+//       ),
+//     );
+//   },
+// )
 
-                    print("jjj$_saveData");
-                  },
-                  child: SizedBox(
-                    height: 300,
-                    width: double.infinity,
-                    child: ListView.builder(
-                     itemCount:5,
-                      itemBuilder: (context, index) {
-                        return 
-                         Container(
-                        width: 50,
-                        height: 50,
-                       color: context.watch<AppBlocs>().state.tabStatuse
-                                ? Colors.amber
-                                : Colors.red,);
-                      },
-                      
-                    ),
-                  ),
-                ),
-              );
-            },)
             ],
           ),
         ),
@@ -60,12 +47,10 @@ class ToggleScreen extends StatelessWidget {
 }
 
 
-void _saveData()async{
-  print("saveData");
-  
-
- var user = FavoriteModel(ids:ids );
-  var box = await Hive.openBox("userInfo");
-    box.add(user);
-    await  box.close();     
-   }
+// void _saveData()async{
+//   print("saveData");
+//  var user = FavoriteModel(ids:ids );
+//   var box = await Hive.openBox("userInfo");
+//     box.add(user);
+//     await  box.close();     
+//    }

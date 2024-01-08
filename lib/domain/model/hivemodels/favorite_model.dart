@@ -4,9 +4,11 @@ part 'favorite_model.g.dart';
 @HiveType(typeId: 0)
 class FavoriteModel {
   @HiveField(0)
-  List<int> ids;
-   FavoriteModel({required this.ids});
-   FavoriteModel copyWith({List<int>?newisFavorite}){
-    return FavoriteModel(ids: newisFavorite??ids,);
+  int? ids; 
+  @HiveField(1)
+  bool? isLiked;
+   FavoriteModel({required this.ids,this.isLiked});
+   FavoriteModel copyWith({int?newisFavorite,bool?liked}){
+    return FavoriteModel(ids: newisFavorite??ids,isLiked: liked?? isLiked);
    }
 }

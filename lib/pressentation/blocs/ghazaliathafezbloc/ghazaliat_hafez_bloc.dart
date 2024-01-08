@@ -5,6 +5,7 @@ import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_m
 import 'package:autharization_hanna/domain/repository/ghazaliathafezrepo/ghazaliathafez_repository.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
+import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/services.dart';
 import 'package:autharization_hanna/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,25 +20,13 @@ GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
   on<GhazaliatHafezEvent>((event, emit) async {
     print(event);
 
-  //   if (event is ToggleHeartEvent) {
-  //     if (event.index >= 0 && event.index < toggle.length) {
-  //       GhazalItemModelEntity ghazalItem = ghazaliatHafez[event.index]; 
-  //       print("Toggled item at index ${event.index}");
-  //       List<bool> updatedToggle = List.from(toggle);
-
-  //       emit(GhazaliatHafezSuccesState(ghazaliatHafez));
-  //     } else {
-  //       print("Invalid index: ${event.index}");
-  //     }
-  
-  // }
+ 
       if (event is LoadedEvent) {
-        
         print("kkkkkk");
         try {
           print("llllll");
           emit(GhazaliatHafezLoadingState());
-
+        
           final ghazaliatResponse =
               await serviceLocator<GhazaliatHafezRepository>()
                   .ghazaliathafez(page,perPage);
@@ -46,7 +35,7 @@ GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
  
           if (ghazaliatResponse.statusCode == 200) {
             print("55555555");
-            emit(GhazaliatHafezSuccesState(ghazaliatHafez,));
+            emit(GhazaliatHafezSuccesState(ghazaliatHafez));
             print("kooooooooo${ghazaliatHafez}");
           } else {
             emit(GhazaliatHafezErrorState("معتبر نیست"));
@@ -78,16 +67,15 @@ GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
         } else {
           emit(GhazaliatHafezErrorState("معتبر نیست"));
         }
-  
+
     } catch (e) {
       print(" متصل نیست به اینترنت");
     }
   }
 });
 
-     
-
   }
+  
 
 }
 

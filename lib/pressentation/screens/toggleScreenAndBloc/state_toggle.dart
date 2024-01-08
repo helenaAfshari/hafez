@@ -37,25 +37,47 @@ import 'package:equatable/equatable.dart';
 //   @override
 //   List<Object?> get props => [tabStatuse];
 // }
+// class AppSatate extends Equatable {
+//   AppSatate({
+//     this.tabStatuse = true,
+//   });
+
+//   final bool tabStatuse;
+
+
+//   AppSatate changeTab({required selectedIndex}) {
+//     // اعمال تغییرات مربوط به newIds، مثلاً اضافه کردن یک مقدار جدید
+
+//     return AppSatate(
+//       tabStatuse: !tabStatuse,
+    
+//     );
+//   }
+
+//   @override
+//   List<Object?> get props => [tabStatuse];
+// }
+
 class AppSatate extends Equatable {
   AppSatate({
-    this.tabStatuse = true,
+    required this.iconStatusList,
+    required this.ghazaliatHafez,
   });
 
-  final bool tabStatuse;
+  final List<bool> iconStatusList;
+  final List<GhazalItemModelEntity> ghazaliatHafez;
 
-
-  AppSatate changeTab({required selectedIndex}) {
-    // اعمال تغییرات مربوط به newIds، مثلاً اضافه کردن یک مقدار جدید
-
+  AppSatate changeTab({required int selectedIndex}) {
+    List<bool> updatedList = List.from(ghazaliatHafez);
+    updatedList[selectedIndex] = !updatedList[selectedIndex];
     return AppSatate(
-      tabStatuse: !tabStatuse,
-    
+      iconStatusList: updatedList,
+      ghazaliatHafez: ghazaliatHafez,
     );
   }
 
   @override
-  List<Object?> get props => [tabStatuse];
+  List<Object?> get props => [iconStatusList, ghazaliatHafez];
 }
 
 

@@ -7,16 +7,23 @@ import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
 import 'package:autharization_hanna/core/resource/constants/my_strings.dart';
 import 'package:autharization_hanna/core/utils/ui_utils.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
+import 'package:autharization_hanna/domain/model/hivemodels/favorite_model.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
+import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
+import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
 import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
 import 'package:autharization_hanna/pressentation/screens/toggleScreenAndBloc/bloc_toggle.dart';
 import 'package:autharization_hanna/pressentation/screens/toggleScreenAndBloc/event_toggle.dart';
 import 'package:autharization_hanna/pressentation/screens/toggleScreenAndBloc/state_toggle.dart';
+import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_bloc.dart';
+import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_event.dart';
+import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hive/hive.dart';
 import 'package:share_plus/share_plus.dart';
 class GhazaliatHafezScreen extends StatefulWidget {
   const GhazaliatHafezScreen({super.key});
@@ -34,11 +41,21 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
   if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
       BlocProvider.of<GhazaliatHafezBloc>(context).add(LoadMoreEvent());
   }});
-          BlocProvider.of<GhazaliatHafezBloc>(context).add((ToggleHeartEvent(0)));
         
   }
+    Color _containerColor = Colors.blue;
+
+  void _changeColor() {
+    setState(() {
+      _containerColor = Colors.red;
+    });
+  }
+    Box? _myBox;
   @override
   Widget build(BuildContext context) {
+     int selectedIndex = 0;
+     bool onColor = true;
+    
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.primaryColor,
@@ -89,7 +106,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                return 
                 GestureDetector(
                   onTap: () {
-                 int adjustedIndex = index < 17 ? index+1  : index+1 ;
+                 int adjustedIndex = index < 17 ? index+1  : index+1;
                                 Navigator.of(context).push(MaterialPageRoute(  
                                   builder: (context) => BlocProvider(
                                     create: (context) => GhazaliatHafezBloc(),
@@ -135,24 +152,61 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                   ),
                   const Gap(10),
                   //یک blocBuilder میزارم 
-                    BlocBuilder<AppBlocs,AppSatate>(
-            builder: (context, state) {
-              return 
-                 Center(
-                child: GestureDetector(
-                  onTap: () {
-                  BlocProvider.of<AppBlocs>(context).add(ChangeTabEvent(index));
-                    print("jjj");
-                  },
-                  child: Container(
-                    width: 50,
-                    height: 50,
-   color: BlocProvider.of<AppBlocs>(context).state.tabStatuse
-                            ? Colors.amber
-                            : Colors.red,                  ),
-                ),
+
+      //             GestureDetector(
+      //   onTap: () {
+      //     BlocProvider.of<GhazaliatHafezBloc>(context).add(ChangeTabEvent(index));
+      //     print("jjj");
+      //   },
+      //   child: Container(
+      //     width: 50,
+      //     height: 50,
+      //     color: state.iconStatusList[index] ? Colors.amber : Colors.red,
+      //     // Use ghazaliatHafez[index] for specific data related to the icon
+      //     // For example: Text(state.ghazaliatHafez[index].title),
+      //   ),
+      // ),
+BlocBuilder<BadgeBloc, BadgeState>(
+  builder: (context, state) {
+    if(state is BadgeLoading){
+     return const Center(
+    child: CircularProgressIndicator(color: Colors.blue),
+   );
+  
+   
+    }else if(state is ChangeColorListState){
+      Color itemColor =const Color.fromARGB(255, 217, 201, 150);
+       return Center(
+      child: GestureDetector(
+        onTap: () {
+         BlocProvider.of<BadgeBloc>(context).add(ChangeColorButtomListClickedEvent(index,false));
+          print("jjj");
+        },
+        child: (index == state.isColor)? Image.asset("assets/icons/selected_heart.png"):Image.asset("assets/icons/unselected_heart.png"),
+        // child: Container(
+        //   width: 50,
+        //   height: 50,
+        //   color: (index == state.isColor) ? Colors.amber : itemColor,
+        //   // Use ghazaliatHafez[index] for specific data related to the icon
+        //   // For example: Text(state.ghazaliatHafez[index].title),
+        // ),
+      ),
+    );
+
+    }
+    else if(state is BadgeErrorState){
+      return Center(
+                child: Text(state.error),
               );
-            },)
+    }
+  return Container();
+  }, 
+  
+)
+
+
+
+
         //           BlocBuilder<GhazaliatHafezBloc,GhazaliatHafezState>(
                 
         //           builder: (context, state) {
@@ -262,6 +316,35 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
         ),
       ),
     );
+
+  }
+
+//   Color _getButtonColor(BadgeState state, int index,bool isClicked) {
+//   print("Current state: $state");
+  
+
+//      return  (isClicked) ? Color.fromARGB(255, 13, 15, 16) : const Color.fromARGB(255, 161, 156, 139);
+     
+    
+  
+// }
+
+  Color _getButtonColor(BadgeState state, int index) {
+    print("Current state: $state");
+
+    bool isClicked = _myBox?.get('isClicked$index', defaultValue: false)??"";
+
+    return (isClicked)
+        ? Color.fromARGB(255, 13, 15, 16)
+        : const Color.fromARGB(255, 161, 156, 139);
+  }
+
+  void _onButtonClick(int index) {
+    bool isClicked = _myBox!.get('isClicked$index', defaultValue: false);
+    _myBox?.put('isClicked$index', isClicked)??"";
+    print("opennnn");
+
+    // انجام سایر عملیات مرتبط با کلیک دکمه
   }
 }
 
