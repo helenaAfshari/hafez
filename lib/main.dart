@@ -33,7 +33,7 @@ void main()async {
 }
 
 class MyApp extends StatelessWidget {
-    late final TodoRepository todoBloc;
+    late final IconRepository todoBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<DetailsGhazaliatHafezBloc>(
           create: (context) => DetailsGhazaliatHafezBloc()..add(LoadedddEvent(0))),
           BlocProvider<BadgeBloc>(
-          create: (_) => BadgeBloc(todoRepository: TodoRepository()),)
+          create: (_) => BadgeBloc(todoRepository: IconRepository()),)
       ],
       child:  MaterialApp(
         title: 'Your App Title',

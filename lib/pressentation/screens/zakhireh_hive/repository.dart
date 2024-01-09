@@ -31,46 +31,10 @@ import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_st
 //   }
 // }
 
-// class TodoRepository {
-//   Future<List<FavoriteModel>> loadTodos(int itemCount) async {
-//     await Future.delayed(const Duration(seconds: 2));
-  
-//     List<FavoriteModel> dynamicFavorites = [];
-//     for (int i = 0; i < itemCount; i++) {
-//       dynamicFavorites.add(FavoriteModel(ids: i, isLiked: false));
-//     }
-
-//     return dynamicFavorites;
-//   }
-// }
-import 'package:hive/hive.dart';
-
-class TodoRepository {
-//  late Box _todoBox;
-
-  // TodoRepository() {
-  //   _initHive();
-  // }
-
-  // Future<void> _initHive() async {
-  //   await Hive.openBox<FavoriteModel>('favoriteBox');
-  //   _todoBox = Hive.box<FavoriteModel>('favoriteBox');
-  // }
-
-  // Future<List<FavoriteModel>> loadTodos(int itemCount) async {
-  //   await Future.delayed(const Duration(seconds: 2));
-
-  //   List<FavoriteModel> dynamicFavorites = [];
-  //   for (int i = 0; i < itemCount; i++) {
-  //     dynamicFavorites.add(FavoriteModel(id: i, isLiked: false));
-  //   }
-
-  //   return dynamicFavorites;
-  // }
-Future<List<FavoriteModel>> loadTodos() async {
-  int itemCount =5;
+class IconRepository {
+  Future<List<FavoriteModel>> loadIcons(int itemCount) async {
     await Future.delayed(const Duration(seconds: 2));
-
+  
     List<FavoriteModel> dynamicFavorites = [];
     for (int i = 0; i < itemCount; i++) {
       dynamicFavorites.add(FavoriteModel(id: i, isLiked: false));
@@ -78,13 +42,30 @@ Future<List<FavoriteModel>> loadTodos() async {
 
     return dynamicFavorites;
   }
-  // Future<dynamic> saveTodoAtIndex(int index) async {
-  //   FavoriteModel todo = FavoriteModel(id: index, isLiked: false);
-  //   await _todoBox.putAt(index, todo);
-  //    FavoriteModel savedTodo = _todoBox.getAt(index);
-  // print('Saved Todo at index $index: $savedTodo');
-  //   }
+
 }
+// import 'package:hive/hive.dart';
+
+// class TodoRepository {
+ 
+// Future<List<FavoriteModel>> loadIcon() async {
+//   int itemCount =5;
+//     await Future.delayed(const Duration(seconds: 2));
+
+//     List<FavoriteModel> dynamicFavorites = [];
+//     for (int i = 0; i < itemCount; i++) {
+//       dynamicFavorites.add(FavoriteModel(id: i, isLiked: false));
+//     }
+
+//     return dynamicFavorites;
+//   }
+//   // Future<dynamic> saveTodoAtIndex(int index) async {
+//   //   FavoriteModel todo = FavoriteModel(id: index, isLiked: false);
+//   //   await _todoBox.putAt(index, todo);
+//   //    FavoriteModel savedTodo = _todoBox.getAt(index);
+//   // print('Saved Todo at index $index: $savedTodo');
+//   //   }
+// }
 
 // class TodoRepository {
 //   Future<List<FavoriteModel>> loadTodos(BadgeEvent event) async {

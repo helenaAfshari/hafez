@@ -33,23 +33,16 @@ class GhazaliatHafezScreen extends StatefulWidget {
 }
 class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
   ScrollController scrollController = ScrollController();
-    //List<bool> isHeartSelectedList = [];
  late  BadgeBloc todoBloc;
   @override
   void initState() {
-   todoBloc = BadgeBloc(todoRepository: TodoRepository());
-    //  todoBloc.add(BadgeLoadEvent());
-         //BlocProvider.of<BadgeBloc>(context).add(BadgeLoadEvent());
-    //      todoBloc = BlocProvider.of<BadgeBloc>(context);
-      // todoBloc.add(BadgeLoadEvent(5));
-      // todoBloc=BlocProvider.of<BadgeBloc>(context);
-  todoBloc.add(BadgeLoadEvent());
-    // todoBloc.add(BadgeLoadEvent(5));
+   todoBloc = BadgeBloc(todoRepository: IconRepository());
+   todoBloc.add(BadgeLoadEvent(10));
+  
     super.initState();
     scrollController.addListener(() {
   if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
       BlocProvider.of<GhazaliatHafezBloc>(context).add(LoadMoreEvent());
-
   }});
         
   }
@@ -99,7 +92,8 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
               UIUtils.getConvertedHeight(context, UIUtils.screenHeightInFigma),
           width: UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
           const MyAppBar(),
            Gap(MyDimensions.large+3),
@@ -108,7 +102,6 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                 controller: scrollController,
                 physics: const ScrollPhysics(),
                 itemBuilder: (context, index) {
-              List<bool> isHeartSelectedList = List.generate(state.ghazaliatHafez[index].id!, (index) => false);
                  return 
                   GestureDetector(
                     onTap: () {
@@ -122,15 +115,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                                       ),
                                     ),
                                   ));
-                                  //  Navigator.of(context).push(MaterialPageRoute(  
-                                  //   builder: (context) => BlocProvider(
-                                  //     create: (_) =>todoBloc,
-                                  //     child: DetailsGhazaliatHafezScreen(
-                                  //       e: k[index],
-                                  //       index:adjustedIndex,
-                                  //     ),
-                                  //   ),
-                                  // ));
+                             
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -166,21 +151,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                     )
                     ),
                     const Gap(10),
-                    //یک blocBuilder میزارم 
-      
-        //             GestureDetector(
-        //   onTap: () {
-        //     BlocProvider.of<GhazaliatHafezBloc>(context).add(ChangeTabEvent(index));
-        //     print("jjj");
-        //   },
-        //   child: Container(
-        //     width: 50,
-        //     height: 50,
-        //     color: state.iconStatusList[index] ? Colors.amber : Colors.red,
-        //     // Use ghazaliatHafez[index] for specific data related to the icon
-        //     // For example: Text(state.ghazaliatHafez[index].title),
-        //   ),
-        // ),
+    
       BlocBuilder<BadgeBloc, BadgeState>(
       builder: (context, state) {
       if(state is BadgeLoading){
@@ -195,9 +166,9 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
       child:  GestureDetector(
         onTap: () {
           print("gggggjjjllllrrrr::::");
-          // todoBloc.add(ChangeColorButtomListClickedEvent(id: index));
+           todoBloc.add(ChangeColorButtomListClickedEvent(id: index));
           // todoBloc.add(BadgeLoadEvent(index));
-          todoBloc.add(ChangeColorButtomListClickedEvent(id: index));
+          //todoBloc.add(ChangeColorButtomListClickedEvent(id: index));
           // context.read<BadgeBloc>().add(
           //         ChangeColorButtomListClickedEvent(id: state.characters[index].ids),
           //       );
@@ -373,9 +344,9 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                        .textTheme
                        .titleLarge!.copyWith(fontSize: MyDimensions.xLight),
                        ),
-                     Text("الی یا ابها",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: MyDimensions.light+2),),
-                      Gap( MyDimensions.xLight-2),
-                    Expanded(child: CustomDivider(indent: MyDimensions.light+2,endIndent: MyDimensions.light+2,)),
+                     Text(state.ghazaliatHafez[index].firstStanza!,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: MyDimensions.light+2),),
+                     Gap( MyDimensions.xLight-2),
+                   CustomDivider(indent: MyDimensions.light+2,endIndent: MyDimensions.light+2,),
                                  ],
                                ),),),
                   );},
@@ -411,23 +382,6 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
   
 // }
 
-  Color _getButtonColor(BadgeState state, int index) {
-    print("Current state: $state");
-
-    bool isClicked = _myBox?.get('isClicked$index', defaultValue: false)??"";
-
-    return (isClicked)
-        ? Color.fromARGB(255, 13, 15, 16)
-        : const Color.fromARGB(255, 161, 156, 139);
-  }
-
-  void _onButtonClick(int index) {
-    bool isClicked = _myBox!.get('isClicked$index', defaultValue: false);
-    _myBox?.put('isClicked$index', isClicked)??"";
-    print("opennnn");
-
-    // انجام سایر عملیات مرتبط با کلیک دکمه
-  }
 }
 
 

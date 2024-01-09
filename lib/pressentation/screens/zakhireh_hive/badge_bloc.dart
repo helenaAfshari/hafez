@@ -68,58 +68,83 @@
 
 // }
 
+
 import 'package:autharization_hanna/domain/model/hivemodels/favorite_model.dart';
+import 'package:autharization_hanna/domain/model/hivemodels/test_model.dart';
 import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_event.dart';
 import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_state.dart';
 import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BadgeBloc extends Bloc<BadgeEvent, BadgeState> {
-  BadgeBloc({
-    required TodoRepository todoRepository,
-  })  : _todoRepository = todoRepository,
-        super(BadgeLoading()) {
-          
-    on<BadgeLoadEvent>(_onLoadTodos);
-    on<ChangeColorButtomListClickedEvent>(_onToggleLikeEvent);
-  }
+class BadgeBloc extends Bloc<BadgeEvent,BadgeState>{
+  BadgeBloc({required IconRepository todoRepository}):super(BadgeInitial()){
+    on<BadgeEvent>((event, emit)async {
+      if(event is BadgeLoadEvent){
+          try {
+      final todos = await IconRepository().loadIcons(event.id);
+      emit(BadgeLoadedState(todos));
+    } catch (e) {
+      emit(BadgeErrorState(e.toString()));
+      print("Error");
+    }
+      }
+    if (event is ChangeColorButtomListClickedEvent) {
+      if (state is BadgeLoadedState) {
+        final todos = List<FavoriteModel>.from((state as BadgeLoadedState).characters);
+        final todoIndex = todos.indexWhere((e) => e.id == event.id);
+          final todo = todos[todoIndex];
+          todos[todoIndex] = todo.copyWith(isLiked: !todo.isLiked);
+         emit(BadgeLoadedState(todos));
+        
+      }
+    }
+    },);
 
-  final TodoRepository _todoRepository;
-Future<void> _onLoadTodos(BadgeLoadEvent event, Emitter<BadgeState> emit) async {
-  try {
-    //final todos = await _todoRepository.loadTodos(event.index);
-    final todoss = await _todoRepository.loadTodos();
-    emit(BadgeLoadedState(todoss));
-  } catch (e) {
-    emit(BadgeErrorState(e.toString()));
   }
 }
 
-  // Future<void> _onLoadTodos(BadgeLoadEvent event, Emitter<BadgeState> emit) async {
-  //   try {
-  //     final todos = await _todoRepository.loadTodos(5);
-  //     emit(BadgeLoadedState(todos));
-  //   } catch (e) {
-  //     emit(BadgeErrorState(e.toString()));
-  //   }
-  // }
+// import 'package:autharization_hanna/domain/model/hivemodels/favorite_model.dart';
+// import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_event.dart';
+// import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_state.dart';
+// import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/repository.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 
-  Future<void> _onToggleLikeEvent(ChangeColorButtomListClickedEvent event, Emitter<BadgeState> emit) async {
-    final todos = [...(state as BadgeLoadedState).characters];
-    final todoIndex = todos.indexWhere((e) => e.id == event.id);
-    final todo = todos[todoIndex];
-    todos[todoIndex] = todo.copyWith(isLiked: !todo.isLiked);
-    emit(BadgeLoadedState(todos));
-  }
+// class BadgeBloc extends Bloc<BadgeEvent, BadgeState> {
+//   BadgeBloc({
+//     required IconRepository todoRepository,
+//   })  : _todoRepository = todoRepository,
+//         super(BadgeLoading()) {
+          
+//     on<BadgeLoadEvent>(_onLoadTodos);
+//     on<ChangeColorButtomListClickedEvent>(_onToggleLikeEvent);
+//   }
 
-// Future<void> _onToggleLikeEvent(ChangeColorButtomListClickedEvent event, Emitter<BadgeState> emit) async {
-//    final List<FavoriteModel> characters = [];
+//   final IconRepository _todoRepository;
+// Future<void> _onLoadTodos(BadgeLoadEvent event, Emitter<BadgeState> emit) async {
 //   try {
-//     // Your logic to toggle likes
-//     emit(BadgeLoadedState(characters));
+   
+//     final todoss = await _todoRepository.loadIcons(event.id);
+//     emit(BadgeLoadedState(todoss));
 //   } catch (e) {
 //     emit(BadgeErrorState(e.toString()));
 //   }
 // }
+//   Future<void> _onToggleLikeEvent(ChangeColorButtomListClickedEvent event, Emitter<BadgeState> emit) async {
+//     final icons = [...(state as BadgeLoadedState).characters];
+//     final iconsIndex = icons.indexWhere((e) => e.id == event.id);
+//     final icon = icons[iconsIndex];
+//     icons[iconsIndex] = icon.copyWith(isLiked: !icon.isLiked);
+//     emit(BadgeLoadedState(icons));
+//   }
 
-}
+// // Future<void> _onToggleLikeEvent(ChangeColorButtomListClickedEvent event, Emitter<BadgeState> emit) async {
+// //    final List<FavoriteModel> characters = [];
+// //   try {
+// //     // Your logic to toggle likes
+// //     emit(BadgeLoadedState(characters));
+// //   } catch (e) {
+// //     emit(BadgeErrorState(e.toString()));
+// //   }
+// // }
+
+// }
