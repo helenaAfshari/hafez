@@ -23,7 +23,7 @@ class BadgeLoadedState extends BadgeState{
    final List<FavoriteModel> characters;
   
   @override
-  List<Object?> get props => [characters];
+  List<Object?> get props => [characters,];
 }
 
 class BadgeErrorState extends BadgeState{

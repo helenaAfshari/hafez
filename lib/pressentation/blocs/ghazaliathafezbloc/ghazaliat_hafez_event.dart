@@ -1,5 +1,6 @@
 
 import 'package:autharization_hanna/domain/model/hivemodels/favorite_model.dart';
+import 'package:autharization_hanna/domain/model/hivemodels/test_model.dart';
 
 abstract class GhazaliatHafezEvent{}
 class GhazaliatHafezStart extends GhazaliatHafezEvent{
@@ -18,7 +19,7 @@ class ChangeTabEvent extends GhazaliatHafezStart {
 }
 
 class GhazaliatEditedEvent extends GhazaliatHafezEvent {
-  final FavoriteModel character;
+  final Todo character;
   final int index;
   GhazaliatEditedEvent({required this.character, required this.index});
   

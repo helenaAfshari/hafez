@@ -56,10 +56,11 @@
 //   }
 // }
 
-
 //   @override
-//   Future<FavoriteModel> updateFavoriteModel({required FavoriteModel favoriteModel, required bool currentfavorite}) {
-//     // TODO: implement updateFavoriteModel
+//   Future<bool> updateFavoriteModel({required FavoriteModel favoriteModel, required bool currentfavorite}) {
+//     Hive.box<FavoriteModel>(_boxName).putAt(0, value)
+//   //  var box = await noteBox();
+//     // await box.putAt(index, character);
 //     throw UnimplementedError();
 //   }
   

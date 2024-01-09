@@ -6,7 +6,10 @@ import 'package:equatable/equatable.dart';
 
 abstract class BadgeEvent extends Equatable {}
 
-class BadgeLoadedEvent extends BadgeEvent {
+class BadgeLoadEvent extends BadgeEvent {
+  // BadgeLoadEvent(this.id);
+  
+  //int id;
   @override
   List<Object?> get props => [];
 }
@@ -32,12 +35,20 @@ class ChangeeeTabEvent extends BadgeEvent {
   List<Object?> get props => [selectedIndex];
 }
 
-class ChangeColorButtomListClickedEvent extends BadgeEvent {
-  ChangeColorButtomListClickedEvent(this.index,this.isFirstTime);
-   int index ;
-    bool isFirstTime;
+// class ChangeColorButtomListClickedEvent extends BadgeEvent {
+//   ChangeColorButtomListClickedEvent(this.index, this.character,);
+//    final FavoriteModel character;
+//    int index ;
+//   @override
+//   List<Object?> get props => [index,];
+// }
+final class ChangeColorButtomListClickedEvent extends BadgeEvent {
+  ChangeColorButtomListClickedEvent( {required this.id});
+
+  final int id;
+
   @override
-  List<Object?> get props => [index,isFirstTime];
+  List<Object?> get props => [id];
 }
 
 

@@ -13,6 +13,7 @@ import 'package:autharization_hanna/pressentation/screens/toggleScreenAndBloc/bl
 import 'package:autharization_hanna/pressentation/screens/toggleScreenAndBloc/toggle_screen.dart';
 import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_bloc.dart';
 import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_event.dart';
+import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/repository.dart';
 import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/services.dart';
 import 'package:autharization_hanna/service_locator.dart';
 import 'package:flutter/material.dart';
@@ -25,12 +26,15 @@ void main()async {
   
   await injector();
   await Hive.initFlutter();
-   Hive.registerAdapter(FavoriteModelAdapter());
-    await Hive.openBox<FavoriteModel>('myBox'); // باز کردن باکس
+   //Hive.registerAdapter(FavoriteModelAdapter());
+   
+    //await Hive.openBox<FavoriteModel>('myBox'); // باز کردن باکس
   runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
+    late final TodoRepository todoBloc;
+
   @override
   Widget build(BuildContext context) {
     return 
@@ -42,7 +46,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<DetailsGhazaliatHafezBloc>(
           create: (context) => DetailsGhazaliatHafezBloc()..add(LoadedddEvent(0))),
           BlocProvider<BadgeBloc>(
-          create: (context) => BadgeBloc(box:BadgeDatabase())..add(ChangeColorButtomListClickedEvent(0,false))),
+          create: (_) => BadgeBloc(todoRepository: TodoRepository()),)
       ],
       child:  MaterialApp(
         title: 'Your App Title',
