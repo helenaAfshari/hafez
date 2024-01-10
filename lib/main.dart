@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<DetailsGhazaliatHafezBloc>(
           create: (context) => DetailsGhazaliatHafezBloc()..add(LoadedddEvent(0))),
           BlocProvider<BadgeBloc>(
-          create: (_) => BadgeBloc(todoRepository: IconRepository()),)
+          create: (_) => BadgeBloc()..add(BadgeLoadEvent()),),
       ],
       child:  MaterialApp(
         title: 'Your App Title',

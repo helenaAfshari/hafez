@@ -32,11 +32,11 @@ import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_st
 // }
 
 class IconRepository {
-  Future<List<FavoriteModel>> loadIcons(int itemCount) async {
+  Future<List<FavoriteModel>> loadIcons(List<int> itemCount) async {
     await Future.delayed(const Duration(seconds: 2));
   
     List<FavoriteModel> dynamicFavorites = [];
-    for (int i = 0; i < itemCount; i++) {
+    for (int i = 0; i < itemCount[0]+1; i++) {
       dynamicFavorites.add(FavoriteModel(id: i, isLiked: false));
     }
 

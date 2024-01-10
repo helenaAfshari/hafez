@@ -69,38 +69,88 @@
 // }
 
 
+import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
 import 'package:autharization_hanna/domain/model/hivemodels/favorite_model.dart';
 import 'package:autharization_hanna/domain/model/hivemodels/test_model.dart';
+import 'package:autharization_hanna/domain/repository/ghazaliathafezrepo/ghazaliathafez_repository.dart';
+import 'package:autharization_hanna/pressentation/screens/toggleScreenAndBloc/toggle_screen.dart';
 import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_event.dart';
 import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_state.dart';
 import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/repository.dart';
+import 'package:autharization_hanna/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BadgeBloc extends Bloc<BadgeEvent,BadgeState>{
-  BadgeBloc({required IconRepository todoRepository}):super(BadgeInitial()){
+   List<GhazalItemModelEntity> ghazaliatHafez = [];
+     int page =1;
+     int perPage=60;
+   //BadgeBloc({required IconRepository todoRepository}):super(BadgeLoadedState([])){
+    BadgeBloc() : super(BadgeInitialState()) {
+
     on<BadgeEvent>((event, emit)async {
       if(event is BadgeLoadEvent){
           try {
-      final todos = await IconRepository().loadIcons(event.id);
+            final ghazaliatResponse =
+              await serviceLocator<GhazaliatHafezRepository>()
+                  .ghazaliathafez(page,perPage);
+          print("jjjjj${ghazaliatResponse}");
+    ghazaliatHafez = (ghazaliatResponse.data['data']as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
+
+      final todos = await IconRepository().loadIcons([ghazaliatHafez.length]);
       emit(BadgeLoadedState(todos));
     } catch (e) {
       emit(BadgeErrorState(e.toString()));
       print("Error");
     }
       }
-    if (event is ChangeColorButtomListClickedEvent) {
-      if (state is BadgeLoadedState) {
-        final todos = List<FavoriteModel>.from((state as BadgeLoadedState).characters);
+    // if (event is ChangeColorButtomListClickedEvent) {
+    //   if (state is BadgeLoadedState) {
+    //     final todos = List<FavoriteModel>.from((state as BadgeLoadedState).characters);
+    //     final todoIndex = todos.indexWhere((e) => e.id == event.id);
+    //       final todo = todos[todoIndex];
+    //       todos[todoIndex] = todo.copyWith(isLiked: !todo.isLiked);
+    //      emit(BadgeLoadedState(todos));
+        
+    //   }
+    // }
+    },);
+    on<ChangeColorButtomListClickedEvent>((event, emit) async {
+        final todos = List<FavoriteModel>.from((state as BadgeLoadedState).fcharacters);
         final todoIndex = todos.indexWhere((e) => e.id == event.id);
           final todo = todos[todoIndex];
+      //       final ghazaliatResponse =
+      //         await serviceLocator<GhazaliatHafezRepository>()
+      //             .ghazaliathafez(page,perPage);
+      // ghazaliatHafez = (ghazaliatResponse.data['data']as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
+
           todos[todoIndex] = todo.copyWith(isLiked: !todo.isLiked);
          emit(BadgeLoadedState(todos));
-        
-      }
-    }
     },);
 
+ on<LoadMoreBadgeEvent>((event, emit) async {
+   List<GhazalItemModelEntity> loadedData = [];
+  page++;
+  
+  if (event is LoadMoreBadgeEvent) {
+    try {
+      final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>()
+          .ghazaliathafez(page, perPage);
+      print("jjjjj${ghazaliatResponse}");
+       loadedData = (ghazaliatResponse.data['data'] as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
+       ghazaliatHafez.addAll(loadedData);
+       print("LoadedEvent$loadedData");
+         final todos = await IconRepository().loadIcons([ghazaliatHafez.length]);
+      emit(BadgeLoadedState(todos));
+      
+    } catch (e) {
+      emit(BadgeErrorState(e.toString()));
+      print("Error");
+    }
   }
+});
+
+  }
+  
 }
 
 // import 'package:autharization_hanna/domain/model/hivemodels/favorite_model.dart';

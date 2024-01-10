@@ -18,6 +18,7 @@ class GhazaliatHafezErrorState extends GhazaliatHafezState{
 
 class GhazaliatHafezSuccesState extends GhazaliatHafezState{
   final List<GhazalItemModelEntity> ghazaliatHafez;
+
   
   //  final bool isHeartSelected;
   GhazaliatHafezSuccesState(this.ghazaliatHafez,);
@@ -25,10 +26,10 @@ class GhazaliatHafezSuccesState extends GhazaliatHafezState{
  // get toggle => false;
 }
 
-class GhazaliatHafezChangeState extends GhazaliatHafezState {
-  final List<bool> isHeartSelectedList;
-  GhazaliatHafezChangeState(this.isHeartSelectedList);
-}
+// class GhazaliatHafezChangeState extends GhazaliatHafezState {
+//   final List<bool> isHeartSelectedList;
+//   GhazaliatHafezChangeState(this.isHeartSelectedList);
+// }
 
 
 
