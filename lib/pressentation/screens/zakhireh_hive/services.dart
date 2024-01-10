@@ -14,7 +14,7 @@ class BadgeDatabase {
 //این برای زمانی که زدم روی ایکون
   Future<dynamic> addCharacter(FavoriteModel character) async {
     var box = await noteBox();
-    await box.put(character.id, character);
+    await box.put(character.ids, character);
   }
 
   Future<void> updateCharacter(int index, FavoriteModel character) async {
@@ -31,7 +31,7 @@ class BadgeDatabase {
     var box = await noteBox();
     var data = box.values.toList();
     if (data.isEmpty) {
-      await addCharacter(FavoriteModel(id: id?.id??0, isLiked: false));
+      await addCharacter(FavoriteModel(ids: id?.id??0, isLiked: false));
      
     }
     return box.values.toList();

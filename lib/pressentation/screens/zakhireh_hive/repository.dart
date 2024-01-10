@@ -37,12 +37,10 @@ class IconRepository {
   
     List<FavoriteModel> dynamicFavorites = [];
     for (int i = 0; i < itemCount[0]+1; i++) {
-      dynamicFavorites.add(FavoriteModel(id: i, isLiked: false));
+      dynamicFavorites.add(FavoriteModel( isLiked: false, ids: i,));
     }
-
     return dynamicFavorites;
   }
-
 }
 // import 'package:hive/hive.dart';
 

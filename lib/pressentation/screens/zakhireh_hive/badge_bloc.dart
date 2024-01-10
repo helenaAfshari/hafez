@@ -116,7 +116,7 @@ class BadgeBloc extends Bloc<BadgeEvent,BadgeState>{
     },);
     on<ChangeColorButtomListClickedEvent>((event, emit) async {
         final todos = List<FavoriteModel>.from((state as BadgeLoadedState).fcharacters);
-        final todoIndex = todos.indexWhere((e) => e.id == event.id);
+        final todoIndex = todos.indexWhere((e) => e.ids == event.id);
           final todo = todos[todoIndex];
       //       final ghazaliatResponse =
       //         await serviceLocator<GhazaliatHafezRepository>()
@@ -130,7 +130,6 @@ class BadgeBloc extends Bloc<BadgeEvent,BadgeState>{
  on<LoadMoreBadgeEvent>((event, emit) async {
    List<GhazalItemModelEntity> loadedData = [];
   page++;
-  
   if (event is LoadMoreBadgeEvent) {
     try {
       final ghazaliatResponse = await serviceLocator<GhazaliatHafezRepository>()

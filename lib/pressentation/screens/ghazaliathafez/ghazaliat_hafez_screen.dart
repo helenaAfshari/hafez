@@ -235,7 +235,6 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
 //       ),
     BlocBuilder<BadgeBloc, BadgeState>(
   builder: (context, state) {
-
     if (state is BadgeLoading) {
       return const Center(
         child: CircularProgressIndicator(color: Colors.blue),
@@ -254,7 +253,6 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
         ),
       );
     }
-    // اگر طول لیست صفر باشد
     return Container();
   },
 ),
