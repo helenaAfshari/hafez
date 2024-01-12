@@ -1,5 +1,6 @@
 
 import 'dart:ui';
+import 'package:autharization_hanna/data/remote/ghazaliathafez/ghazaliathafez_api.dart';
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
 import 'package:autharization_hanna/domain/model/hivemodels/favorite_model.dart';
 import 'package:equatable/equatable.dart';
@@ -17,7 +18,7 @@ class BadgeLoading extends BadgeState{
 }
 class BadgeLoadedState extends BadgeState{
   BadgeLoadedState(this.fcharacters);
-   final List<FavoriteModel> fcharacters;
+   final List<GhazalItemModelEntity> fcharacters;
   //  final List<GhazalItemModelEntity> characters;
   @override
   List<Object?> get props => [fcharacters];

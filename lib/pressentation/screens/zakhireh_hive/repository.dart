@@ -1,6 +1,7 @@
 
 import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
 import 'package:autharization_hanna/domain/model/hivemodels/favorite_model.dart';
+import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_fav.dart';
 import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_event.dart';
 import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_state.dart';
 
@@ -32,12 +33,12 @@ import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_st
 // }
 
 class IconRepository {
-  Future<List<FavoriteModel>> loadIcons(List<int> itemCount) async {
+  Future<List<GhazalItemModelEntity>> loadIcons(List<int> itemCount) async {
     await Future.delayed(const Duration(seconds: 2));
   
-    List<FavoriteModel> dynamicFavorites = [];
+    List<GhazalItemModelEntity> dynamicFavorites = [];
     for (int i = 0; i < itemCount[0]+1; i++) {
-      dynamicFavorites.add(FavoriteModel( isLiked: false, ids: i,));
+      dynamicFavorites.add(GhazalItemModelEntity( isLiked: false, id: i));
     }
     return dynamicFavorites;
   }

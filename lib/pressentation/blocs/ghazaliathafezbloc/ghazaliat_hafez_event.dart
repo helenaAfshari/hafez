@@ -24,14 +24,18 @@ class LoadMoreEvent extends GhazaliatHafezStart {
 //   GhazaliatEditedEvent({required this.character, required this.index});
   
 // }
-
-
-final class cccccc extends GhazaliatHafezEvent {
-  cccccc( {required this.id});
+final class ChangeColorButtomListClickedEventtt extends GhazaliatHafezStart {
+  ChangeColorButtomListClickedEventtt( {required this.id});
   final int id;
-  @override
-  List<Object?> get props => [id];
+
 }
+
+
+// final class ChangeColorButtomListClickedEvent extends GhazaliatHafezStart {
+//   ChangeColorButtomListClickedEvent( {required this.id});
+//   final int id;
+
+// }
 
 
 

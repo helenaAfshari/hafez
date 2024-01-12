@@ -16,39 +16,54 @@ import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/badge_ev
 import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/repository.dart';
 import 'package:autharization_hanna/pressentation/screens/zakhireh_hive/services.dart';
 import 'package:autharization_hanna/service_locator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'pressentation/screens/toggleScreenAndBloc/event_toggle.dart';
 
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
+  if(!kIsWeb){
+
+  final dir = await getApplicationDocumentsDirectory();
+  Hive.defaultDirectory = dir.path;
+
+  }else{
+    Hive.defaultDirectory = './';
+    // Isar.
+  }
   await injector();
-  await Hive.initFlutter();
-   //Hive.registerAdapter(FavoriteModelAdapter());
-   
-    //await Hive.openBox<FavoriteModel>('myBox'); // باز کردن باکس
-  runApp( MyApp());
+  // if (kIsWeb) {
+  //   Hive.init('./');
+  // } else {
+  //   await Hive.initFlutter();
+  // }
+  // //  Hive.registerAdapter(FavoriteModelAdapter());
+
+  // await Hive.openBox<Map>('favBox'); // باز کردن باکس
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-    late final IconRepository todoBloc;
+  //  late final IconRepository todoBloc;
 
   @override
   Widget build(BuildContext context) {
-    return 
-    MultiBlocProvider(
+    return MultiBlocProvider(
       providers: [
         BlocProvider<GhazaliatHafezBloc>(
           create: (context) => GhazaliatHafezBloc()..add(LoadedEvent()),
-        ),  
+        ),
         BlocProvider<DetailsGhazaliatHafezBloc>(
-          create: (context) => DetailsGhazaliatHafezBloc()..add(LoadedddEvent(0))),
-          BlocProvider<BadgeBloc>(
-          create: (_) => BadgeBloc()..add(BadgeLoadEvent()),),
+            create: (context) =>
+                DetailsGhazaliatHafezBloc()..add(LoadedddEvent(0))),
+        // BlocProvider<BadgeBloc>(
+        // create: (_) => BadgeBloc()..add(BadgeLoadEvent()),),
       ],
-      child:  MaterialApp(
+      child: MaterialApp(
         title: 'Your App Title',
         home: GhazaliatHafezScreen(),
       ),
