@@ -18,8 +18,8 @@ import 'package:gap/gap.dart';
 import 'package:just_audio/just_audio.dart';
 class DetailsGhazaliatHafezScreen extends StatefulWidget {
      GhazalItemModelEntity? e;
-     int index;
-  DetailsGhazaliatHafezScreen({Key? key,  this.e, required this.index});
+     int? index;
+  DetailsGhazaliatHafezScreen({Key? key,  this.e,  this.index});
   @override
   State<DetailsGhazaliatHafezScreen> createState() => _DetailsGhazaliatHafezScreenState();
 }

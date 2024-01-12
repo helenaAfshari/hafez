@@ -14,7 +14,7 @@ class GhazalItemModelEntity {
   final String? title;
   final String? tafsir;
   final String? tafsirAudio;
-  final String? firstStanza;
+   String? firstStanza;
   final bool? isLiked;
   GhazalItemModelEntity(
       {this.id,

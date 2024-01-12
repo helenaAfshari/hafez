@@ -55,7 +55,8 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
   if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
       BlocProvider.of<GhazaliatHafezBloc>(context).add(LoadMoreEvent());
      //  BlocProvider.of<BadgeBloc>(context).add(LoadMoreBadgeEvent());
-  }});
+  }}
+  );
         
   }
 
@@ -148,58 +149,16 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                   )
                   ),
                   const Gap(10),
-                  IconButton(onPressed: (){
-                     BlocProvider.of<GhazaliatHafezBloc>(context).add(ChangeColorButtomListClickedEventtt(id: k[index].id!));
-                  }, icon: Icon((k[index].isLiked ?? false) ? Icons.favorite : Icons.favorite_border)),
-                  //  GestureDetector(
-                  //   onTap: ()async {
-                        
-                  //     },
-                  //   child:  Image.asset(
-                  //  "assets/icons/share.png"
-                  // )
-                  // ),
-                  //یک blocBuilder میزارم 
-     
+                   GestureDetector(
+                    onTap: ()async {
+ BlocProvider.of<GhazaliatHafezBloc>(context).add(ChangeColorButtomListClickedEventtt(id: k[index].id!));
+  },
+     child: 
+    Image.asset(
+ (k[index].isLiked ?? false) ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",
+),
+                  ),
     
-// GestureDetector(
-//   onTap: () {
-//     print("jjj");
-//     // BlocProvider.of<BadgeBloc>(context).add(BadgeLoadEvent([index]));
-//   },
-//   child: Row(
-//     children: [
-//     Icon(Icons.abc),
-
-//       BlocBuilder<BadgeBloc, BadgeState>(
-//         builder: (context, state) {
-//           if (state is BadgeLoading) {
-//             return const Center(
-//               child: CircularProgressIndicator(color: Colors.blue),
-//             );
-//           } else if (state is BadgeLoadedState) {
-//               return Center(
-//                 child: GestureDetector(
-//                   onTap: () {
-//                     print("gggggjjjllllrrrr::::");
-//                     // Toggle the isLiked property in your BadgeBloc
-
-//     BlocProvider.of<BadgeBloc>(context).add(ChangeColorButtomListClickedEvent(id: index));
-//                   },
-//                   child: Icon(
-//                     Icons.account_box,
-//                     color: state.fcharacters[index].isLiked ? Colors.red : Colors.black, // Change the color here
-//                   ),
-//                 ),
-//               );
-          
-//           }
-//           return Container(); // Return an empty container if no conditions are met
-//         },
-//       ),
-//     ],
-//   ),
-// )
                               ],
                             );
                           },),],),
@@ -235,84 +194,9 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
     );
 
   }
-
-//   Color _getButtonColor(BadgeState state, int index,bool isClicked) {
-//   print("Current state: $state");
-  
-
-//      return  (isClicked) ? Color.fromARGB(255, 13, 15, 16) : const Color.fromARGB(255, 161, 156, 139);
-     
-    
-  
-// }
 }
 
 
-//درست
-// BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
-//   builder: (context, state) {
-//     if (state is GhazaliatHafezToggleState) {
-//       return GestureDetector(
-//         onTap: () {
-//           BlocProvider.of<GhazaliatHafezBloc>(context).add(ToggleHeartEvent(0));
-//         },
-//         child: Image.asset(
-//           state.isHeartSelected
-//               ? "assets/icons/selected_heart.png"
-//               : "assets/icons/unselected_heart.png",
-//         ),
-//       );
-//     } else if (state is GhazaliatHafezLoadingState) {
-//       // Handle loading state UI
-//       return CircularProgressIndicator();
-//     } else {
-//       // Handle other states or provide a default UI
-//       return YourDefaultWidget();
-//     }
-//   },
-// )
 
 
 
-
-
-//////////////////////
-///
-///// یک لیست برای ذخیره وضعیت انتخاب برای هر آیتم ایجاد کنید
-// List<bool> isHeartSelectedList = List.generate(تعداد_آیتم‌ها, (index) => false);
-
-// // ...
-
-// // در GestureDetector برای انتخاب / عدم انتخاب آیکون قلب
-// onTap: () {
-//   setState(() {
-//     // وضعیت انتخاب برای آیتم فعلی را تغییر دهید
-//     isHeartSelectedList[index] = !isHeartSelectedList[index];
-//   });
-// },
-
-// // ...
-
-// // در ویجت Image.asset برای آیکون قلب
-// Image.asset(
-//   isHeartSelectedList[index] ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",
-// ),
-
-// // ...
-
-// // در onTap برای ناوبری به جزئیات
-// GestureDetector(
-//   onTap: () {
-//     int adjustedIndex = index < 17 ? index + 1 : index + 1;
-//     Navigator.of(context).push(MaterialPageRoute(
-//       builder: (context) => BlocProvider(
-//         create: (context) => GhazaliatHafezBloc(),
-//         child: DetailsGhazaliatHafezScreen(
-//           e: k[index],
-//           index: adjustedIndex,
-//           isHeartSelected: isHeartSelectedList[index], // وضعیت انتخاب را به صفحه جزئیات منتقل کنید
-//         ),
-//       ),
-//     ));
-//   },
-// ),
