@@ -1,5 +1,5 @@
-import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
-import 'package:autharization_hanna/core/resource/constants/my_strings.dart';
+import 'package:hafez/core/resource/constants/my_colors.dart';
+import 'package:hafez/core/resource/constants/my_strings.dart';
 import 'package:flutter/material.dart';
 
 class BottomSheetTafsirWidget extends StatelessWidget {

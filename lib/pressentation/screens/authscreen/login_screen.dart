@@ -1,9 +1,9 @@
 
-import 'package:autharization_hanna/core/resource/constants/my_strings.dart';
-import 'package:autharization_hanna/pressentation/screens/authscreen/check_otp_screen.dart';
-import 'package:autharization_hanna/pressentation/blocs/bloc_login/event_login.dart';
-import 'package:autharization_hanna/pressentation/blocs/bloc_login/login_bloc.dart';
-import 'package:autharization_hanna/pressentation/blocs/bloc_login/state_login.dart';
+import 'package:hafez/core/resource/constants/my_strings.dart';
+import 'package:hafez/pressentation/screens/authscreen/check_otp_screen.dart';
+import 'package:hafez/pressentation/blocs/bloc_login/event_login.dart';
+import 'package:hafez/pressentation/blocs/bloc_login/login_bloc.dart';
+import 'package:hafez/pressentation/blocs/bloc_login/state_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';

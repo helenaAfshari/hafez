@@ -1,6 +1,5 @@
 
-import 'package:autharization_hanna/domain/model/detailsghazaliathafez/details_ghazaliat_hafez_model.dart';
-import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
+import 'package:hafez/domain/model/detailsghazaliathafez/details_ghazaliat_hafez_model.dart';
 
 abstract class DetailsGhazaliatHafezState{}
 

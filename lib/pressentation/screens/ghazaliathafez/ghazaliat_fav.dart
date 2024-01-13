@@ -1,15 +1,15 @@
-import 'package:autharization_hanna/core/appbar/my_appbar.dart';
-import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navigation.dart';
-import 'package:autharization_hanna/core/components/customwidgets/custom_divider.dart';
-import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
-import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
-import 'package:autharization_hanna/core/resource/constants/my_strings.dart';
-import 'package:autharization_hanna/core/utils/ui_utils.dart';
-import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
-import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
-import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
-import 'package:autharization_hanna/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
-import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
+import 'package:hafez/core/appbar/my_appbar.dart';
+import 'package:hafez/core/bottomnavigationbar/my_bottom_navigation.dart';
+import 'package:hafez/core/components/customwidgets/custom_divider.dart';
+import 'package:hafez/core/resource/constants/my_colors.dart';
+import 'package:hafez/core/resource/constants/my_dimensions.dart';
+import 'package:hafez/core/resource/constants/my_strings.dart';
+import 'package:hafez/core/utils/ui_utils.dart';
+import 'package:hafez/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
+import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
+import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
+import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
+import 'package:hafez/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -18,27 +18,24 @@ import 'package:share_plus/share_plus.dart';
 
 class GhazaliatFav extends StatefulWidget {
   const GhazaliatFav({super.key});
-
   @override
   State<GhazaliatFav> createState() => _GhazaliatFavState();
 }
 
 class _GhazaliatFavState extends State<GhazaliatFav> {
-
   final box  = Hive.box<Map>(name: 'favBox');
+  
   List<GhazalItemModelEntity> ghazaliat = [];
     ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   scrollController.addListener(() {
   if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
       BlocProvider.of<GhazaliatHafezBloc>(context).add(LoadMoreEvent());
-     //  BlocProvider.of<BadgeBloc>(context).add(LoadMoreBadgeEvent());
   }});
-    Future.microtask(() {
+         Future.microtask(() {
       
       for (final favEntities in box.keys) { 
         ghazaliat.add(GhazalItemModelEntity.fromJson(box.get(favEntities)! as Map<String, dynamic>));
@@ -49,20 +46,13 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
     });
 
   }
-
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      // body: ListView.builder(itemCount: ghazaliat.length,
-      // itemBuilder: (context, index) {
-        
-      // },
-      // // itemBuilder: (context, index) => ListTile(
-      // //   // title: Text(ghazaliat.elementAt(index).title ?? 'title is empty'),
-      // // ),
-      // ),
+      backgroundColor: MyColors.primaryColor,
+
       body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
           builder: (context, state) {
 
@@ -96,12 +86,11 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
                                     create: (context) => GhazaliatHafezBloc(),
                                     child: DetailsGhazaliatHafezScreen(
                                       e: k[index],
-                                      index: state.ghazaliatHafez[index].id
+                                      index: ghazaliat.elementAt(index).id
                                       //index:adjustedIndex,
                                     ),
                                   ),
                                 ));
-                         
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -110,8 +99,8 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
                      border: Border.all(color: MyColors.borderBottomColor)
                     ),
                     margin:EdgeInsets.only(left: MyDimensions.semiLarge+5,right: MyDimensions.semiLarge+5),
-                       height: UIUtils.getConvertedHeight(context,90),
-                       width: UIUtils.getConvertedWidth(context,292),
+                       height: 90,
+                       width:292,
                        child: Padding(
                          padding:  EdgeInsets.only(right: MyDimensions.medium+2),
                          child: Column(
@@ -136,16 +125,6 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
                    "assets/icons/share.png"
                   )
                   ),
-//                   const Gap(10),
-//                    GestureDetector(
-//                     onTap: ()async {
-//  BlocProvider.of<GhazaliatHafezBloc>(context).add(ChangeColorButtomListClickedEventtt(id: k[index].id!));
-//   },
-//      child: 
-//     Image.asset(
-//  (k[index].isLiked ?? false) ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",
-// ),
-//                   ),
     
                               ],
                             );
@@ -156,10 +135,10 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
                      .titleLarge!.copyWith(fontSize: MyDimensions.xLight),
                      ),
                     //  Text(ghazaliat.elementAt(index).title ??
-                   Text(state.ghazaliatHafez[index].firstStanza??"first",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: MyDimensions.light+2),),
+                   Text(ghazaliat.elementAt(index).firstStanza??'',style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: MyDimensions.light+2),),
                     Gap( MyDimensions.xLight-2),
                   Expanded(child: CustomDivider(indent: MyDimensions.light+2,endIndent: MyDimensions.light+2,)),
-                               ],
+                 ],
                              ),),),
                 );},
               separatorBuilder: (context, index) => Gap(MyDimensions.light+2),
@@ -175,8 +154,7 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
             } else {
               print('cannot detect state');
               return Container();
-            }
-          
+            }  
           },
         ),
     );

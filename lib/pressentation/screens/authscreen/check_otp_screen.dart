@@ -1,10 +1,10 @@
 
 import 'dart:async';
-import 'package:autharization_hanna/pressentation/screens/authscreen/login_screen.dart';
-import 'package:autharization_hanna/pressentation/blocs/bloc_checked_otp/bloc_checked_otp.dart';
-import 'package:autharization_hanna/pressentation/blocs/bloc_checked_otp/event_check_otp.dart';
-import 'package:autharization_hanna/pressentation/blocs/bloc_checked_otp/state_checked_otp.dart';
-import 'package:autharization_hanna/pressentation/screens/home_screen/home_screen.dart';
+import 'package:hafez/pressentation/screens/authscreen/login_screen.dart';
+import 'package:hafez/pressentation/blocs/bloc_checked_otp/bloc_checked_otp.dart';
+import 'package:hafez/pressentation/blocs/bloc_checked_otp/event_check_otp.dart';
+import 'package:hafez/pressentation/blocs/bloc_checked_otp/state_checked_otp.dart';
+import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';

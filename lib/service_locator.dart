@@ -1,19 +1,19 @@
 
-import 'package:autharization_hanna/core/network/api_provider.dart';
-import 'package:autharization_hanna/core/network/api_provider_impl.dart';
-import 'package:autharization_hanna/core/network/dio_wraper.dart';
-import 'package:autharization_hanna/data/remote/auth/auth_api.dart';
-import 'package:autharization_hanna/data/remote/auth/auth_api_impl.dart';
-import 'package:autharization_hanna/data/remote/detailsghazaliathafez/details_ghazaliat_hafez_api.dart';
-import 'package:autharization_hanna/data/remote/detailsghazaliathafez/details_ghazaliat_hafez_api_impl.dart';
-import 'package:autharization_hanna/data/remote/ghazaliathafez/ghazaliathafez_api.dart';
-import 'package:autharization_hanna/data/remote/ghazaliathafez/ghazaliathafez_api_impl.dart';
-import 'package:autharization_hanna/domain/repository/auth/auth_repository.dart';
-import 'package:autharization_hanna/domain/repository/auth/auth_repository_impl.dart';
-import 'package:autharization_hanna/domain/repository/detailsghazaliathafez_repo/details_ghazaliat_hafez_repository.dart';
-import 'package:autharization_hanna/domain/repository/detailsghazaliathafez_repo/details_ghazaliat_hafez_repository_impl.dart';
-import 'package:autharization_hanna/domain/repository/ghazaliathafezrepo/ghazaliathafez_repository.dart';
-import 'package:autharization_hanna/domain/repository/ghazaliathafezrepo/ghazaliathafez_repository_impl.dart';
+import 'package:hafez/core/network/api_provider.dart';
+import 'package:hafez/core/network/api_provider_impl.dart';
+import 'package:hafez/core/network/dio_wraper.dart';
+import 'package:hafez/data/remote/auth/auth_api.dart';
+import 'package:hafez/data/remote/auth/auth_api_impl.dart';
+import 'package:hafez/data/remote/detailsghazaliathafez/details_ghazaliat_hafez_api.dart';
+import 'package:hafez/data/remote/detailsghazaliathafez/details_ghazaliat_hafez_api_impl.dart';
+import 'package:hafez/data/remote/ghazaliathafez/ghazaliathafez_api.dart';
+import 'package:hafez/data/remote/ghazaliathafez/ghazaliathafez_api_impl.dart';
+import 'package:hafez/domain/repository/auth/auth_repository.dart';
+import 'package:hafez/domain/repository/auth/auth_repository_impl.dart';
+import 'package:hafez/domain/repository/detailsghazaliathafez_repo/details_ghazaliat_hafez_repository.dart';
+import 'package:hafez/domain/repository/detailsghazaliathafez_repo/details_ghazaliat_hafez_repository_impl.dart';
+import 'package:hafez/domain/repository/ghazaliathafezrepo/ghazaliathafez_repository.dart';
+import 'package:hafez/domain/repository/ghazaliathafezrepo/ghazaliathafez_repository_impl.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 

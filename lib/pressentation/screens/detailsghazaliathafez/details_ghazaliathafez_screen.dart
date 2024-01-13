@@ -1,17 +1,17 @@
 
 import 'dart:async';
-import 'package:autharization_hanna/core/appbar/my_appbar.dart';
-import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navigation.dart';
-import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
-import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
-import 'package:autharization_hanna/core/resource/constants/my_pading.dart';
-import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
-import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
-import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
-import 'package:autharization_hanna/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_state.dart';
-import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/widgets/bottom_sheet_tafsir_widget.dart';
-import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/widgets/tafsir_text_visibility_widget.dart';
-import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/widgets/my_progressbar_widget_music.dart';
+import 'package:hafez/core/appbar/my_appbar.dart';
+import 'package:hafez/core/bottomnavigationbar/my_bottom_navigation.dart';
+import 'package:hafez/core/resource/constants/my_colors.dart';
+import 'package:hafez/core/resource/constants/my_dimensions.dart';
+import 'package:hafez/core/resource/constants/my_pading.dart';
+import 'package:hafez/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
+import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
+import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
+import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_state.dart';
+import 'package:hafez/pressentation/screens/detailsghazaliathafez/widgets/bottom_sheet_tafsir_widget.dart';
+import 'package:hafez/pressentation/screens/detailsghazaliathafez/widgets/tafsir_text_visibility_widget.dart';
+import 'package:hafez/pressentation/screens/detailsghazaliathafez/widgets/my_progressbar_widget_music.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -154,11 +154,12 @@ void update(double newValue) {
           left: 47,
           right: 47,
           child: Container(
+          
             decoration:  BoxDecoration(
               color: MyColors.musicBoxColor,
               borderRadius: BorderRadius.all(Radius.circular(MyDimensions.light)),
             ),
-            height: MediaQuery.of(context).size.height * 0.10,
+            height: 85,
             child: Column(
               children: [
                 const Gap(5),

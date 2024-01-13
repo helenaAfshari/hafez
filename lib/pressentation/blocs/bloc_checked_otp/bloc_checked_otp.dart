@@ -1,9 +1,9 @@
 
 import 'dart:async';
-import 'package:autharization_hanna/domain/repository/auth/auth_repository.dart';
-import 'package:autharization_hanna/pressentation/blocs/bloc_checked_otp/event_check_otp.dart';
-import 'package:autharization_hanna/pressentation/blocs/bloc_checked_otp/state_checked_otp.dart';
-import 'package:autharization_hanna/service_locator.dart';
+import 'package:hafez/domain/repository/auth/auth_repository.dart';
+import 'package:hafez/pressentation/blocs/bloc_checked_otp/event_check_otp.dart';
+import 'package:hafez/pressentation/blocs/bloc_checked_otp/state_checked_otp.dart';
+import 'package:hafez/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -12,22 +12,15 @@ class CheckedOtpBloc extends Bloc<EventChecked, CheckedOtpState> {
   int _countDown = 50;
     final StreamController<int> _timerController = StreamController<int>();
  Stream<int> get timerStream => _timerController.stream;
-
   CheckedOtpBloc() : super(CheckedOtpInitial()) {
     on<EventChecked>((event, emit) async {
       if (event is CheckedOtpButtomClicked) {
         try {
           emit(CheckedOtpLoading());
-         // final  otpToken = await getOtpToken();
-       //  print("fffffffff${otpToken}");
-          // Assuming you have a method in your AuthRepository to check the OTP
           final checkOtpResponse = await serviceLocator<AuthRepository>()
               .checkOtp(event.mobileNumber, event.token);
-
           if (checkOtpResponse.statusCode == 200) {
-          //  checkOtpResponse.data
             emit(CheckedOtpSuccess());
-            // Start the expiration timer (2 minutes)
             startExpirationTimer();
             print("timerrrrrrr${startExpirationTimer}");
           } else if (checkOtpResponse.statusCode == 400) {
@@ -41,11 +34,6 @@ class CheckedOtpBloc extends Bloc<EventChecked, CheckedOtpState> {
       }
     });
   }
-  //use save token with SecureStorage
-  // Future<String> getOtpToken() async {
-  //   FlutterSecureStorage storage = const FlutterSecureStorage();
-  //   return await storage.read(key: 'otpToken') ?? '';
-  // }
   int get countDown => _countDown;
 
   void startExpirationTimer() {
@@ -62,10 +50,9 @@ void startCountDown() {
         timer.cancel();
         
       }
-      _timerController.add(_countDown); // ارسال مقدار به ویجت
+      _timerController.add(_countDown); 
     });
   }
-
   Timer? get timer => _timer;
 
   @override

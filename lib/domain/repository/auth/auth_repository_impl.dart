@@ -1,7 +1,7 @@
 
-import 'package:autharization_hanna/data/remote/auth/auth_api.dart';
-import 'package:autharization_hanna/domain/repository/auth/auth_repository.dart';
-import 'package:autharization_hanna/service_locator.dart';
+import 'package:hafez/data/remote/auth/auth_api.dart';
+import 'package:hafez/domain/repository/auth/auth_repository.dart';
+import 'package:hafez/service_locator.dart';
 import 'package:dio/dio.dart';
 
 class AuthRepositoryImp extends AuthRepository {

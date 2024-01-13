@@ -1,9 +1,9 @@
 
-import 'package:autharization_hanna/core/appbar/my_appbar_items.dart';
-import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
-import 'package:autharization_hanna/core/resource/constants/my_dimensions.dart';
-import 'package:autharization_hanna/core/resource/constants/my_pading.dart';
-import 'package:autharization_hanna/core/utils/ui_utils.dart';
+import 'package:hafez/core/appbar/my_appbar_items.dart';
+import 'package:hafez/core/resource/constants/my_colors.dart';
+import 'package:hafez/core/resource/constants/my_dimensions.dart';
+import 'package:hafez/core/resource/constants/my_pading.dart';
+import 'package:hafez/core/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 

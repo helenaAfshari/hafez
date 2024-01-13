@@ -1,8 +1,7 @@
-import 'package:autharization_hanna/core/network/api_provider_impl.dart';
-import 'package:autharization_hanna/data/remote/ghazaliathafez/ghazaliathafez_api.dart';
-import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
-import 'package:autharization_hanna/service_locator.dart';
-import 'package:dio/src/response.dart';
+import 'package:hafez/core/network/api_provider_impl.dart';
+import 'package:hafez/data/remote/ghazaliathafez/ghazaliathafez_api.dart';
+import 'package:hafez/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
+import 'package:hafez/service_locator.dart';
 
 // class GhazaliatHafezApiImpl extends GhazaliatHafezApi{
 //   @override
@@ -31,27 +30,6 @@ class GhazaliatHafezApiImpl extends GhazaliatHafezApi {
       // emit(GhazaliatHafezSuccesState(ghazaliatHafez));
       print("kooooooooo${ghazaliatHafez}");
     }
-  
     return ghazaliatHafez;
   }
 }
-
-// class GhazaliatHafezApiImpl extends GhazaliatHafezApi {
-//   @override
-//   Future<List<GhazalItemModelEntity>> poems(int page, int perPage) async {
-//     final poemsResponse = await serviceLocator<ApiProviderImp>().get(
-//       'https://api.hafezname.ir/api/poems?page=$page&per_page=$perPage',
-//     );
-
-//     final ghazaliatHafez = (poemsResponse.data['data'] as List)
-//         .map((e) => GhazalItemModelEntity.fromJson(e))
-//         .toList();
-
-//     // You can remove the check for statusCode here
-
-//     // If you want to print or log the data, do it here
-//     print("kooooooooo${ghazaliatHafez}");
-
-//     return ghazaliatHafez;
-//   }
-// }

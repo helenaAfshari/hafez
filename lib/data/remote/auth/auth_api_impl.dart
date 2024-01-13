@@ -1,7 +1,7 @@
-import 'package:autharization_hanna/core/network/api_provider.dart';
-import 'package:autharization_hanna/core/network/api_provider_impl.dart';
-import 'package:autharization_hanna/data/remote/auth/auth_api.dart';
-import 'package:autharization_hanna/service_locator.dart';
+import 'package:hafez/core/network/api_provider.dart';
+import 'package:hafez/core/network/api_provider_impl.dart';
+import 'package:hafez/data/remote/auth/auth_api.dart';
+import 'package:hafez/service_locator.dart';
 import 'package:dio/dio.dart';
 
 class AuthApiImp extends AuthApi {

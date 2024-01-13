@@ -1,8 +1,8 @@
 
-import 'package:autharization_hanna/domain/repository/auth/auth_repository.dart';
-import 'package:autharization_hanna/pressentation/blocs/bloc_login/event_login.dart';
-import 'package:autharization_hanna/pressentation/blocs/bloc_login/state_login.dart';
-import 'package:autharization_hanna/service_locator.dart';
+import 'package:hafez/domain/repository/auth/auth_repository.dart';
+import 'package:hafez/pressentation/blocs/bloc_login/event_login.dart';
+import 'package:hafez/pressentation/blocs/bloc_login/state_login.dart';
+import 'package:hafez/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginOtpBloc extends Bloc<LoginOtpEvent, LoginOtpState> {

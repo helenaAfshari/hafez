@@ -1,10 +1,10 @@
 
 
-import 'package:autharization_hanna/core/components/customwidgets/custom_button.dart';
-import 'package:autharization_hanna/core/resource/constants/my_colors.dart';
-import 'package:autharization_hanna/core/resource/constants/my_strings.dart';
-import 'package:autharization_hanna/core/utils/ui_utils.dart';
-import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
+import 'package:hafez/core/components/customwidgets/custom_button.dart';
+import 'package:hafez/core/resource/constants/my_colors.dart';
+import 'package:hafez/core/resource/constants/my_strings.dart';
+import 'package:hafez/core/utils/ui_utils.dart';
+import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:flutter/material.dart';
 
 Widget listBottomsWidget(int index,BuildContext context){

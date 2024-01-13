@@ -5,7 +5,7 @@ abstract class MyStrings {
    static const String close = "close";
    static const String ghazaliatHafezText = "غزلیات حافظ";
    static const String shareText = """
-من از تکبلاگ استفاده میکنم ، خیلی باحاله ، تو هم داشته باش\n
+     به اپلیکیشن حافظ خوش امدید\n
 https://play.google.com/store/apps/details?id=com.devapps.hafez
 """;
 }

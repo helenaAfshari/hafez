@@ -1,4 +1,4 @@
-import 'package:autharization_hanna/core/resource/constants/my_pading.dart';
+import 'package:hafez/core/resource/constants/my_pading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

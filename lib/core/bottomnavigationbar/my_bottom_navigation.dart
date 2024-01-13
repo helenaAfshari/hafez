@@ -1,10 +1,11 @@
-import 'package:autharization_hanna/core/bottomnavigationbar/my_bottom_navbar_item.dart';
-import 'package:autharization_hanna/core/resource/constants/my_pading.dart';
-import 'package:autharization_hanna/core/utils/ui_utils.dart';
-import 'package:autharization_hanna/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
-import 'package:autharization_hanna/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
-import 'package:autharization_hanna/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
-import 'package:autharization_hanna/pressentation/screens/home_screen/home_screen.dart';
+import 'package:hafez/core/bottomnavigationbar/my_bottom_navbar_item.dart';
+import 'package:hafez/core/resource/constants/my_pading.dart';
+import 'package:hafez/core/utils/ui_utils.dart';
+import 'package:hafez/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
+import 'package:hafez/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
+import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_fav.dart';
+import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
+import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 class MyBottomNavigation extends StatelessWidget {
   
@@ -46,11 +47,11 @@ class MyBottomNavigation extends StatelessWidget {
   onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => DetailsGhazaliatHafezScreen(index: 0,)
+        MaterialPageRoute(builder: (context) => GhazaliatFav()
       )
       );
   },
-  icon: 'assets/icons/support.png',
+  icon: 'assets/icons/heart.png',
 ),
 
          ]
