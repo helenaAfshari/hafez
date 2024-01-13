@@ -40,11 +40,6 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.primaryColor,
-        // appBar: AppBar(
-        //   actions: [
-        //     IconButton.filled(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => GhazaliatFav(),)), icon: Icon(Icons.favorite))
-        //   ],
-        // ),
         body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
           builder: (context, state) {
             if (state is GhazaliatHafezLoadingState  ) {
@@ -89,11 +84,8 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                      border: Border.all(color: MyColors.borderBottomColor)
                     ),
                     margin:EdgeInsets.only(left: MyDimensions.semiLarge+5,right: MyDimensions.semiLarge+5),
-                      //  height: UIUtils.getConvertedHeight(context,90),
-                      //  width: UIUtils.getConvertedWidth(context,292),
-                      height: 90,
-                      width: 292,
-                      //  padding: EdgeInsets.only(bottom: 1),
+                      height: MyDimensions.xlarge+50,
+                       width:MyDimensions.minMobileSize-28,
                        child: Padding(
                          padding:  EdgeInsets.only(right: MyDimensions.medium+2),
                          child: Column(

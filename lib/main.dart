@@ -1,6 +1,5 @@
 
 import 'dart:io';
-
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
@@ -12,17 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-
-
-
 void main() async {
  
    WidgetsFlutterBinding.ensureInitialized();
      if(!kIsWeb){
  Directory dir = await getApplicationDocumentsDirectory();
   Hive.defaultDirectory = dir.path;
-  // await getApplicationSupportDirectory();
-  // await getTemporaryDirectory();
   }else{
     Hive.defaultDirectory = './';
     // Isar.

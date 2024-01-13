@@ -1,7 +1,6 @@
 import 'package:hafez/core/resource/constants/my_pading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 // ignore: must_be_immutable
 class CustomButtonWidget extends StatelessWidget {
@@ -16,7 +15,6 @@ class CustomButtonWidget extends StatelessWidget {
   List<Color>? gradient;
   Color? textColor;
   FontStyle? fontStyle;
-  SvgPicture? image;
   double? fontSize;
   VoidCallback? onPress;
   final TextStyle? textStyle; // اضافه شده
@@ -30,7 +28,6 @@ class CustomButtonWidget extends StatelessWidget {
       this.iconPadding,
       this.width,
       this.margin,
-      this.image,
       this.gradient,
       this.fontStyle,
       this.borderRadius,

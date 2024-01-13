@@ -99,8 +99,8 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
                      border: Border.all(color: MyColors.borderBottomColor)
                     ),
                     margin:EdgeInsets.only(left: MyDimensions.semiLarge+5,right: MyDimensions.semiLarge+5),
-                       height: 90,
-                       width:292,
+                       height: MyDimensions.xlarge+50,
+                       width:MyDimensions.minMobileSize-28,
                        child: Padding(
                          padding:  EdgeInsets.only(right: MyDimensions.medium+2),
                          child: Column(
