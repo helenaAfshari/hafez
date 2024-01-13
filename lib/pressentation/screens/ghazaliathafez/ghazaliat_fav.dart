@@ -96,8 +96,8 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
                                     create: (context) => GhazaliatHafezBloc(),
                                     child: DetailsGhazaliatHafezScreen(
                                       e: k[index],
-                                      
-                                      index:adjustedIndex,
+                                      index: state.ghazaliatHafez[index].id
+                                      //index:adjustedIndex,
                                     ),
                                   ),
                                 ));
@@ -151,12 +151,12 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
                             );
                           },),],),
                    ),
-                   Text(state.ghazaliatHafez[index].title??"title",style: Theme.of(context)
+                   Text(ghazaliat.elementAt(index).title ??"title",style: Theme.of(context)
                      .textTheme
                      .titleLarge!.copyWith(fontSize: MyDimensions.xLight),
                      ),
                     //  Text(ghazaliat.elementAt(index).title ??
-                   Text(ghazaliat.elementAt(index).firstStanza??"first",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: MyDimensions.light+2),),
+                   Text(state.ghazaliatHafez[index].firstStanza??"first",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: MyDimensions.light+2),),
                     Gap( MyDimensions.xLight-2),
                   Expanded(child: CustomDivider(indent: MyDimensions.light+2,endIndent: MyDimensions.light+2,)),
                                ],
