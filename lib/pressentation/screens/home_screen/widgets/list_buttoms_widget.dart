@@ -3,6 +3,7 @@
 import 'package:hafez/core/components/customwidgets/custom_button.dart';
 import 'package:hafez/core/resource/constants/my_colors.dart';
 import 'package:hafez/core/resource/constants/my_strings.dart';
+import 'package:hafez/core/resource/constants/theme/my_theme.dart';
 import 'package:hafez/core/utils/ui_utils.dart';
 import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +18,7 @@ Widget listBottomsWidget(int index,BuildContext context){
      color: MyColors.boxBottomColor,
      border: Border.all(color: MyColors.borderBottomColor),
       text: MyStrings.ghazaliatHafezText,
-    textStyle:Theme.of(context)
-    .textTheme
-    .titleLarge,
+    textStyle:MyTHeme.lightTheme().textTheme.titleLarge,
     onPress: () {
     Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const GhazaliatHafezScreen(),));
   },);

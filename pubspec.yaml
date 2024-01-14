@@ -50,4 +50,4 @@ flutter:
     - family: IranSans
       fonts:
         - asset: assets/fonts/IRANSansMobile_Medium.ttf
-          weight: 400
+          weight: 100

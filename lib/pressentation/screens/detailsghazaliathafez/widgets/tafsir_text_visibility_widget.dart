@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hafez/core/resource/constants/theme/my_theme.dart';
 
 class TafsirTextVisibilityWidget extends StatelessWidget {
   final String? tafsir;
@@ -19,7 +20,7 @@ class TafsirTextVisibilityWidget extends StatelessWidget {
               child: Text(
                 tafsir ?? '', // Ensure widget.tafsir is not null
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 12),
+                style: MyTHeme.lightTheme().textTheme.titleLarge!.copyWith(fontSize: 6),
               ),
             ),
           ],

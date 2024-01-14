@@ -1,10 +1,13 @@
 
+import 'package:hafez/core/appbar/drawer_menu.dart';
 import 'package:hafez/core/appbar/my_appbar.dart';
 import 'package:hafez/core/bottomnavigationbar/my_bottom_navigation.dart';
 import 'package:hafez/core/components/customwidgets/custom_divider.dart';
 import 'package:hafez/core/resource/constants/my_colors.dart';
 import 'package:hafez/core/resource/constants/my_dimensions.dart';
+import 'package:hafez/core/resource/constants/my_pading.dart';
 import 'package:hafez/core/resource/constants/my_strings.dart';
+import 'package:hafez/core/resource/constants/theme/my_theme.dart';
 import 'package:hafez/core/utils/ui_utils.dart';
 import 'package:hafez/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
@@ -14,15 +17,20 @@ import 'package:hafez/pressentation/screens/detailsghazaliathafez/details_ghazal
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
 import 'package:share_plus/share_plus.dart';
+
+
+final GlobalKey<ScaffoldState> _key = GlobalKey();
+
 class GhazaliatHafezScreen extends StatefulWidget {
   const GhazaliatHafezScreen({super.key});
   @override
   State<GhazaliatHafezScreen> createState() => _GhazaliatHafezScreenState();
 }
 class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
+  
   ScrollController scrollController = ScrollController();
- int inu =0;
   @override
   void initState() {
     super.initState();
@@ -35,10 +43,114 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
   void dispose() {
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {  
     return SafeArea(
       child: Scaffold(
+        key: _key,
+         endDrawer: Drawer(
+          backgroundColor: MyColors.primaryColor,
+          child:  DrawerHeader(
+            child: ListView(
+              children: [    
+                Image.asset('assets/images/hafez.png',),
+                CustomDivider(endIndent: 10, indent: 10),
+                 Gap(MyDimensions.medium),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(MyStrings.suport),
+                    Gap(MyDimensions.xlarge-5),
+                     Image.asset('assets/icons/suport.png',),
+                  ],
+                ),
+                 Gap(MyDimensions.medium),
+                   Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(MyStrings.websiteHafez),
+                    Gap(MyDimensions.xlarge-5),
+                     Image.asset('assets/icons/website.png',),
+                  ],
+                )
+              ],
+            ) ,),
+        
+        ),
+       appBar: AppBar(
+        elevation: 0.0,
+         automaticallyImplyLeading: false,
+        backgroundColor:  MyColors.primaryColor,
+
+        actions: [
+            Container(
+       width:
+           UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
+       alignment: Alignment.center,
+      // margin: MyPaddings.horizontal20,
+       padding: MyPaddings.all12,
+       decoration: const BoxDecoration(
+        // color:  MyColors.primaryColor,
+       ),
+       child:Row(
+           mainAxisAlignment: MainAxisAlignment.spaceAround,
+           children: [
+               GestureDetector(
+                onTap: () =>Navigator.of(context).pushReplacement(
+  MaterialPageRoute(
+    builder: (context) => const HomeScreen(),
+  ),
+),
+                child: 
+                Icon(Icons.arrow_back,size: MyDimensions.medium+5,color: MyColors.primaryButtonColor,)),
+              Gap(MyDimensions.semiLarge-4),
+             Text(MyStrings.ghazaliatHafezText,style: MyTHeme.lightTheme().textTheme.titleLarge,),
+              Gap(MyDimensions.light+3),
+           GestureDetector(
+            onTap: () {
+              _key.currentState!.openEndDrawer();
+            },
+            child: Icon(Icons.menu,size: MyDimensions.medium+5,color: MyColors.primaryButtonColor,))
+           ],
+         ),
+           ),
+        ],
+       ),
+        
+//         appBar: AppBar(
+//           actions: [
+//             Container(
+//        width:
+//            UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
+//        alignment: Alignment.center,
+//       // margin: MyPaddings.horizontal20,
+//        padding: MyPaddings.all12,
+//        decoration: const BoxDecoration(
+//          color:  MyColors.primaryColor,
+//        ),
+//        child:  Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceAround,
+//            children: [
+//                GestureDetector(
+//                 onTap: () => Navigator.of(context).pop(),
+//                 child: Icon(Icons.arrow_back,size: MyDimensions.medium+5)),
+//               Gap(MyDimensions.semiLarge-4),
+//              Text(MyStrings.ghazaliatHafezText,style: MyTHeme.lightTheme().textTheme.titleLarge,),
+//               Gap(MyDimensions.light+3),
+         
+//              GestureDetector(
+//   onTap: () {
+    
+//   },
+//   child: Icon(Icons.menu, size: MyDimensions.medium + 5),
+// )
+
+//            ],
+//          ),
+//            ),
+//           ],
+//         ),
         backgroundColor: MyColors.primaryColor,
         body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
           builder: (context, state) {
@@ -56,7 +168,8 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-        const MyAppBar(),
+        //const MyAppBar(),
+      
          Gap(MyDimensions.large+3),
           Expanded(
             child: ListView.separated(
@@ -110,7 +223,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                    "assets/icons/share.png"
                   )
                   ),
-                  const Gap(10),
+                   Gap(MyDimensions.light+2),
                    GestureDetector(
                     onTap: ()async {
  BlocProvider.of<GhazaliatHafezBloc>(context).add(ChangeColorButtomListClickedEventtt(id: k[index].id!));
@@ -120,16 +233,16 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
  (k[index].isLiked ?? false) ? "assets/icons/selected_heart.png" : "assets/icons/unselected_heart.png",
 ),
                   ),
-    
                               ],
                             );
                           },),],),
                    ),
-                   Text(state.ghazaliatHafez[index].title!,style: Theme.of(context)
-                     .textTheme
-                     .titleLarge!.copyWith(fontSize: MyDimensions.xLight),
+                   Text(state.ghazaliatHafez[index].title!,style: MyTHeme.lightTheme().textTheme.titleLarge,
                      ),
-                   Text(state.ghazaliatHafez[index].firstStanza!,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: MyDimensions.light+2),),
+                   Text(state.ghazaliatHafez[index].firstStanza!,
+                   style: MyTHeme.lightTheme().textTheme.headlineSmall,
+                   ),
+                  //  style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: MyDimensions.light+2),),
                     // Gap( MyDimensions.xLight-2),
                   CustomDivider(indent: MyDimensions.light+2,endIndent: MyDimensions.light+2,),
                                ],

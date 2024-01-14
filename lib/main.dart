@@ -1,10 +1,12 @@
 
 import 'dart:io';
+import 'package:hafez/core/resource/constants/theme/my_theme.dart';
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
+import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
 import 'package:hafez/service_locator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -38,9 +40,10 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 DetailsGhazaliatHafezBloc()..add(LoadedddEvent(0))),
       ],
-      child: const MaterialApp(
+      child:  MaterialApp(
         title: 'Your App Title',
-        home: GhazaliatHafezScreen(),
+        theme: MyTHeme.lightTheme(),
+        home: const HomeScreen(),
       ),
     );
   }
