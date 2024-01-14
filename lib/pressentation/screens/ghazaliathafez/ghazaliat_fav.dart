@@ -1,5 +1,4 @@
-import 'package:hafez/core/appbar/drawer_menu.dart';
-import 'package:hafez/core/appbar/my_appbar.dart';
+
 import 'package:hafez/core/bottomnavigationbar/my_bottom_navigation.dart';
 import 'package:hafez/core/components/customwidgets/custom_divider.dart';
 import 'package:hafez/core/resource/constants/my_colors.dart';
@@ -16,7 +15,6 @@ import 'package:hafez/pressentation/screens/detailsghazaliathafez/details_ghazal
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
 import 'package:hive/hive.dart';
 import 'package:share_plus/share_plus.dart';
 final GlobalKey<ScaffoldState> _key = GlobalKey();

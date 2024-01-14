@@ -1,6 +1,4 @@
 
-import 'package:hafez/core/appbar/drawer_menu.dart';
-import 'package:hafez/core/appbar/my_appbar.dart';
 import 'package:hafez/core/bottomnavigationbar/my_bottom_navigation.dart';
 import 'package:hafez/core/components/customwidgets/custom_divider.dart';
 import 'package:hafez/core/resource/constants/my_colors.dart';
@@ -19,8 +17,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
 import 'package:share_plus/share_plus.dart';
-
-
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class GhazaliatHafezScreen extends StatefulWidget {
@@ -118,39 +114,6 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
         ],
        ),
         
-//         appBar: AppBar(
-//           actions: [
-//             Container(
-//        width:
-//            UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
-//        alignment: Alignment.center,
-//       // margin: MyPaddings.horizontal20,
-//        padding: MyPaddings.all12,
-//        decoration: const BoxDecoration(
-//          color:  MyColors.primaryColor,
-//        ),
-//        child:  Row(
-//            mainAxisAlignment: MainAxisAlignment.spaceAround,
-//            children: [
-//                GestureDetector(
-//                 onTap: () => Navigator.of(context).pop(),
-//                 child: Icon(Icons.arrow_back,size: MyDimensions.medium+5)),
-//               Gap(MyDimensions.semiLarge-4),
-//              Text(MyStrings.ghazaliatHafezText,style: MyTHeme.lightTheme().textTheme.titleLarge,),
-//               Gap(MyDimensions.light+3),
-         
-//              GestureDetector(
-//   onTap: () {
-    
-//   },
-//   child: Icon(Icons.menu, size: MyDimensions.medium + 5),
-// )
-
-//            ],
-//          ),
-//            ),
-//           ],
-//         ),
         backgroundColor: MyColors.primaryColor,
         body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
           builder: (context, state) {

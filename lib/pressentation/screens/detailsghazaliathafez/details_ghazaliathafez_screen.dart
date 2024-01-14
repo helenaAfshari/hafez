@@ -227,7 +227,6 @@ void update(double newValue) {
           left: 47,
           right: 47,
           child: Container(
-          
             decoration:  BoxDecoration(
               color: MyColors.musicBoxColor,
               borderRadius: BorderRadius.all(Radius.circular(MyDimensions.light)),
@@ -239,43 +238,48 @@ void update(double newValue) {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-  
- GestureDetector(
+ SizedBox(
+  height: 30,
+  width: 50,
+   child: GestureDetector(
+      onTap: () async {
+        if (isPlaying) {
+          await _audioPlayer.pause();
+        } 
+        setState(() {
+          isPlaying = !isPlaying;
+        });
+      },
+      child: Image.asset('assets/icons/pause.png'),
+    ),
+ ),
+SizedBox(
+   height: 35,
+  width: 50,
+  child:   GestureDetector(
     onTap: () async {
-      if (isPlaying) {
-        await _audioPlayer.pause();
-        if (timer != null && timer!.isActive) {
-          timer!.cancel();
-        }
-      } 
-      setState(() {
-        isPlaying = !isPlaying;
-      });
-    },
-    child: Image.asset('assets/icons/pause.png'),
+      startProgress();
+        setState(() async {
+  
+           await _audioPlayer.play();
+  
+        });
+      },
+    child: Image.asset('assets/icons/play.png'),
+  
   ),
-GestureDetector(
-  onTap: () async {
-      if (isPlaying) {
-        await _audioPlayer.play();
-        if (timer != null && timer!.isActive) {
-          timer!.cancel();
-        }
-      } 
-    startProgress();
-      setState(() {
-        isPlaying = !isPlaying;
-      });
-    },
-  child: Image.asset('assets/icons/play.png'),
 ),
-                  GestureDetector(
-  onTap: () async {
-    await _audioPlayer.seek(Duration.zero);
-    update(0.0);      
-  },
-  child: Image.asset('assets/icons/Rectangle.png'),
-)
+                  SizedBox(
+                   height: 30,
+                   width: 30,
+                    child: GestureDetector(
+                    onTap: () async {
+                      await _audioPlayer.seek(Duration.zero);
+                      update(0.0);      
+                    },
+                    child: Image.asset('assets/icons/Rectangle.png'),
+                  ),
+                  )
                   ],
                 ),
                 MyProgressBarWidgetMusic(
