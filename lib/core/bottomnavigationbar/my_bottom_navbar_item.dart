@@ -1,7 +1,5 @@
 
-import 'package:hafez/core/resource/constants/my_dimensions.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
 class MyBottomNavigationBarItem extends StatelessWidget {
   const MyBottomNavigationBarItem({

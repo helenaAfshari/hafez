@@ -17,28 +17,25 @@ class HomeScreen extends StatelessWidget {
       height:
             UIUtils.getConvertedHeight(context, UIUtils.screenHeightInFigma),
         width: UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
-      child: Positioned(
-        top: 0.1,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-             Gap(MyDimensions.xlarge+60),
-            Center(child: Image.asset('assets/images/hafez.png')),
-             Gap(MyDimensions.xlarge+55),
-            Expanded(
-              child: ListView.separated(
-                physics: const ScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return listBottomsWidget(index,context);
-                },
-                separatorBuilder: (context, index) =>  Gap(MyDimensions.small+1),
-                itemCount: 1,
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+           Gap(MyDimensions.xlarge+60),
+          Center(child: Image.asset('assets/images/hafez.png')),
+           Gap(MyDimensions.xlarge+55),
+          Expanded(
+            child: ListView.separated(
+              physics: const ScrollPhysics(),
+              itemBuilder: (context, index) {
+                return listBottomsWidget(index,context);
+              },
+              separatorBuilder: (context, index) =>  Gap(MyDimensions.small+1),
+              itemCount: 1,
             ),
-             Gap(MyDimensions.large-2),
-             const MyBottomNavigation(),
-          ],
-        ),
+          ),
+           Gap(MyDimensions.large-2),
+           const MyBottomNavigation(),
+        ],
       ),
     ),
   ),

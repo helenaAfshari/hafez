@@ -1,5 +1,4 @@
 
-import 'package:hafez/core/appbar/my_appbar_items.dart';
 import 'package:hafez/core/resource/constants/my_colors.dart';
 import 'package:hafez/core/resource/constants/my_dimensions.dart';
 import 'package:hafez/core/resource/constants/my_pading.dart';
@@ -12,6 +11,8 @@ import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class MyAppBar extends StatelessWidget {
+  const MyAppBar({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class MyAppBar extends StatelessWidget {
                GestureDetector(
                 onTap: () =>Navigator.of(context).pushReplacement(
   MaterialPageRoute(
-    builder: (context) => HomeScreen(),
+    builder: (context) => const HomeScreen(),
   ),
 ),
                 child: 

@@ -215,7 +215,54 @@ void update(double newValue) {
                   },
                 ),
             ),
-      BottomSheetTafsirWidget(tafsirText: widget.e!.tafsir!),
+         
+      // BottomSheetTafsirWidget(tafsirText: widget.e!.tafsir!),
+
+      GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(50))),
+          context: context,
+          builder: (BuildContext builder) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                    Gap(MyDimensions.light+5),
+                  Text(MyStrings.tafsirPoint,
+                  style: MyTHeme.lightTheme().textTheme.titleLarge!.copyWith(color: MyColors.tafsirTextColor),),
+                  Gap(MyDimensions.light+5),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 30, left: 25),
+                    child: Text(
+                      widget.e!.tafsir!,
+                      textAlign: TextAlign.center,
+                      style: MyTHeme.lightTheme().textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal)
+                    ),
+                  ),
+                  Gap(MyDimensions.light+5),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(MyColors.musicBoxColor),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(MyStrings.close),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+      child: const Text(
+        MyStrings.tafsir,
+        style: TextStyle(color:MyColors.tafsirTextColor),
+      ),
+    ),
       TafsirTextVisibilityWidget(),
        Gap(MyDimensions.xlarge+30),
                    ],
@@ -238,6 +285,7 @@ void update(double newValue) {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+
  SizedBox(
   height: 30,
   width: 50,

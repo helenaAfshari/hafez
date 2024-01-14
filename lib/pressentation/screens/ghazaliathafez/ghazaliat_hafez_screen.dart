@@ -17,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class GhazaliatHafezScreen extends StatefulWidget {
@@ -42,6 +43,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
 
   @override
   Widget build(BuildContext context) {  
+    final url = Uri.parse('https://hafezname.ir/');
     return SafeArea(
       child: Scaffold(
         key: _key,
@@ -58,16 +60,31 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                   children: [
                     const Text(MyStrings.suport),
                     Gap(MyDimensions.xlarge-5),
-                     Image.asset('assets/icons/suport.png',),
+                     Image.asset('assets/icons/support.png',),
                   ],
                 ),
                  Gap(MyDimensions.medium),
                    Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text(MyStrings.websiteHafez),
+                    GestureDetector(
+                      onTap: () async {
+                          if(await canLaunchUrl(url)){
+                            await launchUrl(url);
+                            print("Clicked");
+                          }
+                      },
+                      child: const Text(MyStrings.websiteHafez)),
                     Gap(MyDimensions.xlarge-5),
-                     Image.asset('assets/icons/website.png',),
+                     GestureDetector(
+                      onTap: () async {
+                          
+                          if(await canLaunchUrl(url)){
+                            await launchUrl(url);
+                            print("Clicked");
+                          }
+                      },
+                      child: Image.asset('assets/icons/website.png',)),
                   ],
                 )
               ],

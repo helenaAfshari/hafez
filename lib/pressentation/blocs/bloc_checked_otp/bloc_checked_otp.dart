@@ -22,12 +22,10 @@ class CheckedOtpBloc extends Bloc<EventChecked, CheckedOtpState> {
           if (checkOtpResponse.statusCode == 200) {
             emit(CheckedOtpSuccess());
             startExpirationTimer();
-            print("timerrrrrrr${startExpirationTimer}");
           } else if (checkOtpResponse.statusCode == 400) {
             emit(CheckedOtpError(errorMessage: "کد اشتباه است"));
           }
         } catch (e) {
-          print(e);
           emit(CheckedOtpError(
               errorMessage: 'دسترسی به اینترنت قطع شده است، لطفاً مجددا تلاش کنید'));
         }
@@ -39,6 +37,7 @@ class CheckedOtpBloc extends Bloc<EventChecked, CheckedOtpState> {
   void startExpirationTimer() {
     _timer?.cancel();
     _timer = Timer(const Duration(seconds: 120), () {
+      // ignore: invalid_use_of_visible_for_testing_member
       emit(CheckedOtpExpired());
     });
   }

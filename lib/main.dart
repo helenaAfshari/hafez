@@ -1,11 +1,11 @@
 
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:hafez/core/resource/constants/theme/my_theme.dart';
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
-import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
 import 'package:hafez/service_locator.dart';
 import 'package:flutter/foundation.dart';
@@ -16,6 +16,9 @@ import 'package:path_provider/path_provider.dart';
 void main() async {
  
    WidgetsFlutterBinding.ensureInitialized();
+     SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
      if(!kIsWeb){
  Directory dir = await getApplicationDocumentsDirectory();
   Hive.defaultDirectory = dir.path;
@@ -29,6 +32,8 @@ void main() async {
   );
 }
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

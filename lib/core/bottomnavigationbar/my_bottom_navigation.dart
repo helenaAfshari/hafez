@@ -1,8 +1,6 @@
 import 'package:hafez/core/bottomnavigationbar/my_bottom_navbar_item.dart';
 import 'package:hafez/core/resource/constants/my_pading.dart';
 import 'package:hafez/core/utils/ui_utils.dart';
-import 'package:hafez/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
-import 'package:hafez/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
 import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_fav.dart';
 import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
@@ -32,14 +30,14 @@ class MyBottomNavigation extends StatelessWidget {
                onTap: () {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => GhazaliatHafezScreen()),
+      MaterialPageRoute(builder: (context) => const GhazaliatHafezScreen()),
     );
   },
-    icon: 'assets/icons/history.png', 
+    icon: 'assets/icons/list.png', 
 ),
              MyBottomNavigationBarItem(
              onTap:() {
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen(),));
              },
              icon: 'assets/icons/home.png', 
              ),
@@ -47,7 +45,7 @@ class MyBottomNavigation extends StatelessWidget {
   onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => GhazaliatFav()
+        MaterialPageRoute(builder: (context) => const GhazaliatFav()
       )
       );
   },

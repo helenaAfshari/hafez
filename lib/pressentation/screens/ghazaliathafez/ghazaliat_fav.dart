@@ -121,10 +121,12 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
             builder: (context, state) {
     
               if (state is GhazaliatHafezLoadingState  ) {
+
                 return const Center(
                   child: CircularProgressIndicator(color: Colors.blue),
                 );
-              } else if (state is GhazaliatHafezSuccesState ) {
+              } 
+              else if  (state is GhazaliatHafezSuccesState ) {
                 List<GhazalItemModelEntity> k = state.ghazaliatHafez;
                 return
                 SizedBox(
@@ -203,7 +205,8 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
                                ),),),
                   );},
                 separatorBuilder: (context, index) => Gap(MyDimensions.light+2),
-                itemCount: ghazaliat.length),
+                itemCount: ghazaliat.length)
+      
               ),
              Gap(MyDimensions.large-2),
              const MyBottomNavigation(),

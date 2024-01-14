@@ -152,7 +152,7 @@ class _CheckedOtpScreenState extends State<CheckedOtpScreen> {
                 Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => HomeScreen(),
+              builder: (context) => const HomeScreen(),
             ),); }},)],),
               Padding(
                       padding:
