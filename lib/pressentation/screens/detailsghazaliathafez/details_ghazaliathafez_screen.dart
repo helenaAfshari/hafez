@@ -22,6 +22,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
@@ -106,18 +107,42 @@ void update(double newValue) {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text(MyStrings.suport),
+                     GestureDetector(
+                       onTap: () async {
+                          if(await canLaunchUrl(Uri.parse(MyStrings.websiteLink))){
+                            await launchUrl(Uri.parse(MyStrings.supportLink));
+                          }
+                      },
+                      child: Text(MyStrings.suport,style:  MyTHeme.lightTheme().textTheme.titleLarge,)),
                     Gap(MyDimensions.xlarge-5),
-                     Image.asset('assets/icons/suport.png',),
+                     GestureDetector(
+                       onTap: () async {
+                          if(await canLaunchUrl(Uri.parse(MyStrings.websiteLink))){
+                            await launchUrl(Uri.parse(MyStrings.supportLink));
+                          }
+                      },
+                      child: Image.asset('assets/icons/support.png',)),
                   ],
                 ),
                  Gap(MyDimensions.medium),
                    Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text(MyStrings.websiteHafez),
+                    GestureDetector(
+                      onTap: () async {
+                          if(await canLaunchUrl(Uri.parse(MyStrings.websiteLink))){
+                            await launchUrl(Uri.parse(MyStrings.websiteLink));
+                          }
+                      },
+                      child:  Text(MyStrings.websiteHafez,style:  MyTHeme.lightTheme().textTheme.titleLarge,)),
                     Gap(MyDimensions.xlarge-5),
-                     Image.asset('assets/icons/website.png',),
+                     GestureDetector(
+                      onTap: () async {
+                          if(await canLaunchUrl(Uri.parse(MyStrings.websiteLink))){
+                            await launchUrl(Uri.parse(MyStrings.websiteLink));
+                          }
+                      },
+                      child: Image.asset('assets/icons/website.png',)),
                   ],
                 )
               ],

@@ -43,7 +43,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
 
   @override
   Widget build(BuildContext context) {  
-    final url = Uri.parse('https://hafezname.ir/');
+    // final url = Uri.parse('https://hafezname.ir/');
     return SafeArea(
       child: Scaffold(
         key: _key,
@@ -58,9 +58,21 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text(MyStrings.suport),
+                     GestureDetector(
+                       onTap: () async {
+                          if(await canLaunchUrl(Uri.parse(MyStrings.websiteLink))){
+                            await launchUrl(Uri.parse(MyStrings.supportLink));
+                          }
+                      },
+                      child: Text(MyStrings.suport,style:  MyTHeme.lightTheme().textTheme.titleLarge,)),
                     Gap(MyDimensions.xlarge-5),
-                     Image.asset('assets/icons/support.png',),
+                     GestureDetector(
+                       onTap: () async {
+                          if(await canLaunchUrl(Uri.parse(MyStrings.websiteLink))){
+                            await launchUrl(Uri.parse(MyStrings.supportLink));
+                          }
+                      },
+                      child: Image.asset('assets/icons/support.png',)),
                   ],
                 ),
                  Gap(MyDimensions.medium),
@@ -69,19 +81,16 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                   children: [
                     GestureDetector(
                       onTap: () async {
-                          if(await canLaunchUrl(url)){
-                            await launchUrl(url);
-                            print("Clicked");
+                          if(await canLaunchUrl(Uri.parse(MyStrings.websiteLink))){
+                            await launchUrl(Uri.parse(MyStrings.websiteLink));
                           }
                       },
-                      child: const Text(MyStrings.websiteHafez)),
+                      child:  Text(MyStrings.websiteHafez,style:  MyTHeme.lightTheme().textTheme.titleLarge,)),
                     Gap(MyDimensions.xlarge-5),
                      GestureDetector(
                       onTap: () async {
-                          
-                          if(await canLaunchUrl(url)){
-                            await launchUrl(url);
-                            print("Clicked");
+                          if(await canLaunchUrl(Uri.parse(MyStrings.websiteLink))){
+                            await launchUrl(Uri.parse(MyStrings.websiteLink));
                           }
                       },
                       child: Image.asset('assets/icons/website.png',)),

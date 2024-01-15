@@ -12,6 +12,7 @@ abstract class MyStrings {
 https://play.google.com/store/apps/details?id=com.devapps.hafez
 """;
   static const String websiteLink ="https://hafezname.ir/";
+  static const String supportLink ="https://telegram.me/crmapps";
   
 }
 

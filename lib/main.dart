@@ -14,7 +14,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 void main() async {
- 
    WidgetsFlutterBinding.ensureInitialized();
      SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
