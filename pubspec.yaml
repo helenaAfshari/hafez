@@ -1,7 +1,7 @@
 name: hafez
 description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.0.0+1
+version: 2.0.0+2
 environment:
   sdk: '>=3.1.0 <4.0.0'
 
@@ -27,8 +27,9 @@ dependencies:
   hive: ^4.0.0-dev.2
   isar_flutter_libs: ^4.0.0-dev.14
   device_preview: ^1.1.0
-  path_provider: ^2.1.2
   url_launcher: ^6.2.3
+  flutter_launcher_icons: ^0.13.1
+
   
 
 
@@ -49,3 +50,9 @@ flutter:
       fonts:
         - asset: assets/fonts/IRANSansMobile_Medium.ttf
           weight: 100
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/ic_launcher.png"
+  adaptive_icon_foreground: "assets/ic_launcher.png"
+

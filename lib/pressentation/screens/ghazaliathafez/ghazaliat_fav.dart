@@ -103,13 +103,11 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
                 )
               ],
             ) ,),
-        
         ),
        appBar: AppBar(
         elevation: 0.0,
          automaticallyImplyLeading: false,
         backgroundColor:  MyColors.primaryColor,
-
         actions: [
          Container(
        width:
@@ -215,7 +213,6 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
                      "assets/icons/share.png"
                     )
                     ),
-      
                                 ],
                               );
                             },),],),
@@ -227,7 +224,7 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
                       Gap( MyDimensions.xLight-2),
                     Expanded(child: CustomDivider(indent: MyDimensions.light+2,endIndent: MyDimensions.light+2,)),
                    ],
-                               ),),),
+                  ),),),
                   );},
                 separatorBuilder: (context, index) => Gap(MyDimensions.light+2),
                 itemCount: ghazaliat.length)

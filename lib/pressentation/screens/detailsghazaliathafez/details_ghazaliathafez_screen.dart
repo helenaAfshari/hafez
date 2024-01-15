@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:hafez/core/appbar/drawer_menu.dart';
 import 'package:hafez/core/appbar/my_appbar.dart';
@@ -246,7 +245,7 @@ void update(double newValue) {
       GestureDetector(
       onTap: () {
         showModalBottomSheet(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(50))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(50))),
           context: context,
           builder: (BuildContext builder) {
             return SingleChildScrollView(

@@ -1,4 +1,4 @@
-package com.example.autharization_hanna
+package com.devapps.hafez
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -43,7 +43,6 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
 
   @override
   Widget build(BuildContext context) {  
-    // final url = Uri.parse('https://hafezname.ir/');
     return SafeArea(
       child: Scaffold(
         key: _key,
