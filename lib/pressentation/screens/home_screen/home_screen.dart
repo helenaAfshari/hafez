@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
            Gap(MyDimensions.large-2),
-           const MyBottomNavigation(),
+          //  const MyBottomNavigation(),
         ],
       ),
     ),

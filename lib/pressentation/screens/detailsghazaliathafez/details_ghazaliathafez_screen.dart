@@ -152,7 +152,6 @@ void update(double newValue) {
         elevation: 0.0,
          automaticallyImplyLeading: false,
         backgroundColor:  MyColors.primaryColor,
-
         actions: [
          Container(
        width:
@@ -370,7 +369,7 @@ SizedBox(
             ),
             ),
              Gap(MyDimensions.semiLarge-4),
-            const MyBottomNavigation(),
+           // const MyBottomNavigation(),
                   ],
                 );
        }

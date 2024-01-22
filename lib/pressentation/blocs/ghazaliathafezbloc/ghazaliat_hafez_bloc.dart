@@ -26,7 +26,8 @@ class GhazaliatHafezBloc
                   .ghazaliathafez(page, perPage);
           emit(GhazaliatHafezSuccesState(ghazaliatResponse));
         } catch (e) {
-          print(" متصل نیست به اینترت");
+          print("نیست به اینترت");
+
         }
       }
     });
@@ -49,7 +50,7 @@ class GhazaliatHafezBloc
            
   emit(GhazaliatHafezSuccesState(ghazaliatResponse));
         }  catch (e) {
-        print(" متصل نیست به اینترنت");
+        print(" 77777متصل نیست به اینترنت");
       }
         });
   }

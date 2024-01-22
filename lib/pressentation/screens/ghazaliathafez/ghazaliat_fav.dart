@@ -231,7 +231,7 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
       
               ),
              Gap(MyDimensions.large-2),
-             const MyBottomNavigation(),
+            // const MyBottomNavigation(),
           ], ),);} 
                else if (state is GhazaliatHafezErrorState) {
                 return Center(

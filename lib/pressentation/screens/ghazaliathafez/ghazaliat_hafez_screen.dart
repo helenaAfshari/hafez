@@ -240,7 +240,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
               itemCount: state.ghazaliatHafez.length),
             ),
            Gap(MyDimensions.large-2),
-           const MyBottomNavigation(),
+           //const MyBottomNavigation(),
         ], ),);} 
              else if (state is GhazaliatHafezErrorState) {
               return Center(

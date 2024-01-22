@@ -20,6 +20,7 @@ class GhazaliatHafezApiImpl extends GhazaliatHafezApi {
     final poemsResponse = await serviceLocator<ApiProviderImp>().get(
       'https://api.hafezname.ir/api/poems?page=$page&per_page=$perPage',
     );
+    print("jjjjjj88888");
     //  ghazaliatHafez = (poemsResponse.data['data']as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();
     final loadedData = (poemsResponse.data['data'] as List)
         .map((e) => GhazalItemModelEntity.fromJson(e))
@@ -29,6 +30,8 @@ class GhazaliatHafezApiImpl extends GhazaliatHafezApi {
       print("55555555");
       // emit(GhazaliatHafezSuccesState(ghazaliatHafez));
       print("kooooooooo${ghazaliatHafez}");
+    }else{
+      print("SSSSFFDDG:::${poemsResponse.statusCode}");
     }
     return ghazaliatHafez;
   }

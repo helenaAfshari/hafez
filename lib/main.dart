@@ -7,14 +7,19 @@ import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghaz
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
+import 'package:hafez/route/names.dart';
+import 'package:hafez/route/routes.dart';
 import 'package:hafez/service_locator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+
+
 void main() async {
    WidgetsFlutterBinding.ensureInitialized();
+  
      SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -47,7 +52,9 @@ class MyApp extends StatelessWidget {
       child:  MaterialApp(
         title: 'Your App Title',
         theme: MyTHeme.lightTheme(),
-        home: const HomeScreen(),
+        // home: const HomeScreen(),
+        initialRoute: ScreenNames.mainScreen,
+        routes: routes,
       ),
     );
   }
