@@ -1,14 +1,16 @@
 
 import 'dart:io';
 import 'package:flutter/services.dart';
+import 'package:hafez/core/resource/constants/my_colors.dart';
 import 'package:hafez/core/resource/constants/theme/my_theme.dart';
+import 'package:hafez/core/utils/ui_utils.dart';
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
+import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_fav.dart';
+import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
-import 'package:hafez/route/names.dart';
-import 'package:hafez/route/routes.dart';
 import 'package:hafez/service_locator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -50,12 +52,75 @@ class MyApp extends StatelessWidget {
                 DetailsGhazaliatHafezBloc()..add(LoadedddEvent(0))),
       ],
       child:  MaterialApp(
-        title: 'Your App Title',
+
         theme: MyTHeme.lightTheme(),
         // home: const HomeScreen(),
-        initialRoute: ScreenNames.mainScreen,
-        routes: routes,
+        home: PageViewDemo(),
+        // initialRoute: ScreenNames.mainScreen,
+        // routes: routes,
       ),
     );
   }
+}
+
+class PageViewDemo extends StatefulWidget {
+  const PageViewDemo({super.key});
+
+  @override
+  State<PageViewDemo> createState() => _PageViewDemoState();
+}
+
+class _PageViewDemoState extends State<PageViewDemo> {
+  PageController _controller = PageController();
+  int selectedPage = 0;
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(child: 
+    Scaffold(body: Column(
+      children: [
+        buildPageView(),
+        buildBottomNav(),
+      ],
+    ),));
+  }
+
+Widget buildPageView(){
+   return SizedBox(
+    height:  737,
+     child: PageView(
+      controller: _controller,
+      children: [
+        HomeScreen(),
+        GhazaliatHafezScreen(),
+        GhazaliatFav(),
+      ],
+      onPageChanged: (index) {
+        onPageChange(index);
+      },
+     ),
+   );
+}
+Widget buildBottomNav(){
+  return BottomNavigationBar(
+    
+    backgroundColor:MyColors.bottomNavigationBarBackgroundColor,
+    currentIndex: selectedPage,
+   items: [
+   
+    BottomNavigationBarItem(label: "لیست غزلیات حافظ",icon: Image.asset('assets/icons/list.png')),
+     BottomNavigationBarItem(
+      backgroundColor: MyColors.borderBottomColor,
+      label: "خانه",icon: Image.asset('assets/icons/home.png')),
+    BottomNavigationBarItem(label: "مورد علاقه ها",icon: Image.asset('assets/icons/heart.png')),
+   ],
+   onTap: (int index) {
+     _controller.animateToPage(index, duration: const Duration(microseconds: 1000), curve: Curves.easeIn);
+   },
+  );
+}
+onPageChange(int index){
+ setState(() {
+   selectedPage = index;
+ });
+}
 }

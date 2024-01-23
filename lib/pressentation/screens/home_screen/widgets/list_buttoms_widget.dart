@@ -22,9 +22,12 @@ Widget listBottomsWidget(int index,BuildContext context){
       text: MyStrings.ghazaliatHafezText,
     textStyle:MyTHeme.lightTheme().textTheme.titleLarge,
     onPress: () {
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const GhazaliatFav()),
-  );
+         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const GhazaliatHafezScreen(),));
+
+      //Navigator.pushNamed(context, ScreenNames.ghazaliatHafezScreen);
+  //   Navigator.push(
+  //   context,
+  //   MaterialPageRoute(builder: (context) => const GhazaliatFav()),
+  // );
   },);
 }

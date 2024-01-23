@@ -118,11 +118,15 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
            mainAxisAlignment: MainAxisAlignment.spaceAround,
            children: [
                GestureDetector(
-                onTap: () =>Navigator.of(context).pushReplacement(
-  MaterialPageRoute(
-    builder: (context) => const HomeScreen(),
-  ),
-),
+               
+     onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const GhazaliatHafezScreen(),)),
+
+//                 onTap: () =>Navigator.of(context).pushReplacement(
+//   MaterialPageRoute(
+//     builder: (context) => const HomeScreen(),
+//   ),
+// ),
+
                 child: 
                 Icon(Icons.arrow_back,size: MyDimensions.medium+5,color: MyColors.primaryButtonColor,)),
               Gap(MyDimensions.semiLarge-4),
@@ -240,7 +244,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
               itemCount: state.ghazaliatHafez.length),
             ),
            Gap(MyDimensions.large-2),
-           //const MyBottomNavigation(),
+          //  MyBottomNavigation(),
         ], ),);} 
              else if (state is GhazaliatHafezErrorState) {
               return Center(

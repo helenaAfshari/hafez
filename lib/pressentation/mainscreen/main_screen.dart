@@ -47,7 +47,6 @@ class _MainScreenState extends State<MainScreen> {
         selectedIndex = _routeHistory.last;
       });
     }
-
     return false;
   }
 
@@ -56,61 +55,64 @@ class _MainScreenState extends State<MainScreen> {
     var size = MediaQuery.of(context).size;
     double btmNavHeight = size.height * .1;
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: btmNavHeight,
-              child: IndexedStack(
-                index: selectedIndex,
-                children: [
-                     Navigator(
-                    key: _homeKey,
-                    onGenerateRoute: (settings) => MaterialPageRoute(
-                        builder: (context) => const HomeScreen()),
-                  ),
-               
-                  Navigator(
-                    key: _ghazaliatHafez,
-                    onGenerateRoute: (settings) => MaterialPageRoute(
-                        builder: (context) => const GhazaliatHafezScreen()),
-                  ),
-                     Navigator(
-                    key: _favoriteGhazaliatHafez,
-                    onGenerateRoute: (settings) => MaterialPageRoute(
-                        builder: (context) => const GhazaliatFav()),
-                  ),
-                ],
-              )),
-          Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                color: MyColors.primaryColor,
-                height: btmNavHeight,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+      body: WillPopScope(
+        onWillPop: _onWillPop,
+        child: Stack(
+          children: [
+            Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: btmNavHeight,
+                child: IndexedStack(
+                  index: selectedIndex,
                   children: [
-                    BtmNavItem(
-                       iconSvgPath: 'assets/icons/list.png',
-                        onTap: () => btmNavOnPressed(
-                            index: BtmNavScreenIndex.ghazaliatHafez)),
-                    BtmNavItem(
-                      iconSvgPath: 'assets/icons/home.png',
-                        onTap: () =>
-                            btmNavOnPressed(index: BtmNavScreenIndex.home)),
-                    BtmNavItem(
-                      iconSvgPath: 'assets/icons/heart.png',
-                        onTap: () =>
-                            btmNavOnPressed(index: BtmNavScreenIndex.favoriteGhazaliatHafez)),
+                       Navigator(
+                      key: _homeKey,
+                      onGenerateRoute: (settings) => MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
+                    ),
+                 
+                    Navigator(
+                      key: _ghazaliatHafez,
+                      onGenerateRoute: (settings) => MaterialPageRoute(
+                          builder: (context) => const GhazaliatHafezScreen()),
+                    ),
+                       Navigator(
+                      key: _favoriteGhazaliatHafez,
+                      onGenerateRoute: (settings) => MaterialPageRoute(
+                          builder: (context) => const GhazaliatFav()),
+                    ),
                   ],
-                ),
-              ))
-        ],
+                )),
+            Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  color: MyColors.primaryColor,
+                  height: btmNavHeight,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      BtmNavItem(
+                         iconSvgPath: 'assets/icons/list.png',
+                          onTap: () => btmNavOnPressed(
+                              index: BtmNavScreenIndex.ghazaliatHafez)),
+                      BtmNavItem(
+                        iconSvgPath: 'assets/icons/home.png',
+                          onTap: () =>
+                              btmNavOnPressed(index: BtmNavScreenIndex.home)),
+                      BtmNavItem(
+                        iconSvgPath: 'assets/icons/heart.png',
+                          onTap: () =>
+                              btmNavOnPressed(index: BtmNavScreenIndex.favoriteGhazaliatHafez)),
+                    ],
+                  ),
+                ))
+          ],
+        ),
       ),
     );
   }
