@@ -97,11 +97,11 @@ AppBar CustomAppBarr(GlobalKey key,BuildContext context) {
          mainAxisAlignment: MainAxisAlignment.spaceAround,
          children: [
              GestureDetector(
-              onTap: () =>Navigator.of(context).pushReplacement(
-MaterialPageRoute(
-  builder: (context) => const HomeScreen(),
-),
-),
+//               onTap: () =>Navigator.of(context).pushReplacement(
+// MaterialPageRoute(
+//   builder: (context) =>  HomeScreen();
+// ),
+// ),
               child: 
               Icon(Icons.arrow_back,size: MyDimensions.medium+5,color: MyColors.primaryButtonColor,)),
             Gap(MyDimensions.semiLarge-4),

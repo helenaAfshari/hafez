@@ -10,7 +10,9 @@ import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_hafez_scree
 import 'package:flutter/material.dart';
 import 'package:hafez/route/names.dart';
 
-Widget listBottomsWidget(int index,BuildContext context){
+Widget listBottomsWidget(int index,BuildContext context,){
+  
+     
   return 
   CustomButtonWidget(
      margin: const EdgeInsets.only(left: 67.0,right: 67.0),
@@ -24,6 +26,9 @@ Widget listBottomsWidget(int index,BuildContext context){
     onPress: () {
          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const GhazaliatHafezScreen(),));
 
+        
+// controller.nextPage(
+//                     duration: Duration(milliseconds: 100), curve: Curves.ease);
       //Navigator.pushNamed(context, ScreenNames.ghazaliatHafezScreen);
   //   Navigator.push(
   //   context,

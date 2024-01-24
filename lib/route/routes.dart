@@ -11,5 +11,5 @@ Map<String, Widget Function(BuildContext)> routes = {
   ScreenNames.favoriteScreen: (context) => GhazaliatFav(),
   ScreenNames.detailsGhazaliatHafezScreen: (context) => DetailsGhazaliatHafezScreen(),
   ScreenNames.ghazaliatHafezScreen: (context) => GhazaliatHafezScreen(),
-  ScreenNames.mainScreen: (context) => MainScreen(),
+ // ScreenNames.mainScreen: (context) => MainScreen(),
 };

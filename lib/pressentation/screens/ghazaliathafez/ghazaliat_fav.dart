@@ -21,7 +21,8 @@ import 'package:url_launcher/url_launcher.dart';
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class GhazaliatFav extends StatefulWidget {
-  const GhazaliatFav({super.key});
+  //   final   PageController pageController;
+  //  GhazaliatFav(this.pageController);
   @override
   State<GhazaliatFav> createState() => _GhazaliatFavState();
 }
@@ -231,7 +232,7 @@ class _GhazaliatFavState extends State<GhazaliatFav> {
       
               ),
              Gap(MyDimensions.large-2),
-            // const MyBottomNavigation(),
+              MyBottomNavigation(),
           ], ),);} 
                else if (state is GhazaliatHafezErrorState) {
                 return Center(

@@ -30,6 +30,7 @@ dependencies:
   url_launcher: ^6.2.3
   flutter_launcher_icons: ^0.13.1
   firebase_messaging: ^14.7.10
+  lottie: ^2.7.0
 
   
 
@@ -46,6 +47,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/lottie/
   fonts:
     - family: IranSans
       fonts:

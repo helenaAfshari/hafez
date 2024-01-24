@@ -146,7 +146,6 @@ void update(double newValue) {
                 )
               ],
             ) ,),
-        
         ),
        appBar: AppBar(
         elevation: 0.0,

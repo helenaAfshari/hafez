@@ -11,6 +11,7 @@ import 'package:hafez/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_state.dart';
+import 'package:hafez/pressentation/mainscreen/main_screen.dart';
 import 'package:hafez/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,6 +44,8 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
 
   @override
   Widget build(BuildContext context) {  
+         PageController _pageController = PageController();
+
     return SafeArea(
       child: Scaffold(
         key: _key,
@@ -118,8 +121,8 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
            mainAxisAlignment: MainAxisAlignment.spaceAround,
            children: [
                GestureDetector(
-               
-     onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const GhazaliatHafezScreen(),)),
+               onTap: () => Navigator.pop(context),
+     //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PageViewDemo(),)),
 
 //                 onTap: () =>Navigator.of(context).pushReplacement(
 //   MaterialPageRoute(
@@ -244,7 +247,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
               itemCount: state.ghazaliatHafez.length),
             ),
            Gap(MyDimensions.large-2),
-          //  MyBottomNavigation(),
+           MyBottomNavigation(),
         ], ),);} 
              else if (state is GhazaliatHafezErrorState) {
               return Center(
