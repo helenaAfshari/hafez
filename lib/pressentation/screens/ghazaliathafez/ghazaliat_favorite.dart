@@ -115,88 +115,210 @@ class _GhazaliatFavoriteScreenState extends State<GhazaliatFavoriteScreen> {
                   child: CircularProgressIndicator(color: Colors.blue),
                 );
               } 
-              else if  (state is GhazaliatHafezSuccesState ) {
-                List<GhazalItemModelEntity> k = state.ghazaliatHafez;
-                return
-                SizedBox(
-               height:
-              UIUtils.getConvertedHeight(context, UIUtils.screenHeightInFigma),
-          width: UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-           Gap(MyDimensions.large+3),
-            Expanded(
-              child: ListView.separated(
-                controller: scrollController,
-                physics: const ScrollPhysics(),
-                itemBuilder: (context, index) {
-                 return 
-                  GestureDetector(
-                    onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(  
-                                    builder: (context) => BlocProvider(
-                                      create: (context) => GhazaliatHafezBloc(),
-                                      child: DetailsGhazaliatHafezScreen(
-                                        e: k[index],
-                                        index: ghazaliat.elementAt(index).id
-                                        //index:adjustedIndex,
-                                      ),
-                                    ),
-                                  ));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(MyDimensions.small),
-                      color: MyColors.boxBottomColor,
-                       border: Border.all(color: MyColors.borderBottomColor)
+              
+  // List<GhazalItemModelEntity> k = state.ghazaliatHafez;
+  //  if(state is isNotEmptyListState){
+  //   print("UUUUIIIIIEEEEMMM");
+  //   return Center(child: Text("Empty"),
+  //   );
+  //  }
+
+   else if (state is GhazaliatHafezSuccesState){
+      List<GhazalItemModelEntity> k = state.ghazaliatHafez;
+return 
+SizedBox(
+    height: UIUtils.getConvertedHeight(context, UIUtils.screenHeightInFigma),
+    width: UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Gap(MyDimensions.large + 3),
+        Expanded(
+          child:  ListView.separated(
+            controller: scrollController,
+            physics: const ScrollPhysics(),
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                      create: (context) => GhazaliatHafezBloc(),
+                      child: DetailsGhazaliatHafezScreen(
+                        e: k[index],
+                        index: ghazaliat.elementAt(index).id,
                       ),
-                      margin:EdgeInsets.only(left: MyDimensions.semiLarge+5,right: MyDimensions.semiLarge+5),
-                         height: MyDimensions.xlarge+50,
-                         width:MyDimensions.minMobileSize-28,
-                         child: Padding(
-                           padding:  EdgeInsets.only(right: MyDimensions.medium+2),
-                           child: Column(
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 textDirection: TextDirection.rtl,
-                                 children: [
-                     Padding(
-                                 padding: EdgeInsets.only(left: MyDimensions.small+1,top:  MyDimensions.small+1),
-                                 child: Row(
-                     mainAxisAlignment: MainAxisAlignment.start,
-                     children: [
-                             Gap( MyDimensions.small),
-                            StatefulBuilder(builder: (context, setState) {
-                              return Row(
-                                children: [
-                    GestureDetector(
-                      onTap: ()async {
-                        print("shareeee::::::::::");
-                        await Share.share(MyStrings.shareText);
-                        },
-                      child:  Image.asset(
-                     "assets/icons/share.png"
-                    )
                     ),
-                                ],
-                              );
-                            },),],),
-                     ),
-                     Text(ghazaliat.elementAt(index).title ??"title",style: MyTHeme.lightTheme().textTheme.titleLarge,
-                       ),
-                      //  Text(ghazaliat.elementAt(index).title ??
-                     Text(ghazaliat.elementAt(index).firstStanza??'',style: MyTHeme.lightTheme().textTheme.titleLarge,),
-                      Gap( MyDimensions.xLight-2),
-                    Expanded(child: CustomDivider(indent: MyDimensions.light+2,endIndent: MyDimensions.light+2,)),
-                   ],
-                  ),),),
-                  );},
-                separatorBuilder: (context, index) => Gap(MyDimensions.light+2),
-                itemCount: ghazaliat.length)
-              ),
-             Gap(MyDimensions.large-2),
-             // MyBottomNavigation(),
-          ], ),);} 
+                  ));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(MyDimensions.small),
+                    color: MyColors.boxBottomColor,
+                    border: Border.all(color: MyColors.borderBottomColor),
+                  ),
+                  margin: EdgeInsets.only(
+                      left: MyDimensions.semiLarge + 5,
+                      right: MyDimensions.semiLarge + 5),
+                  height: MyDimensions.xlarge + 50,
+                  width: MyDimensions.minMobileSize - 28,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: MyDimensions.medium + 2),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      textDirection: TextDirection.rtl,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: MyDimensions.small + 1,
+                              top: MyDimensions.small + 1),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Gap(MyDimensions.small),
+                              StatefulBuilder(builder: (context, setState) {
+                                return Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () async {
+                                        print("shareeee::::::::::");
+                                        await Share.share(MyStrings.shareText);
+                                      },
+                                      child: Image.asset("assets/icons/share.png"),
+                                    ),
+                                  ],
+                                );
+                              }),
+                            ],
+                          ),
+                        ),
+                        Text(
+                          ghazaliat.elementAt(index).title ?? "title",
+                          style: MyTHeme.lightTheme().textTheme.titleLarge,
+                        ),
+                        Text(
+                          ghazaliat.elementAt(index).firstStanza ?? '',
+                          style: MyTHeme.lightTheme().textTheme.titleLarge,
+                        ),
+                        Gap(MyDimensions.xLight - 2),
+                        Expanded(
+                          child: CustomDivider(
+                            indent: MyDimensions.light + 2,
+                            endIndent: MyDimensions.light + 2,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+            separatorBuilder: (context, index) => Gap(MyDimensions.light + 2),
+            itemCount: ghazaliat.length,
+          ),
+        ),
+        Gap(MyDimensions.large - 2),
+        // MyBottomNavigation(),
+      ],
+    ),
+  );
+   }
+  // return SizedBox(
+  //   height: UIUtils.getConvertedHeight(context, UIUtils.screenHeightInFigma),
+  //   width: UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
+  //   child: Column(
+  //     crossAxisAlignment: CrossAxisAlignment.center,
+  //     children: [
+  //       Gap(MyDimensions.large + 3),
+  //       Expanded(
+  //         child:  ListView.separated(
+  //           controller: scrollController,
+  //           physics: const ScrollPhysics(),
+  //           itemBuilder: (context, index) {
+  //             return GestureDetector(
+  //               onTap: () {
+  //                 Navigator.of(context).push(MaterialPageRoute(
+  //                   builder: (context) => BlocProvider(
+  //                     create: (context) => GhazaliatHafezBloc(),
+  //                     child: DetailsGhazaliatHafezScreen(
+  //                       e: k[index],
+  //                       index: ghazaliat.elementAt(index).id,
+  //                     ),
+  //                   ),
+  //                 ));
+  //               },
+  //               child: Container(
+  //                 decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.circular(MyDimensions.small),
+  //                   color: MyColors.boxBottomColor,
+  //                   border: Border.all(color: MyColors.borderBottomColor),
+  //                 ),
+  //                 margin: EdgeInsets.only(
+  //                     left: MyDimensions.semiLarge + 5,
+  //                     right: MyDimensions.semiLarge + 5),
+  //                 height: MyDimensions.xlarge + 50,
+  //                 width: MyDimensions.minMobileSize - 28,
+  //                 child: Padding(
+  //                   padding: EdgeInsets.only(right: MyDimensions.medium + 2),
+  //                   child: Column(
+  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //                     textDirection: TextDirection.rtl,
+  //                     children: [
+  //                       Padding(
+  //                         padding: EdgeInsets.only(
+  //                             left: MyDimensions.small + 1,
+  //                             top: MyDimensions.small + 1),
+  //                         child: Row(
+  //                           mainAxisAlignment: MainAxisAlignment.start,
+  //                           children: [
+  //                             Gap(MyDimensions.small),
+  //                             StatefulBuilder(builder: (context, setState) {
+  //                               return Row(
+  //                                 children: [
+  //                                   GestureDetector(
+  //                                     onTap: () async {
+  //                                       print("shareeee::::::::::");
+  //                                       await Share.share(MyStrings.shareText);
+  //                                     },
+  //                                     child: Image.asset("assets/icons/share.png"),
+  //                                   ),
+  //                                 ],
+  //                               );
+  //                             }),
+  //                           ],
+  //                         ),
+  //                       ),
+  //                       Text(
+  //                         ghazaliat.elementAt(index).title ?? "title",
+  //                         style: MyTHeme.lightTheme().textTheme.titleLarge,
+  //                       ),
+  //                       Text(
+  //                         ghazaliat.elementAt(index).firstStanza ?? '',
+  //                         style: MyTHeme.lightTheme().textTheme.titleLarge,
+  //                       ),
+  //                       Gap(MyDimensions.xLight - 2),
+  //                       Expanded(
+  //                         child: CustomDivider(
+  //                           indent: MyDimensions.light + 2,
+  //                           endIndent: MyDimensions.light + 2,
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ),
+  //               ),
+  //             );
+  //           },
+  //           separatorBuilder: (context, index) => Gap(MyDimensions.light + 2),
+  //           itemCount: ghazaliat.length,
+  //         ),
+  //       ),
+  //       Gap(MyDimensions.large - 2),
+  //       // MyBottomNavigation(),
+  //     ],
+  //   ),
+  // );
+
+
                else if (state is GhazaliatHafezErrorState) {
                 return Center(
                   child: Text(state.errorText),

@@ -6,11 +6,11 @@ import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_sta
 import 'package:hafez/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GhazaliatHafezBloc
-    extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> {
+class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> {
   int page = 1;
   int perPage = 50;
   List<GhazalItemModelEntity> ghazaliatHafez = [];
+
   List<DetailsGhazaliatHafezModel> detailsGhazaliatHafez = [];
   GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
     on<GhazaliatHafezEvent>((event, emit) async {
@@ -18,6 +18,10 @@ class GhazaliatHafezBloc
 
       if (event is LoadedEvent) {
         print("kkkkkk");
+         if(ghazaliatHafez.isEmpty){
+                print("EmptyyyResponse:::");
+                emit(isNotEmptyListState()); 
+         }
         try {
           print("llllll");
           emit(GhazaliatHafezLoadingState());
@@ -25,12 +29,13 @@ class GhazaliatHafezBloc
               await serviceLocator<GhazaliatHafezRepository>()
                   .ghazaliathafez(page, perPage);
           emit(GhazaliatHafezSuccesState(ghazaliatResponse));
-        } catch (e) {
+        } 
+       catch (e) {
           print("نیست به اینترت");
 
         }
-      }
-    });
+      
+    }});
      on<ChangeColorButtomListClickedEventtt>((event, emit) async {
         final todos = List<GhazalItemModelEntity>.from((state as GhazaliatHafezSuccesState).ghazaliatHafez);
         final todoIndex = todos.indexWhere((e) => e.id == event.id);

@@ -7,6 +7,7 @@ class GhazaliatHafezInitialState extends GhazaliatHafezState{
   GhazaliatHafezInitialState();
 }
 class GhazaliatHafezLoadingState extends GhazaliatHafezState{
+
 }
 class GhazaliatHafezErrorState extends GhazaliatHafezState{
  final String errorText;
@@ -16,10 +17,11 @@ class GhazaliatHafezErrorState extends GhazaliatHafezState{
 class GhazaliatHafezSuccesState extends GhazaliatHafezState{
   final List<GhazalItemModelEntity> ghazaliatHafez;
   GhazaliatHafezSuccesState(this.ghazaliatHafez,);
-
 }
 
+class isNotEmptyListState extends GhazaliatHafezState{
 
+}
 
 
 
