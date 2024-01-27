@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
           ),
            Gap(MyDimensions.large-2),
         
-             MyBottomNavigation(),
+            // MyBottomNavigation(),
         ],
       ),
     ),

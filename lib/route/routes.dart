@@ -8,7 +8,7 @@ import 'package:hafez/route/names.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {
   ScreenNames.homeScreen: (context) => HomeScreen(),
-  ScreenNames.favoriteScreen: (context) => GhazaliatFav(),
+  ScreenNames.favoriteScreen: (context) => GhazaliatFavorite(),
   ScreenNames.detailsGhazaliatHafezScreen: (context) => DetailsGhazaliatHafezScreen(),
   ScreenNames.ghazaliatHafezScreen: (context) => GhazaliatHafezScreen(),
  // ScreenNames.mainScreen: (context) => MainScreen(),

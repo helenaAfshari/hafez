@@ -28,7 +28,6 @@ import 'package:path_provider/path_provider.dart';
 
 void main() async {
    WidgetsFlutterBinding.ensureInitialized();
-  
      SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -61,7 +60,7 @@ class MyApp extends StatelessWidget {
       child:  MaterialApp(
 
         theme: MyTHeme.lightTheme(),
-        home:  YourWidget(),
+        home:  MainScreen(),
        // home:  SamplePageView(),
         //  initialRoute: ScreenNames.homeScreen,
         //  routes: routes,

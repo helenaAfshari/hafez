@@ -111,12 +111,30 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class YourWidget extends StatefulWidget {
+class Hand extends StatefulWidget {
   @override
-  _YourWidgetState createState() => _YourWidgetState();
+  _HandState createState() => _HandState();
 }
-
-class _YourWidgetState extends State<YourWidget> {
+// @override
+//   void initState() {
+//     super.initState();
+//     Future.delayed(Duration(seconds: 7), () {
+//       setState(() {
+//         opacity = 0;
+//       });
+//     });
+//   }
+class _HandState extends State<Hand> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     Future.delayed(Duration(seconds: 7), () {
+      setState(() {
+        opacity = 0;
+      });
+    });
+  }
   double opacity = 1.0;
   bool _isClicked = false;
   Offset? _tapPosition;
@@ -124,46 +142,7 @@ class _YourWidgetState extends State<YourWidget> {
   @override
   Widget build(BuildContext context) {
     return 
-    GestureDetector(
-  onTapDown: (TapDownDetails details) {
-    setState(() {
-      _isClicked = !_isClicked;
-      _tapPosition = details.globalPosition;
-    });
-  },
-  child: Stack(
-    children: [
-      Container(
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: AssetImage('assets/images/Goldfinger.jpg'),
-          ),
-        ),
-        child: AnimatedOpacity(
-          duration: const Duration(seconds: 1),
-          opacity: opacity,
-          child: Lottie.asset('assets/lottie/anim.json'),
-        ),
-      ),
-      if (_isClicked && _tapPosition != null)
-        Positioned(
-          left: _tapPosition!.dx - 1 - MediaQuery.of(context).size.width ,
-          top: 0,
-          right: MediaQuery.of(context).size.width / 2,
-          bottom: 0,
-          child: Container(
-            width: 2,
-            height: 10,
-            color: Colors.black,
-          ),
-        ),
-    ],
-  ),
-);
-
-//    GestureDetector(
+//     GestureDetector(
 //   onTapDown: (TapDownDetails details) {
 //     setState(() {
 //       _isClicked = !_isClicked;
@@ -188,9 +167,9 @@ class _YourWidgetState extends State<YourWidget> {
 //       ),
 //       if (_isClicked && _tapPosition != null)
 //         Positioned(
-//           left: _tapPosition!.dx - 1,
+//           left: _tapPosition!.dx - 1 - MediaQuery.of(context).size.width+20,
 //           top: 0,
-//           right: MediaQuery.of(context).size.width - _tapPosition!.dx - 1,
+//           right:_tapPosition!.dx - 1 - MediaQuery.of(context).size.width/50,
 //           bottom: 0,
 //           child: Container(
 //             width: 2,
@@ -202,6 +181,50 @@ class _YourWidgetState extends State<YourWidget> {
 //   ),
 // );
 
+   GestureDetector(
+  onTapDown: (TapDownDetails details) {
+    setState(() {
+      _isClicked = !_isClicked;
+      _tapPosition = details.globalPosition;
+    });
+  },
+  child: Stack(
+    children: [
+      Container(
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage('assets/images/Goldfinger.jpg'),
+          ),
+        ),
+        child: AnimatedOpacity(
+          duration: const Duration(seconds: 1),
+          opacity: opacity,
+          child: Lottie.asset('assets/lottie/anim.json'),
+         ),
+      ),
+        // child: AnimatedOpacity(
+        //   duration: const Duration(seconds: 1),
+        //   opacity: opacity,
+        //   child: Lottie.asset('assets/lottie/anim.json'),
+        // ),
+      
+      if (_isClicked && _tapPosition != null)
+        Positioned(
+          left: _tapPosition!.dx - 1,
+          top: 0,
+          right: MediaQuery.of(context).size.width - _tapPosition!.dx - 1,
+          bottom: 0,
+          child: Container(
+            width: 2,
+            height: 10,
+            color: Colors.black,
+          ),
+        ),
+    ],
+  ),
+);
 
   }
 }
