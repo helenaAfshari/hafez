@@ -5,7 +5,7 @@ import 'package:hafez/core/resource/constants/my_colors.dart';
 import 'package:hafez/core/resource/constants/my_strings.dart';
 import 'package:hafez/core/resource/constants/theme/my_theme.dart';
 import 'package:hafez/core/utils/ui_utils.dart';
-import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_fav.dart';
+import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_favorite.dart';
 import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hafez/route/names.dart';

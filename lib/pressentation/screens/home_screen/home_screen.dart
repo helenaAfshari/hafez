@@ -1,5 +1,5 @@
 
-import 'package:hafez/core/bottomnavigationbar/my_bottom_navigation.dart';
+import 'package:hafez/core/bottomnavigationbar/custom_buttom_navigation.dart';
 import 'package:hafez/core/components/customwidgets/custom_button.dart';
 import 'package:hafez/core/resource/constants/my_colors.dart';
 import 'package:hafez/core/resource/constants/my_dimensions.dart';

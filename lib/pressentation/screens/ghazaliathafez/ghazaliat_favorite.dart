@@ -1,10 +1,8 @@
 
 import 'package:hafez/core/appbar/my_appbar.dart';
-import 'package:hafez/core/bottomnavigationbar/my_bottom_navigation.dart';
 import 'package:hafez/core/components/customwidgets/custom_divider.dart';
 import 'package:hafez/core/resource/constants/my_colors.dart';
 import 'package:hafez/core/resource/constants/my_dimensions.dart';
-import 'package:hafez/core/resource/constants/my_pading.dart';
 import 'package:hafez/core/resource/constants/my_strings.dart';
 import 'package:hafez/core/resource/constants/theme/my_theme.dart';
 import 'package:hafez/core/utils/ui_utils.dart';
@@ -20,19 +18,14 @@ import 'package:hive/hive.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 final GlobalKey<ScaffoldState> _key = GlobalKey();
-
-class GhazaliatFavorite extends StatefulWidget {
-  //   final   PageController pageController;
-  //  GhazaliatFav(this.pageController);
+class GhazaliatFavoriteScreen extends StatefulWidget {
   @override
-  State<GhazaliatFavorite> createState() => _GhazaliatFavoriteState();
+  State<GhazaliatFavoriteScreen> createState() => _GhazaliatFavoriteScreenState();
 }
-
-class _GhazaliatFavoriteState extends State<GhazaliatFavorite> {
+class _GhazaliatFavoriteScreenState extends State<GhazaliatFavoriteScreen> {
   final box  = Hive.box<Map>(name: 'favBox');
   List<GhazalItemModelEntity> ghazaliat = [];
   ScrollController scrollController = ScrollController();
-
   @override
   void initState() {
     super.initState();
@@ -47,7 +40,6 @@ class _GhazaliatFavoriteState extends State<GhazaliatFavorite> {
         });
       }
     });
-
   }
   @override
   Widget build(BuildContext context) {
@@ -106,7 +98,6 @@ class _GhazaliatFavoriteState extends State<GhazaliatFavorite> {
               ],
             ) ,),
         ),
-        // appBar: appBarrrrrrr("ggg",context),
         extendBodyBehindAppBar: true,
         appBar: CustomAppBarWidget(
       scaffoldKey: _key,
@@ -114,55 +105,12 @@ class _GhazaliatFavoriteState extends State<GhazaliatFavorite> {
     title: MyStrings.ghazaliatHafezText,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: BackButton()),
+          icon: const BackButton()),
         ),
-      //  appBar: AppBar(
-      //   elevation: 0.0,
-      //   automaticallyImplyLeading: false,
-      //   leading: GestureDetector(
-      //     onTap: () {
-      //       Navigator.of(context).pop();
-      //     },
-      //     child: Icon(Icons.back_hand)),
-      //   //  automaticallyImplyLeading: false,
-      //   backgroundColor:  MyColors.primaryColor,
-      //   actions: [
-      //    Container(
-      //  width:
-      //      UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
-      //  alignment: Alignment.center,
-      // // margin: MyPaddings.horizontal20,
-      //  padding: MyPaddings.all12,
-      //  decoration: const BoxDecoration(
-      //   // color:  MyColors.primaryColor,
-      //  ),
-      //  child:Row(
-      //      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //      children: [
-      //          GestureDetector(
-      //           onTap: () =>Navigator.of(context).pop(),
-      //           child: 
-      //           Icon(Icons.arrow_back,size: MyDimensions.medium+5,color: MyColors.primaryButtonColor,)),
-      //         Gap(MyDimensions.semiLarge-4),
-      //        Text(MyStrings.ghazaliatHafezText,style: MyTHeme.lightTheme().textTheme.titleLarge,),
-      //         Gap(MyDimensions.light+3),
-      //      GestureDetector(
-      //       onTap: () {
-      //         _key.currentState!.openEndDrawer();
-      //       },
-      //       child: Icon(Icons.menu,size: MyDimensions.medium+5,color: MyColors.primaryButtonColor,))
-      //      ],
-      //    ),
-      //      ),
-      //   ],
-      //  ),
         backgroundColor: MyColors.primaryColor,
-    
         body: BlocBuilder<GhazaliatHafezBloc, GhazaliatHafezState>(
             builder: (context, state) {
-    
               if (state is GhazaliatHafezLoadingState  ) {
-
                 return const Center(
                   child: CircularProgressIndicator(color: Colors.blue),
                 );
@@ -177,7 +125,6 @@ class _GhazaliatFavoriteState extends State<GhazaliatFavorite> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-         // const MyAppBar(),
            Gap(MyDimensions.large+3),
             Expanded(
               child: ListView.separated(
@@ -246,7 +193,6 @@ class _GhazaliatFavoriteState extends State<GhazaliatFavorite> {
                   );},
                 separatorBuilder: (context, index) => Gap(MyDimensions.light+2),
                 itemCount: ghazaliat.length)
-      
               ),
              Gap(MyDimensions.large-2),
              // MyBottomNavigation(),

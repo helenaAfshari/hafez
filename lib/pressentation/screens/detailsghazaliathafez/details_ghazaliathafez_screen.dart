@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:hafez/core/appbar/drawer_menu.dart';
 import 'package:hafez/core/appbar/my_appbar.dart';
-import 'package:hafez/core/bottomnavigationbar/my_bottom_navigation.dart';
+import 'package:hafez/core/bottomnavigationbar/custom_buttom_navigation.dart';
 import 'package:hafez/core/components/customwidgets/custom_divider.dart';
 import 'package:hafez/core/resource/constants/my_colors.dart';
 import 'package:hafez/core/resource/constants/my_dimensions.dart';

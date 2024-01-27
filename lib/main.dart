@@ -2,7 +2,7 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:hafez/core/bottomnavigationbar/my_bottom_navigation.dart';
+import 'package:hafez/core/bottomnavigationbar/custom_buttom_navigation.dart';
 import 'package:hafez/core/resource/constants/my_colors.dart';
 import 'package:hafez/core/resource/constants/my_dimensions.dart';
 import 'package:hafez/core/resource/constants/theme/my_theme.dart';
@@ -11,14 +11,7 @@ import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghaz
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
-import 'package:hafez/pressentation/mainscreen/main_screen.dart';
-import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_fav.dart';
-import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
-import 'package:hafez/pressentation/screens/hand.dart';
-import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
 import 'package:hafez/pressentation/screens/home_screen/widgets/list_buttoms_widget.dart';
-import 'package:hafez/route/names.dart';
-import 'package:hafez/route/routes.dart';
 import 'package:hafez/service_locator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +53,7 @@ class MyApp extends StatelessWidget {
       child:  MaterialApp(
 
         theme: MyTHeme.lightTheme(),
-        home:  MainScreen(),
+        home:  CustomBottomNavigation(),
        // home:  SamplePageView(),
         //  initialRoute: ScreenNames.homeScreen,
         //  routes: routes,

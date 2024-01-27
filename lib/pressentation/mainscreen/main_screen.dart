@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hafez/core/resource/constants/my_colors.dart';
-import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_fav.dart';
+import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_favorite.dart';
 import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
 
