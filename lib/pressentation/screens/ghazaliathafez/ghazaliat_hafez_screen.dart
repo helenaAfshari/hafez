@@ -123,11 +123,10 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-        //const MyAppBar(),
       
          Gap(MyDimensions.large+3),
           Expanded(
-            child: ListView.separated(
+            child:state.ghazaliatHafez.isEmpty?Icon(Icons.abc): ListView.separated(
               controller: scrollController,
               physics: const ScrollPhysics(),
               itemBuilder: (context, index) {

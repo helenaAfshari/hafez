@@ -122,8 +122,14 @@ class _GhazaliatFavoriteScreenState extends State<GhazaliatFavoriteScreen> {
   //   return Center(child: Text("Empty"),
   //   );
   //  }
-
-   else if (state is GhazaliatHafezSuccesState){
+if (ghazaliat.isEmpty) {
+  return Center(
+    child: Text(
+      'هیچ موردی یافت نشد.',
+      style: TextStyle(fontSize: 16.0),
+    ),
+  );
+} else if (state is GhazaliatHafezSuccesState) {
       List<GhazalItemModelEntity> k = state.ghazaliatHafez;
 return 
 SizedBox(
@@ -134,7 +140,7 @@ SizedBox(
       children: [
         Gap(MyDimensions.large + 3),
         Expanded(
-          child:  ListView.separated(
+          child:ListView.separated(
             controller: scrollController,
             physics: const ScrollPhysics(),
             itemBuilder: (context, index) {
@@ -214,7 +220,7 @@ SizedBox(
             },
             separatorBuilder: (context, index) => Gap(MyDimensions.light + 2),
             itemCount: ghazaliat.length,
-          ),
+          )
         ),
         Gap(MyDimensions.large - 2),
         // MyBottomNavigation(),
