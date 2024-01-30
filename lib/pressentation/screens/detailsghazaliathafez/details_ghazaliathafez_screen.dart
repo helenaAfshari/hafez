@@ -10,6 +10,7 @@ import 'package:hafez/core/resource/constants/my_strings.dart';
 import 'package:hafez/core/resource/constants/theme/my_theme.dart';
 import 'package:hafez/core/utils/ui_utils.dart';
 import 'package:hafez/domain/model/ghazaliathafez/ghazaliathafez_model.dart';
+import 'package:hafez/domain/model/totamodel/total.dart';
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_state.dart';
@@ -23,21 +24,22 @@ import 'package:hafez/pressentation/screens/home_screen/home_screen.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class DetailsGhazaliatHafezScreen extends StatefulWidget {
-     GhazalItemModelEntity? e;
-     int? index;
-  DetailsGhazaliatHafezScreen({Key? key,  this.e,  this.index});
+     GhazalItemModelEntity? GhazaliatModel;
+     TotalModel? total;
+     int? index ;
+  DetailsGhazaliatHafezScreen({Key? key,   this.GhazaliatModel,   this.index,this.total});
   @override
   State<DetailsGhazaliatHafezScreen> createState() => _DetailsGhazaliatHafezScreenState();
 }
 class _DetailsGhazaliatHafezScreenState extends State<DetailsGhazaliatHafezScreen> {
+   final GlobalKey<ScaffoldState> _detailsGhazaliatKey = GlobalKey();
   @override
   void initState() {
     super.initState();
   WidgetsBinding.instance.addPostFrameCallback((_) {
- _playAudio(widget.e!.tafsirAudio?? "");
+ _playAudio(widget.GhazaliatModel!.tafsirAudio?? "");
 
   });
  BlocProvider.of<DetailsGhazaliatHafezBloc>(context).add(LoadedddEvent(widget.index??0));
@@ -94,7 +96,7 @@ void update(double newValue) {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-         key: _key,
+         key: _detailsGhazaliatKey,
          endDrawer: Drawer(
           backgroundColor: MyColors.primaryColor,
           child:  DrawerHeader(
@@ -147,40 +149,15 @@ void update(double newValue) {
               ],
             ) ,),
         ),
-       appBar: AppBar(
-        elevation: 0.0,
-         automaticallyImplyLeading: false,
-        backgroundColor:  MyColors.primaryColor,
-        actions: [
-         Container(
-       width:
-           UIUtils.getConvertedWidth(context, UIUtils.screenWidthInFigma),
-       alignment: Alignment.center,
-      // margin: MyPaddings.horizontal20,
-       padding: MyPaddings.all12,
-       decoration: const BoxDecoration(
-        // color:  MyColors.primaryColor,
-       ),
-       child:Row(
-           mainAxisAlignment: MainAxisAlignment.spaceAround,
-           children: [
-               GestureDetector(
-                onTap: () =>Navigator.of(context).pop(),
-                child: 
-                Icon(Icons.arrow_back,size: MyDimensions.medium+5,color: MyColors.primaryButtonColor,)),
-              Gap(MyDimensions.semiLarge-4),
-             Text(MyStrings.ghazaliatHafezText,style: MyTHeme.lightTheme().textTheme.titleLarge,),
-              Gap(MyDimensions.light+3),
-           GestureDetector(
-            onTap: () {
-              _key.currentState!.openEndDrawer();
-            },
-            child: Icon(Icons.menu,size: MyDimensions.medium+5,color: MyColors.primaryButtonColor,))
-           ],
-         ),
-           ),
-        ],
-       ),
+          appBar: CustomAppBarWidget(
+      scaffoldKey: _detailsGhazaliatKey,
+      showActionIcon: true,
+      title: MyStrings.ghazaliatHafezText,
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: BackButton()),
+        ),
+  
         backgroundColor: MyColors.primaryColor,
        body:  BlocBuilder<DetailsGhazaliatHafezBloc,DetailsGhazaliatHafezState>(
        builder: (context, state) {
@@ -212,9 +189,11 @@ void update(double newValue) {
                  child:  Column(
                    children: [
                       Gap(MyDimensions.semiLarge-2),
-                     Text(widget.e!.title!,style: Theme.of(context)
-                .textTheme
-                .titleLarge!.copyWith(fontSize: MyDimensions.xLight),), 
+                      Text(widget.GhazaliatModel?.title??"null",),
+
+                //      Text(widget.e!.title!,style: Theme.of(context)
+                // .textTheme
+                // .titleLarge!.copyWith(fontSize: MyDimensions.xLight),), 
             
             Expanded(
               child: ListView.builder(
@@ -258,7 +237,7 @@ void update(double newValue) {
                   Padding(
                     padding: const EdgeInsets.only(right: 30, left: 25),
                     child: Text(
-                      widget.e!.tafsir!,
+                      widget.GhazaliatModel!.tafsir!,
                       textAlign: TextAlign.center,
                       style: MyTHeme.lightTheme().textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal)
                     ),

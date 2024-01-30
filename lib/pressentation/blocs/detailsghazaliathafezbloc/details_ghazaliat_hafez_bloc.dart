@@ -8,19 +8,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class DetailsGhazaliatHafezBloc extends Bloc<DetailsGhazaliatHafezEvent,DetailsGhazaliatHafezState>{
  DetailsGhazaliatHafezBloc() : super(DetailsGhazaliatHafezInitialState()) {
      List<DetailsGhazaliatHafezModel> detailsGhazaliatHafez = [];
+
+
+     
     on<DetailsGhazaliatHafezEvent>((event, emit)async {
   emit(DetailsGhazaliatHafezLoadingState());
       if(event is LoadedddEvent){
        try{
           final detailsGhazaliatResponse =
-              await serviceLocator<DetailsGhazaliatHafezRepository>().detailsGhazaliatHafezRepository(event.selectedPoemIdd!);
+              await serviceLocator<DetailsGhazaliatHafezRepository>().detailsGhazaliatHafezRepository(event.selectedPoemIdd);
+              
                     print("DetailsGhazaliatRespons${detailsGhazaliatResponse}");
   detailsGhazaliatHafez = (detailsGhazaliatResponse.data['data'] as List).map((e) =>
    DetailsGhazaliatHafezModel.fromJason(e)).toList();
   if (detailsGhazaliatResponse.statusCode == 200) {
-            print("55555555");
+            print("55555555تتتتت");
             emit(DetailsGhazaliatHafezSuccesState(detailsGhazaliatHafez,));
-            print("koohhhhho${detailsGhazaliatHafez}");
+            print("DetailsGhazaliatHafez${detailsGhazaliatHafez}");
           } else {
             emit(DetailsGhazaliatHafezErrorState("معتبر نیست"));
           }

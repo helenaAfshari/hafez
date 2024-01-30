@@ -17,7 +17,6 @@ import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-final GlobalKey<ScaffoldState> _key = GlobalKey();
 class GhazaliatFavoriteScreen extends StatefulWidget {
   @override
   State<GhazaliatFavoriteScreen> createState() => _GhazaliatFavoriteScreenState();
@@ -41,11 +40,13 @@ class _GhazaliatFavoriteScreenState extends State<GhazaliatFavoriteScreen> {
       }
     });
   }
+  final GlobalKey<ScaffoldState> _ghazaliatFavoriteKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-         key: _key,
+         key: _ghazaliatFavoriteKey,
          endDrawer: Drawer(
           backgroundColor: MyColors.primaryColor,
           child:  DrawerHeader(
@@ -100,7 +101,7 @@ class _GhazaliatFavoriteScreenState extends State<GhazaliatFavoriteScreen> {
         ),
         extendBodyBehindAppBar: true,
         appBar: CustomAppBarWidget(
-      scaffoldKey: _key,
+      scaffoldKey: _ghazaliatFavoriteKey,
       showActionIcon: true,
     title: MyStrings.ghazaliatHafezText,
         leading: IconButton(
@@ -115,22 +116,13 @@ class _GhazaliatFavoriteScreenState extends State<GhazaliatFavoriteScreen> {
                   child: CircularProgressIndicator(color: Colors.blue),
                 );
               } 
-              
-  // List<GhazalItemModelEntity> k = state.ghazaliatHafez;
-  //  if(state is isNotEmptyListState){
-  //   print("UUUUIIIIIEEEEMMM");
-  //   return Center(child: Text("Empty"),
-  //   );
-  //  }
 if (ghazaliat.isEmpty) {
   return Center(
-    child: Text(
-      'هیچ موردی یافت نشد.',
-      style: TextStyle(fontSize: 16.0),
-    ),
+    child: 
+    Image.asset('assets/images/emptyList.png',),
   );
 } else if (state is GhazaliatHafezSuccesState) {
-      List<GhazalItemModelEntity> k = state.ghazaliatHafez;
+  List<GhazalItemModelEntity> k = state.ghazaliatHafez;
 return 
 SizedBox(
     height: UIUtils.getConvertedHeight(context, UIUtils.screenHeightInFigma),
@@ -150,8 +142,8 @@ SizedBox(
                     builder: (context) => BlocProvider(
                       create: (context) => GhazaliatHafezBloc(),
                       child: DetailsGhazaliatHafezScreen(
-                        e: k[index],
-                        index: ghazaliat.elementAt(index).id,
+                        GhazaliatModel: k[index],
+                        index: ghazaliat.elementAt(index).id!,
                       ),
                     ),
                   ));

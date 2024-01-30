@@ -16,14 +16,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-final GlobalKey<ScaffoldState> _key = GlobalKey();
+
 
 class GhazaliatHafezScreen extends StatefulWidget {
+  
   const GhazaliatHafezScreen({super.key});
   @override
   State<GhazaliatHafezScreen> createState() => _GhazaliatHafezScreenState();
 }
 class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
+  final GlobalKey<ScaffoldState> _ghazaliatHafezKey = GlobalKey();
   
   ScrollController scrollController = ScrollController();
   @override
@@ -43,7 +45,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
   Widget build(BuildContext context) {  
     return SafeArea(
       child: Scaffold(
-        key: _key,
+        key: _ghazaliatHafezKey,
          endDrawer: Drawer(
           backgroundColor: MyColors.primaryColor,
           child:  DrawerHeader(
@@ -99,7 +101,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
         ),
         extendBodyBehindAppBar: true,
         appBar: CustomAppBarWidget(
-      scaffoldKey: _key,
+      scaffoldKey: _ghazaliatHafezKey,
       showActionIcon: true,
       title: MyStrings.ghazaliatHafezText,
         leading: IconButton(
@@ -123,10 +125,9 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-      
          Gap(MyDimensions.large+3),
           Expanded(
-            child:state.ghazaliatHafez.isEmpty?Icon(Icons.abc): ListView.separated(
+            child:ListView.separated(
               controller: scrollController,
               physics: const ScrollPhysics(),
               itemBuilder: (context, index) {
@@ -138,7 +139,7 @@ class _GhazaliatHafezScreenState extends State<GhazaliatHafezScreen> {
                                   builder: (context) => BlocProvider(
                                     create: (context) => GhazaliatHafezBloc(),
                                     child: DetailsGhazaliatHafezScreen(
-                                      e: k[index],
+                                      GhazaliatModel: k[index],
                                       index:adjustedIndex,
                                     ),
                                   ),

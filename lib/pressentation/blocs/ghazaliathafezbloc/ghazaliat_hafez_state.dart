@@ -19,12 +19,7 @@ class GhazaliatHafezSuccesState extends GhazaliatHafezState{
   GhazaliatHafezSuccesState(this.ghazaliatHafez,);
 }
 
-class GhazaliatHafezEmptyState extends GhazaliatHafezState{
-  final List<GhazalItemModelEntity> ghazaliatHafez;
-  GhazaliatHafezEmptyState(this.ghazaliatHafez,);
-  // final List<GhazalItemModelEntity> ghazaliatHafez;
- // GhazaliatHafezEmptyState(this.ghazaliatHafez,);
-}
+
 
 
 

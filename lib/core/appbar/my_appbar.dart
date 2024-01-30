@@ -80,6 +80,7 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
     this.titleWidget,
     this.showActionIcon = false,
     this.scaffoldKey,
+
     this.backgroundColor = Colors.transparent,
     this.backgroundBehindColor = MyColors.bottomNavigationBarBackgroundColor, // اضافه کردن پارامتر رنگ پس‌زمینه پشتی
   });
@@ -135,6 +136,7 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
                           child: InkWell(
                             onTap: () {
                               scaffoldKey?.currentState?.openEndDrawer();
+                             
                             },
                             child: Padding(
                               padding: EdgeInsets.all(MyDimensions.light + 2),

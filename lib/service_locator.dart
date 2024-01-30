@@ -6,12 +6,16 @@ import 'package:hafez/data/remote/auth/auth_api.dart';
 import 'package:hafez/data/remote/auth/auth_api_impl.dart';
 import 'package:hafez/data/remote/detailsghazaliathafez/details_ghazaliat_hafez_api.dart';
 import 'package:hafez/data/remote/detailsghazaliathafez/details_ghazaliat_hafez_api_impl.dart';
+import 'package:hafez/data/remote/estekhare/estekhare_api.dart';
+import 'package:hafez/data/remote/estekhare/estekhare_api_impl.dart';
 import 'package:hafez/data/remote/ghazaliathafez/ghazaliathafez_api.dart';
 import 'package:hafez/data/remote/ghazaliathafez/ghazaliathafez_api_impl.dart';
 import 'package:hafez/domain/repository/auth/auth_repository.dart';
 import 'package:hafez/domain/repository/auth/auth_repository_impl.dart';
 import 'package:hafez/domain/repository/detailsghazaliathafez_repo/details_ghazaliat_hafez_repository.dart';
 import 'package:hafez/domain/repository/detailsghazaliathafez_repo/details_ghazaliat_hafez_repository_impl.dart';
+import 'package:hafez/domain/repository/estekharerepo/estekhare_repository.dart';
+import 'package:hafez/domain/repository/estekharerepo/estekhare_repository_impl.dart';
 import 'package:hafez/domain/repository/ghazaliathafezrepo/ghazaliathafez_repository.dart';
 import 'package:hafez/domain/repository/ghazaliathafezrepo/ghazaliathafez_repository_impl.dart';
 import 'package:dio/dio.dart';
@@ -26,6 +30,8 @@ injector() {
    serviceLocator.registerSingleton<ApiProviderImp>(ApiProviderImp());
    serviceLocator.registerSingleton<GhazaliatHafezApi>(GhazaliatHafezApiImpl());
    serviceLocator.registerSingleton<DetailsGhazaliatHafezApi>(DetailsGhazaliatHafezApiImpl());
+   serviceLocator.registerSingleton<EstekhareApi>(EstekhareApiImpl());
     serviceLocator.registerSingleton<GhazaliatHafezRepository>(GhazalHafezRepositoryImplement());
+    serviceLocator.registerSingleton<EstekhareRepository>(EstekhareRepositoryImplement());
     serviceLocator.registerSingleton<DetailsGhazaliatHafezRepository>(DetailsGhazaliatHafezRepositoryImplement());
 }
