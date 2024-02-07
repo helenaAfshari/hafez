@@ -119,7 +119,7 @@ class _GhazaliatFavoriteScreenState extends State<GhazaliatFavoriteScreen> {
 if (ghazaliat.isEmpty) {
   return Center(
     child: 
-    Image.asset('assets/images/emptyList.png',),
+    Image.asset('assets/images/emptyList.png',), 
   );
 } else if (state is GhazaliatHafezSuccesState) {
   List<GhazalItemModelEntity> k = state.ghazaliatHafez;

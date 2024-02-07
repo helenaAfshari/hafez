@@ -19,7 +19,7 @@ class GhazaliatHafezApiImpl extends GhazaliatHafezApi {
   Future<List<GhazalItemModelEntity>> poems(int page, int perPage) async {
     final poemsResponse = await serviceLocator<ApiProviderImp>().get(
       'https://api.hafezname.ir/api/poems?page=$page&per_page=$perPage',
-     // 'https://api.hafezname.ir/api/poems?page=$page&per_page=$perPage&ids[]=45',
+      // 'https://api.hafezname.ir/api/poems?&ids[]=45',
     );
     print("jjjjjj88888");
     //  ghazaliatHafez = (poemsResponse.data['data']as List).map((e) => GhazalItemModelEntity.fromJson(e)).toList();

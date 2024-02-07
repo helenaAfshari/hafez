@@ -1,5 +1,6 @@
 
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:hafez/core/bottomnavigationbar/custom_buttom_navigation.dart';
@@ -12,8 +13,10 @@ import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghaz
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:hafez/pressentation/blocs/estekharebloc/bloc_estekhare.dart';
 import 'package:hafez/pressentation/blocs/estekharebloc/event_estekhare.dart';
+import 'package:hafez/pressentation/blocs/estekharebloc/state_estekhare.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_event.dart';
+import 'package:hafez/pressentation/blocs/tamrin/bloc_tamrin.dart';
 import 'package:hafez/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
 import 'package:hafez/pressentation/screens/estekhare/estekhare_screen.dart';
 import 'package:hafez/pressentation/screens/home_screen/widgets/list_buttoms_widget.dart';
@@ -25,6 +28,7 @@ import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 
+
 void main() async {
    WidgetsFlutterBinding.ensureInitialized();
      SystemChrome.setPreferredOrientations([
@@ -35,13 +39,33 @@ void main() async {
   Hive.defaultDirectory = dir.path;
   }else{
     Hive.defaultDirectory = './';
-    // Isar.
   }
   await injector();
   runApp(
   MyApp()
   );
 }
+   BlocEstekhare blocEstekharee = BlocEstekhare();
+
+int clickCount = 0; // تعداد کلیک‌ها را حساب می‌کند
+bool isLimitReached = false; // برای اطمینان از رسیدن به حداکثر تعداد کلیک‌ها
+
+ generateRandomNumber() {
+  if (!isLimitReached) { // تنها اگر به حداکثر تعداد کلیک‌ها نرسیده باشیم
+    clickCount++; // تعداد کلیک‌ها را افزایش می‌دهیم
+    if (clickCount >= 10) { // اگر تعداد کلیک‌ها بیشتر یا مساوی ۳ شود
+      isLimitReached = true; // وضعیت رسیدن به حداکثر تعداد کلیک‌ها را به true تغییر می‌دهیم
+      print('You have reached the maximum number of clicks.'); // اطلاع رسانی به کاربر
+    } else {
+      int randomNumber = blocEstekharee.nextNumber(index: 400); // تولید عدد تصادفی
+      print('Random Number: $randomNumber');
+      return randomNumber;
+    }
+  }
+  return null; // یا مقدار خاصی که مد نظر شما باشد
+}
+
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -57,7 +81,16 @@ class MyApp extends StatelessWidget {
 
            BlocProvider<BlocEstekhare>(
             create: (context) =>
-          BlocEstekhare()..add(EstekhareLoadedEvent(0))),
+          BlocEstekhare()..add(EstekhareLoadedEvent(generateRandomNumber()))),
+
+    // BlocProvider<BlocEstekharee>(
+    //         create: (context) =>
+    //       BlocEstekharee()..add(sssssssLoadedEvent( 0))),
+
+          //  BlocProvider<AppBlocss>(
+          //   create: (context) =>
+          // AppBlocss()),    
+          
       ],
       child:  MaterialApp(
         theme: MyTHeme.lightTheme(),
@@ -69,6 +102,69 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+// class ColorChanger extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocProvider(
+//       create: (context) => BlocEstekhare(),
+//       child: BlocBuilder<BlocEstekhare, StekharehState>(
+//         builder: (context, state) {
+          
+//           if (state is ClickedEstekhareState){
+//             return 
+//             GestureDetector(
+//             onTap: () {
+//               // ارسال رویداد کلیک به بلاک
+//               BlocProvider.of<BlocEstekhare>(context).add(ClickedEvent(state.Cliiiiccccc));
+//             },
+//             child: Container(
+//               width: 100,
+//               height: 100,
+//               color: state.Cliiiiccccc ? Colors.blue : Colors.amber,
+//               child: Center(
+//                 child: Text(
+//                   state.Cliiiiccccc ? 'Clicked' : 'Not Clicked',
+//                   style: TextStyle(
+//                     fontSize: 20,
+//                     color: Colors.white,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           );
+//           }
+//           return Container();
+//         },
+//       ),
+//     );
+//   }
+// }
+
+
+// GestureDetector(
+//             onTap: () {
+//               // ارسال رویداد کلیک به بلاک
+//               BlocProvider.of<BlocEstekhare>(context).add(ClickedEvent());
+//             },
+//             child: Container(
+//               width: 100,
+//               height: 100,
+//               color: state. ? Colors.blue : Colors.amber,
+//               child: Center(
+//                 child: Text(
+//                   state. ? 'Clicked' : 'Not Clicked',
+//                   style: TextStyle(
+//                     fontSize: 20,
+//                     color: Colors.white,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           );
+
 
 
 

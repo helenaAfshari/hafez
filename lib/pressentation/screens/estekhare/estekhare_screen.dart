@@ -13,6 +13,9 @@ import 'package:hafez/pressentation/blocs/estekharebloc/bloc_estekhare.dart';
 import 'package:hafez/pressentation/blocs/estekharebloc/event_estekhare.dart';
 import 'package:hafez/pressentation/blocs/estekharebloc/state_estekhare.dart';
 import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_bloc.dart';
+import 'package:hafez/pressentation/blocs/tamrin/bloc_tamrin.dart';
+import 'package:hafez/pressentation/blocs/tamrin/event_tamrin.dart';
+import 'package:hafez/pressentation/blocs/tamrin/state_tamrin.dart';
 import 'package:hafez/pressentation/screens/detailsghazaliathafez/details_ghazaliathafez_screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,12 +23,14 @@ import 'dart:math';
 
 
 class EstekhareScreen extends StatefulWidget {
-   GhazalItemModelEntity? e ;
+      GhazalItemModelEntity? ghazaliat;
   // int? index ;
   @override
   _EstekhareScreenState createState() => _EstekhareScreenState();
 }
 class _EstekhareScreenState extends State<EstekhareScreen> {
+   BlocEstekhare blocEstekharee = BlocEstekhare();
+
   final GlobalKey<ScaffoldState> _estekhareKey = GlobalKey();
    int indexxxxx=0;
    int indext =0;
@@ -37,14 +42,56 @@ int aaaa= 50;
       setState(() {
         opacity = 0;
       });
+
     });
+ // BlocProvider.of<BlocEstekhare>(context).add(ClickedEvent(k.length,_isClicked,));
+  //BlocProvider.of<BlocEstekhare>(context).add(ClickedEvent());
+//  BlocProvider.of<BlocEstekhare>(context).add(EstekhareLoadedEvent(widget.e!.id!));
+
   }
   double opacity = 1.0;
-  bool _isClicked = false;
+  bool _isClicked =false;
+  bool _isClickedd =false;
   Offset? _tapPosition;
+
+
+
+
+//  int nextNumber({required int index}) {
+//     int clickCount = 0; // تعداد کلیک‌ها را حساب می‌کند
+//     bool isLimitReached = false; // برای اطمینان از رسیدن به حداکثر تعداد کلیک‌ها
+//     late int limit = 2; // تعداد مجاز تولید اعداد تصادفی
+
+//     if (!isLimitReached) { // تنها اگر به حداکثر تعداد کلیک‌ها نرسیده باشیم
+//       clickCount++; // تعداد کلیک‌ها را افزایش می‌دهیم
+//       if (clickCount >= limit) { // اگر تعداد کلیک‌ها بیشتر یا مساوی حداکثر مجاز باشد
+//         isLimitReached = true; // وضعیت رسیدن به حداکثر تعداد کلیک‌ها را به true تغییر می‌دهیم
+//         print('You have reached the maximum number of clicks.'); // اطلاع رسانی به کاربر
+//       } else {
+//         int randomNumber = Random().nextInt(limit); // تولید عدد تصادفی
+//         print('Random Number: $randomNumber');
+//         return randomNumber;
+//       }
+//     }
+//     return -1; // یا مقدار خاصی که مد نظر شما باشد
+//   }
+
+//  generateRandomNumber(BuildContext context) {
+//     final bloc = BlocProvider.of<BlocEstekhare>(context);
+//     int randomNumber = bloc.nextNumber(index: 100); // تولید عدد تصادفی
+//     print('Random Number: $randomNumber');
+
+//     // اینجا می‌توانید دستورات دیگری را اجرا کنید، مانند نمایش اطلاعات در صفحه یا ارسال رویداد به بلوک
+//   }
+  // generateRandomNumber() {
+  // int randomNumber = blocEstekharee.nextNumber(index: 400); // مثال: تولید عدد تصادفی بین 0 و 100
+  //   print('Random Number: $randomNumber');
+  //   return blocEstekharee.nextNumber(index: 400);
+  // }
 
   @override
   Widget build(BuildContext context) {
+    //BlocEstekhare ssss = context.read<BlocEstekhare>();
     return 
    SafeArea(
      child: Scaffold(
@@ -110,144 +157,181 @@ int aaaa= 50;
           onPressed: () => Navigator.pop(context),
           icon: const BackButton()),
         ),
-        body:BlocBuilder<BlocEstekhare,StekharehState>(builder: (context, state) {
-          if(state is LoadingEstekhareState){
-            return const Center(
-                child: CircularProgressIndicator(color: Colors.blue),
-              );
-          }else if(state is SuccesEstekhareState){
-            List<GhazalItemModelEntity> k = state.ghazaliatHafezEstekhare;
-            return 
-  GestureDetector(
-                   onTapDown: (TapDownDetails details) {
-                    setState(() {
-                           _isClicked = !_isClicked;
-                           _tapPosition = details.globalPosition;
-                    });
-            // final list = List.generate(k.length, (index) {
-            //   return nextNumber(min:0, max:k[index]);
-            // });
-        int dynamicindex=  nextNumber(index:k.length,);
-   
-//             for (var i = 0; i <= list.length; i++) {
-//   var element = list[i];
-//   print("jjkkkliuommn::::::$element");
-//   // در این قسمت می‌توانید هر چیزی که باید در هر ایتریشن انجام شود را انجام دهید
-  //int adjustedIndex = element < 17 ? element + 1 : element + 1;
-    int adjustedIndex = indexxxxx < 17 ? indexxxxx+1  : indexxxxx+1;
-                                // Navigator.of(context).push(MaterialPageRoute(  
-                                //   builder: (context) => BlocProvider(
-                                //     create: (context) => BlocEstekhare(),
-                                //     child: DetailsGhazaliatHafezScreen(
-                                //       GhazaliatModel: k[5-1],
-                                //       index:5,
-                                //     ),
-                                //   ),
-                                // )); 
-  Navigator.of(context).push(MaterialPageRoute(
-    builder: (context) => BlocProvider(
-      create: (context) => BlocEstekhare(),
-      child: DetailsGhazaliatHafezScreen(
-        //index: element,
-          //GhazaliatModel:k[indexx],
-         index: k[dynamicindex].id,
-         GhazaliatModel: k[dynamicindex],
-        // GhazaliatModel: k[element], // اگر بخواهید از عناصر list استفاده کنید
-        // e: k[element],
-        // e: k[adjustedIndex],
-      ),
+        body: 
+     
+  //           BlocBuilder<BlocEstekhare,StekharehState>(builder: (context, state) {
+  //              if(state is SuccesEstekhareState){
+  //                     List<GhazalItemModelEntity> k = state.ghazaliatHafezEstekhare;
+
+  //                return
+  //                GestureDetector(
+  //     child:  Stack(
+  //     children: [
+  //           Container(
+  //             height: double.infinity,
+  //             decoration: const BoxDecoration(
+  //               image: DecorationImage(
+  //                 fit: BoxFit.fill,
+  //                 image: AssetImage('assets/images/Goldfinger.jpg'),
+  //               ),
+  //             ),
+  //             child: AnimatedOpacity(
+  //               duration: const Duration(seconds: 1),
+  //               opacity: opacity,
+  //               child: Lottie.asset('assets/lottie/anim.json'),
+  //             ),
+  //           ),
+            
+  //                Padding(
+  //           padding: const EdgeInsets.only(left: 210),
+  //           child: GestureDetector(
+  //              onTapDown: (TapDownDetails details) {
+                
+  //           BlocProvider.of<BlocEstekhare>(context).add(EstekhareLoadedEvent(k.length,_isClicked));
+            
+  //            int dynamicindex=  nextNumber(index:k.length);
+  //           // nextNumber({required index})=>Random().nextInt(index);
+  //  Navigator.of(context).push(MaterialPageRoute(
+  //     builder: (context) => BlocProvider(
+  //           create: (context) => BlocEstekhare(),
+  //           child: DetailsGhazaliatHafezScreen(
+  //              index: k[dynamicindex].id,
+  //              GhazaliatModel:k[dynamicindex],
+            
+  //           ),
+  //     ),
+  //   ));
+  //           //  setState(() {
+  //           //                      _isClicked = !_isClicked;
+  //           //                     // _tapPosition = details.globalPosition;
+  //           //               });
+  //              },
+  //             child: Container(
+  //                 width: 35,
+  //                 color: _isClicked?Colors.blue:const Color.fromARGB(255, 115, 107, 82),
+  //               // Third container properties
+  //             ),
+  //           ),
+  //     ),
+  //           ] ) );
+  //             }
+  //             return Container();
+  //           },),
+  
+            BlocBuilder<BlocEstekhare,StekharehState>(builder: (context, state) {
+  
+              if(state is LoadingEstekhareState){
+                return const Center(
+                    child: CircularProgressIndicator(color: Colors.blue),
+                  );
+              } 
+            //   else if(state is ClickedEstekhareState){
+            //        return 
+            //         GestureDetector(
+            //     onTap: () {
+            //       // ارسال رویداد کلیک به بلاک
+            //       BlocProvider.of<BlocEstekhare>(context).add(ClickedEvent(state.Cliiiiccccc));
+            //     },
+            //    child: Container(
+            //     width: 30,
+            //     color: state.Cliiiiccccc?Colors.blue:Colors.amber,
+            //   // Third container properties
+            //   // ...
+            // ),
+            //   );
+            //   }
+       else  if(state is SuccesEstekhareState){
+      int nextNumber({required int index}) {
+    int clickCount = 0; // تعداد کلیک‌ها را حساب می‌کند
+    bool isLimitReached = false; // برای اطمینان از رسیدن به حداکثر تعداد کلیک‌ها
+    // تعداد مجاز تولید اعداد تصادفی
+     int limit=500;
+    if (!isLimitReached) { // تنها اگر به حداکثر تعداد کلیک‌ها نرسیده باشیم
+      clickCount++; // تعداد کلیک‌ها را افزایش می‌دهیم
+      if (clickCount >= limit) { // اگر تعداد کلیک‌ها بیشتر یا مساوی حداکثر مجاز باشد
+        isLimitReached = true; // وضعیت رسیدن به حداکثر تعداد کلیک‌ها را به true تغییر می‌دهیم
+        print('You have reached the maximum number of clicks.'); // اطلاع رسانی به کاربر
+      } else {
+        int randomNumber = Random().nextInt(limit); // تولید عدد تصادفی
+        print('Random Number: $randomNumber');
+        return randomNumber;
+      }
+    }
+    return 1; // یا مقدار خاصی که مد نظر شما باشد
+  }
+                List<GhazalItemModelEntity> model = state.ghazaliatHafezEstekhare;
+          // int dynamicindex=  nextNumber(index:model.length);
+         
+          
+  //                if(state is ClickedState){
+  //                  return GestureDetector(
+  //                   onTap: () {
+  //            BlocProvider.of<BlocEstekhare>(context).add(ClickedEvent(clic:_isClicked,
+  //            id: Random().nextInt(k.length)));
+
+  // Navigator.of(context).push(MaterialPageRoute(
+  //   builder: (context) => BlocProvider(
+  //     create: (context) => BlocEstekhare(),
+  //     child: DetailsGhazaliatHafezScreen(
+  //        index: k[dynamicindex].id,
+  //        GhazaliatModel: k[dynamicindex],
       
+  //     ),
+      
+  //   ),
+  // ));
+  //                   },
+  //                    child: Container(
+  //                      width: 30,
+  //                      height: 900,
+  //                      color: Colors.amber,
+                      
+  //                    ),
+  //                  );
+  //                 }
+     return 
+     Stack(
+  children: [
+    GestureDetector(
+      onTap: () {
+           print("شتلییزر");
+       //  int randomNumber = generateRandomNumber();
+ BlocProvider.of<BlocEstekhare>(context).add(EstekhareLoadedEvent(
+  nextNumber(index: state.ghazaliatHafezEstekhare[indext].id!)));
+    Navigator.of(context).push(MaterialPageRoute(
+  builder: (context) => BlocProvider.value(
+    value: BlocProvider.of<BlocEstekhare>(context),
+    child: DetailsGhazaliatHafezScreen(
+      index:  state.ghazaliatHafezEstekhare[indext].id,
+      GhazaliatModel: state.ghazaliatHafezEstekhare[indext],
+    // GhazaliatModel: model[].id,
     ),
-  ));
-  print("WEsteWee");
+    
+  ),
+));
 
-//int
-// list.asMap().forEach((i, element) {
-//    //int adjustedIndex = element < 17 ? element + 1 : element + 1;
-//   Navigator.of(context).push(MaterialPageRoute(
-//     builder: (context) => BlocProvider(
-//       create: (context) => BlocEstekhare(),
-//       child: DetailsGhazaliatHafezScreen(
-//         index: 2,
-//       GhazaliatModel: k[2-1],
-
-//        // e: k[element],
-//         //e: k[adjustedIndex],
-//       ),
-//     ),
-//   ));
-//   print("WEsteWee");
-// });
-// int adjustedIndex = index < 17 ? index+1  : index+1;
-//                                 Navigator.of(context).push(MaterialPageRoute(  
-//                                   builder: (context) => BlocProvider(
-//                                     create: (context) => GhazaliatHafezBloc(),
-//                                     child: DetailsGhazaliatHafezScreen(
-//                                       e: k[index],
-//                                       index:adjustedIndex,
-//                                     ),
-//                                   ),
-//                                 ));
-// int adjustedIndex = 0 < 17 ? 0 + 1 : 0;
-// Navigator.of(context).push(MaterialPageRoute(  
+// سپس شیء bloc را به `DetailsGhazaliatHafezScreen` منتقل می‌کنیم و همچنین از شماره تصادفی استفاده می‌کنیم
+// Navigator.of(context).push(MaterialPageRoute(
 //   builder: (context) => BlocProvider(
-//     create: (context) => GhazaliatHafezBloc(),
+//     create: (context) => BlocEstekhare(),
 //     child: DetailsGhazaliatHafezScreen(
-//       e: k[adjustedIndex], // استفاده از adjustedIndex برای شاخص در لیست k
-//       index: adjustedIndex,
+//       index: randomNumber,
+//       GhazaliatModel: model[randomNumber],
+//       //GhazaliatModel: model[5],
 //     ),
 //   ),
 // ));
+// Navigator.of(context).push(MaterialPageRoute(
+//   builder: (context) => DetailsGhazaliatHafezScreen(
+//      //GhazaliatModel: model[randomNumber],
+//      index: randomNumber
+//     ),));
 
+         // print("dynamicIndexxxx::$randomNumber");
+     // BlocProvider.of<BlocEstekhare>(context).add(EstekhareLoadedEvent(widget.e!.id!));
 
-//  final list = List.generate(k.length, (index) => nextNumber(min: 0, max: 20));
-//  int adjustedIndex = index < 17 ? index+1  : index+1;
-// list.forEach((element) {
-//   int index = list.indexOf(element);
-//   Navigator.of(context).push(MaterialPageRoute(  
-//     builder: (context) => BlocProvider(
-//       create: (context) => BlocEstekhare(),
-//       child: DetailsGhazaliatHafezScreen(
-//         index: element,
-//        e:k[adjustedIndex],
-//       ),
-//     ),
-//   ));
-//   print("WEsteWee$index");
-// });
-
-
-///محاسبه ذرست
-                //     final list = List.generate(10, (index) => nextNumber(min: 5, max: 10));
-                //  // int adjustedIndex = index < 17 ? index+1  : index+1;
-                //                 Navigator.of(context).push(MaterialPageRoute(  
-                //                   builder: (context) => BlocProvider(
-                //                     create: (context) => BlocEstekhare(),
-                //                     child: DetailsGhazaliatHafezScreen(
-                //                       GhazaliatModel: k[2-1],
-                //                       index:2,
-                //                     ),
-                //                   ),
-                //                )); 
-
-
-
-
-                // print("lllliooopppjj");
-  // onTapDown: (TapDownDetails details) {
-  //   setState(() {
-  //     _isClicked = !_isClicked;
-  //     _tapPosition = details.globalPosition;
-  //   });
-  //   // Navigate to detailsScreen
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => DetailsGhazaliatHafezScreen()),
-  //   );
-   },
-  child: Stack(
-    children: [
-      Container(
+      },
+      child: Container(
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -261,284 +345,451 @@ int aaaa= 50;
           child: Lottie.asset('assets/lottie/anim.json'),
         ),
       ),
-      if (_isClicked && _tapPosition != null)
-        Positioned(
-          left: _tapPosition!.dx - 1,
-          top: 0,
-          right: MediaQuery.of(context).size.width - _tapPosition!.dx - 1,
-          bottom: 0,
-          child: Container(
-            width: 2,
-            height: 10,
-            color: Colors.black,
-          ),
-        ),
-    ],
-  ),
-//  child: ListView(
+    ),
+    // Positioned(
+    //   top: 0,
+    //   left: 0,
+    //   child: GestureDetector(
+    //     onTap: () {
+    //       setState(() {
+    //         _isClicked = !_isClicked;
+    //       });
+    //       print("شتلییزر");
+    //       BlocProvider.of<AppBlocss>(context).add(ChangeTabgg());
+    //       Navigator.of(context).push(MaterialPageRoute(
+    //         builder: (context) => BlocProvider(
+    //           create: (context) => BlocEstekhare(),
+    //           child: DetailsGhazaliatHafezScreen(
+    //             index: k[dynamicindex].id,
+    //             GhazaliatModel: k[dynamicindex],
+    //           ),
+    //         ),
+    //       ));
+    //     },
+    //     child: Container(
+    //       width: 30,
+    //       height: 400,
+    //       color: _isClicked ? Colors.amber : Colors.red,
+    //     ),
+    //   ),
+    // ),
+// BlocBuilder<BlocEstekhare,StekharehState>(builder: (context, state) {
+//   return GestureDetector(
+//     onTap: () {
+//        Navigator.of(context).push(MaterialPageRoute(
+//             builder: (context) => BlocProvider(
+//               create: (context) => BlocEstekhare(),
+//               child: DetailsGhazaliatHafezScreen(
+//                 index: k[dynamicindex].id,
+//                 GhazaliatModel: k[dynamicindex],
+//               ),
+//             ),
+//           ));
+//     },
+//     child: Container(
+//       width: 50,
+//       color: Colors.green,
+//     ),
+//   );
+// },),
 
-//       shrinkWrap: true,
+// BlocBuilder<BlocEstekhare,StekharehState>(builder: (context, state) {
+//   return GestureDetector(
+//     onTap: () {
+//        Navigator.of(context).push(MaterialPageRoute(
+//             builder: (context) => BlocProvider(
+//               create: (context) => BlocEstekhare(),
+//               child: DetailsGhazaliatHafezScreen(
+//                 index: k[Random().nextInt(k.length)].id,
+//                 GhazaliatModel: k[Random().nextInt(k.length)],
+//               ),
+//             ),
+//           ));
+//     },
+//     child: Center(
+//       child: Container(
+//         width: 50,
+//         color: Color.fromARGB(255, 19, 89, 202),
+//       ),
+//     ),
+//   );
+// },),
+
+// BlocBuilder<BlocEstekhare,StekharehState>(builder: (context, state) {
+//   return GestureDetector(
+//     onTap: () {
+//         Navigator.of(context).push(MaterialPageRoute(
+//             builder: (context) => BlocProvider(
+//               create: (context) => BlocEstekhare(),
+//               child: DetailsGhazaliatHafezScreen(
+//                 index: k[Random().nextInt(k.length)].id,
+//                 GhazaliatModel: k[nextRd],
+//               ),
+//             ),
+//           ));
+//       // Navigator.of(context).push(MaterialPageRoute(
+//       //         builder: (context) => BlocProvider.value(
+//       //           value: BlocProvider.of<AppBlocss>(context), // از بلاک جاری استفاده می‌کنیم
+//       //           child: DetailsGhazaliatHafezScreen(
+//       //             index: k[nextRd].id,
+//       //             GhazaliatModel: k[nextRd],
+//       //           ),
+//       //         ),
+//       //       ));
+//     },
+//     child: Padding(
+//       padding: const EdgeInsets.only(left: 80),
+//       child: Container(
+//         width: 50,
+//         color: Color.fromARGB(255, 159, 182, 219),
+//       ),
+//     ),
+//   );
+// },),
+  ],
+);
+
+              
+  
+              
+
+                ///////////////////////////درست 
+  // GestureDetector(
+  //   child:  Stack(
+  //   children: [
+  //     Container(
+  //       height: double.infinity,
+  //       decoration: const BoxDecoration(
+  //         image: DecorationImage(
+  //           fit: BoxFit.fill,
+  //           image: AssetImage('assets/images/Goldfinger.jpg'),
+  //         ),
+  //       ),
+  //       child: AnimatedOpacity(
+  //         duration: const Duration(seconds: 1),
+  //         opacity: opacity,
+  //         child: Lottie.asset('assets/lottie/anim.json'),
+  //       ),
+  //     ),
+  //     if (_isClicked && _tapPosition != null)
+  //       Positioned(
+  //         left: _tapPosition!.dx - 1,
+  //         top: 0,
+  //         right: MediaQuery.of(context).size.width - _tapPosition!.dx - 1,
+  //         bottom: 0,
+  //         child: Container(
+  //           width: 2,
+  //           height: 10,
+  //           color: Colors.black,
+  //         ),
+  //       ),
+  //   ],
+  // ),
+  //                  onTapDown: (TapDownDetails details) {
+  //                   setState(() {
+  //                          _isClicked = !_isClicked;
+  //                          _tapPosition = details.globalPosition;
+  //                   });
+
+  // //BlocProvider.of<BlocEstekhare>(context).add(ClickedEvent(k.length,true,Offset.zero));
+  //       int dynamicindex=  nextNumber(index:k.length,);
+   
+
+  // Navigator.of(context).push(MaterialPageRoute(
+  //   builder: (context) => BlocProvider(
+  //     create: (context) => BlocEstekhare(),
+  //     child: DetailsGhazaliatHafezScreen(
+  //        index: k[dynamicindex].id,
+  //        GhazaliatModel: k[dynamicindex],
+      
+  //     ),
+      
+  //   ),
+  // ));
+
+  // print("WEsteWee");
+  
+  //                  }
+  // );
+   
+
+
+   //////////////////////////////////////درست
+  
+   
+//  Stack(
+//   children: [
+//     Container(
+//       height: double.infinity,
+//       decoration: const BoxDecoration(
+//         image: DecorationImage(
+//           fit: BoxFit.fill,
+//           image: AssetImage('assets/images/Goldfinger.jpg'),
+//         ),
+//       ),
+//       child: AnimatedOpacity(
+//         duration: const Duration(seconds: 1),
+//         opacity: opacity,
+//         child: Lottie.asset('assets/lottie/anim.json'),
+//       ),
+//     ),
+//     Padding(
+//       padding: const EdgeInsets.only(left: 160),
+//       child: Container(
+//         color: Colors.amber,
+
+//         width: 50,
+//         // Second container properties
+//         // ...
+//       ),
+//     ),
+//     Padding(
+//       padding: const EdgeInsets.only(left: 110),
+//       child: Container(
+
+//           width: 50,
+//           color: Colors.red,
+//         // Third container properties
+//         // ...
+//       ),
+//     ),
+//      Padding(
+//       padding: const EdgeInsets.only(left: 210),
+//       child: GestureDetector(
+//          onTapDown: (TapDownDetails details) {
+//        setState(() {
+//                            _isClicked = !_isClicked;
+//                            _tapPosition = details.globalPosition;
+//                     });
+//          },
+//         child: Container(
+               
+//             width: 50,
+//             color: const Color.fromARGB(255, 179, 115, 110),
+//           // Third container properties
+//           // ...
+//         ),
+//       ),
+//     ),
+//     //    Padding(
+//     //   padding: const EdgeInsets.only(left: 260),
+//     //   child: GestureDetector(
+//     //     onTapDown: (TapDownDetails details) {
+//     //      print("سبز");
+//     //  //BlocProvider.of<BlocEstekhare>(context).add(ClickedEvent(details.globalPosition));
+
+//     //     },
+//     //     child: 
+//     //    Container(
+//     //         width: 50,
+//     //         color: Color.fromARGB(255, 7, 149, 3),
+               
+//     //       // Third container properties
+//     //       // ...
+//     //     ),
+//     //   ),
+//     // ),
      
-//        children: [
-//         Center(child: GestureDetector(onTap: (){
-         
-//            Navigator.of(context).push(MaterialPageRoute(
+//     Padding(
+//   padding: const EdgeInsets.only(left: 210),
+//   child: GestureDetector(
+//     onTapDown: (TapDownDetails details) {
+//       _tapPosition = details.globalPosition;
+//       BlocProvider.of<BlocEstekhare>(context).add(ClickedEvent(k.length,
+//       _isClicked,_tapPosition=details.globalPosition));
+//       // Consider using setState here if necessary
+//     },
+//     child: Stack(
+//       children: [
+//         Container(
+//           width: 50,
+//           color: const Color.fromARGB(255, 179, 115, 110),
+//            child: Center(
+//              child: Positioned(
+//               left:_tapPosition?.dx ?? 0 ,
+//               top: 0,
+//             right: MediaQuery.of(context).size.width - _tapPosition!.dx - 1,
+//           bottom: 0,
+//                child: Container(
+//                 color: _isClicked?Colors.orange:Colors.blue,
+//              width: 2,
+                             
+                    
+//                ),
+//              ),
+//            ),
+//         ),
+// //         // Positioned(
+// //         //   left: _tapPosition?.dx ?? 0,
+// //         //   top: 0,
+// //         //   child: Container(
+// //         //     width: 2,
+// //         //     height: 10,
+// //         //     color: Colors.black,
+// //         //   ),
+// //         // ),
+// //       ],
+// //     ),
+// //   ),
+// // ),
+
+//   //  if (state is ClickedEstekhareState)
+//   //    Positioned(
+//   //         left: _tapPosition!.dx - 1,
+//   //         top: 0,
+//   //         right: MediaQuery.of(context).size.width - _tapPosition!.dx - 1,
+//   //         bottom: 0,
+//   //         child: Container(
+//   //           width: 2,
+//   //           height: 10,
+//   //           color: Colors.black,
+//   //         ),
+//   //       ),
+      
+//   ],
+// //),
+
+
+  // child: Stack(
+  //   children: [
+  //     Container(
+  //       height: double.infinity,
+  //       decoration: const BoxDecoration(
+  //         image: DecorationImage(
+  //           fit: BoxFit.fill,
+  //           image: AssetImage('assets/images/Goldfinger.jpg'),
+  //         ),
+  //       ),
+  //       child: AnimatedOpacity(
+  //         duration: const Duration(seconds: 1),
+  //         opacity: opacity,
+  //         child: Lottie.asset('assets/lottie/anim.json'),
+  //       ),
+  //     ),
+
+  //     if (_isClicked && _tapPosition != null)
+  //       Positioned(
+  //         left: _tapPosition!.dx - 1,
+  //         top: 0,
+  //         right: MediaQuery.of(context).size.width - _tapPosition!.dx - 1,
+  //         bottom: 0,
+  //         child: Container(
+  //           width: 2,
+  //           height: 10,
+  //           color: Colors.black,
+  //         ),
+  //       ),
+  //   ],
+  // ),
+// //  child: ListView(
+
+// //       shrinkWrap: true,
+     
+// //        children: [
+// //         Center(child: GestureDetector(onTap: (){
+             
+// //            Navigator.of(context).push(MaterialPageRoute(
+// //     builder: (context) => BlocProvider(
+// //       create: (context) => BlocEstekhare(),
+// //       child: DetailsGhazaliatHafezScreen(
+// //         index: k[indext].id,
+// //       GhazaliatModel: k[indext],
+
+// //        // e: k[element],
+// //         //e: k[adjustedIndex],
+// //       ),
+// //     ),
+// //   ));
+              
+// //         },child: Container(height: 60,width: 60,color: Colors.amber,),),),
+// //        ],
+// //       ),
+// );
+
+              }
+              
+               
+              
+            
+              
+            
+
+//         else if(state is SuccesEstekhareStateTow){
+//        List<GhazalItemModelEntity> k = state.ghazaliatHafezEstekhare;
+//             return 
+//  GestureDetector(
+//     child:  Stack(
+//     children: [
+//       Container(
+//         height: double.infinity,
+//         decoration: const BoxDecoration(
+//           image: DecorationImage(
+//             fit: BoxFit.fill,
+//             image: AssetImage('assets/images/Goldfinger.jpg'),
+//           ),
+//         ),
+//         child: AnimatedOpacity(
+//           duration: const Duration(seconds: 1),
+//           opacity: opacity,
+//           child: Lottie.asset('assets/lottie/anim.json'),
+//         ),
+//       ),
+      
+//            Padding(
+//       padding: const EdgeInsets.only(left: 210),
+//       child: GestureDetector(
+//          onTapDown: (TapDownDetails details) {
+              
+//      // BlocProvider.of<BlocEstekhare>(context).add(EstekhareLoadedEvent(k.length,_isClicked));
+      
+//        int dynamicindex=  nextNumber(index:k.length);
+//       // nextNumber({required index})=>Random().nextInt(index);
+//  Navigator.of(context).push(MaterialPageRoute(
 //     builder: (context) => BlocProvider(
 //       create: (context) => BlocEstekhare(),
 //       child: DetailsGhazaliatHafezScreen(
-//         index: k[indext].id,
-//       GhazaliatModel: k[indext],
-
-//        // e: k[element],
-//         //e: k[adjustedIndex],
+//          index: k[dynamicindex].id,
+//          GhazaliatModel:k[dynamicindex],
+      
 //       ),
 //     ),
 //   ));
-          
-//         },child: Container(height: 60,width: 60,color: Colors.amber,),),),
-//        ],
+//       //  setState(() {
+//       //                      _isClicked = !_isClicked;
+//       //                     // _tapPosition = details.globalPosition;
+//       //               });
+//          },
+//         child: Container(
+//             width: 10,
+//             color: _isClicked?const Color.fromARGB(255, 158, 196, 227):const Color.fromARGB(255, 215, 198, 149),
+//           // Third container properties
+//           // ...
+//         ),
 //       ),
-);
+//     ),
+//       ] ) );
+   
+//           }
+              // else if(state is clickedEstekhareState){
+              //   return Container(
+              //     height: 10,width: 10,color: Colors.amber,);
 
-            // Center(child: Container(height: 50,width: 50,color: Colors.amber,));
-//          ListView.builder(
-//           itemCount: state.ghazaliatHafezEstekhare.length,
-//          scrollDirection: Axis.vertical,
-//           itemBuilder: (context, index) {
-//                return GestureDetector(
-//                onTapDown: (TapDownDetails details) {
-//                 //   int adjustedIndex = index < 17 ? index+1  : index+1;
-//                 //                 Navigator.of(context).push(MaterialPageRoute(  
-//                 //                   builder: (context) => BlocProvider(
-//                 //                     create: (context) => BlocEstekhare(),
-//                 //                     child: DetailsGhazaliatHafezScreen(
-//                 //                       e: k[index],
-//                 //                       index:adjustedIndex,
-//                 //                     ),
-//                 //                   ),
-//                 //                )); 
-//                 // print("lllliooopppjj");
-// // int randomIndex = Random().nextInt(widget.e.id!);
-// //         Navigator.of(context).push(MaterialPageRoute(
-// //           builder: (context) => BlocProvider(
-// //             create: (context) => BlocEstekhare(),
-// //             child: DetailsGhazaliatHafezScreen(
-// //               e: k[randomIndex],
-// //               index: randomIndex,
-// //             ),
-// //           ),
-// //         ));
-// //         print("lllliooopppjj");
-
-//  // int randomIndex = Random().nextInt(10); 
-//  final randomIndex = nextNumber(min:0,max:50);
-//     int adjustedIndex = index < 17 ? index+1  : index+1;
-//    Navigator.of(context).push(MaterialPageRoute(  
-//                                   builder: (context) => BlocProvider(
-//                                     create: (context) => GhazaliatHafezBloc(),
-//                                     child: DetailsGhazaliatHafezScreen(
-//                                      e: k[index],
-//                                       index:adjustedIndex,
-//                                     ),
-//                                   ),
-//                                 ));
-//                                 print("FFFDDDDSWWW::::$adjustedIndex");
-//           // Navigator.push(
-//           //      context,
-//           //      MaterialPageRoute(
-//           //        builder: (context) => DetailsGhazaliatHafezScreen(
-//           //   e: k[index],
-//           //   index: adjustedIndex,
-//           //        ),
-//           //      ),
-//           //    );// Generates a random index from 0 to 140
-//   // Navigator.of(context).push(MaterialPageRoute(
-//   //   builder: (context) => BlocProvider(
-//   //     create: (context) => BlocEstekhare(),
-//   //     child: DetailsGhazaliatHafezScreen(
-//   //       e: k[randomIndex],
-//   //       index: randomIndex,
-//   //     ),
-//   //   ),
-//   // ));
-//      //      Navigator.push(
-//         //        context,
-//         //        MaterialPageRoute(
-//         //          builder: (context) => DetailsGhazaliatHafezScreen(
-//         //     e: k[10],
-//         //     index: 10,
-//         //          ),
-//         //        ),
-//         //      );
-
-
-//   // Handle the case where widget.e or widget.e.id is null
-//   print("Error: widget.e or widget.e.id is null.");
-//                },
-//                child: 
-//                Center(
-//                  child: SizedBox(
-//                    height: MediaQuery.of(context).size.height,
-//                    child: Container(
-//                      width: double.infinity,
-//                      decoration: const BoxDecoration(
-//                              image: DecorationImage(
-//                                fit: BoxFit.fill,
-//                                image: AssetImage('assets/images/Goldfinger.jpg'),
-//                              ),
-//                      ),
-//                    child:Text(state.ghazaliatHafezEstekhare[index].id.toString(),
-//                     //  child: AnimatedOpacity(
-//                     //          duration: const Duration(seconds: 1),
-//                     //          opacity: opacity,
-//                     //          child: Lottie.asset('assets/lottie/anim.json'),
-//                     //  ),
-//                    ),
-//                    )
-//                  ),
-//                ),
-//             //    // اگر _isClicked true و _tapPosition مقدار ندارد، یک خط عمودی به عکس اضافه می‌شود
-//             //    if (_isClicked && _tapPosition != null)
-//             //      Positioned(
-//             // left: _tapPosition!.dx - 1,
-//             // top: 0,
-//             // right: MediaQuery.of(context).size.width - _tapPosition!.dx - 1,
-//             // bottom: 0,
-//             // child: Container(
-//             //   width: 2,
-//             //   height: 10,
-//             //   color: Colors.black,
-//             // ),
-//             //      ),
-          
-//                );
-//         //        GestureDetector(
-//         //    onTapDown: (TapDownDetails details) {
-           
-//         //  //    int index = ((details.localPosition.dx / MediaQuery.of(context).size.width*125)).floor();
-//         //  // index = index.clamp(0, 122);
-//         //      //int index = (details.localPosition.dx / MediaQuery.of(context).size.width*123).floor();
-//         //      Navigator.push(
-//         //        context,
-//         //        MaterialPageRoute(
-//         //          builder: (context) => DetailsGhazaliatHafezScreen(
-//         //     e: k[10],
-//         //     index: 10,
-//         //          ),
-//         //        ),
-//         //      );
-//         //    },
-//         //    child: Stack(
-//         //      children: [
-//         //        Container(
-//         //          height: double.infinity,
-//         //          decoration: const BoxDecoration(
-//         //     image: DecorationImage(
-//         //       fit: BoxFit.fill,
-//         //       image: AssetImage('assets/images/Goldfinger.jpg'),
-//         //     ),
-//         //          ),
-//         //          child: AnimatedOpacity(
-//         //     duration: const Duration(seconds: 1),
-//         //     opacity: opacity,
-//         //     child: Lottie.asset('assets/lottie/anim.json'),
-//         //          ),
-//         //        ),
-//         //        // اگر _isClicked true و _tapPosition مقدار ندارد، یک خط عمودی به عکس اضافه می‌شود
-//         //        if (_isClicked && _tapPosition != null)
-//         //          Positioned(
-//         //     left: _tapPosition!.dx - 1,
-//         //     top: 0,
-//         //     right: MediaQuery.of(context).size.width - _tapPosition!.dx - 1,
-//         //     bottom: 0,
-//         //     child: Container(
-//         //       width: 2,
-//         //       height: 10,
-//         //       color: Colors.black,
-//         //     ),
-//         //          ),
-//         //      ],
-//         //    ),
-//         //  );
-         
-//           },
-         
-               
-           
-//          )
-;
-           
-
-             
-              //    GestureDetector(
-              //     // onTapDown: (TapDownDetails details) {
-              //     //   print("hhhhh");
-              //     //      //  BlocProvider.of<BlocEstekhare>(context).add(EstekhareLoadedEvent(widget.index??0));
-
-
-              //     // },
-              //      onTapDown: (TapDownDetails details) {
-              //  int adjustedIndex = index < 17 ? index+1  : index+1;
-            
-              //       Navigator.of(context).push(MaterialPageRoute(  
-                      
-              //                                 builder: (context) => BlocProvider(
-              //                                   create: (context) => BlocEstekhare(),
-              //                                   child: DetailsGhazaliatHafezScreen(
-              //                                     e: k[index],
-              //                                     index:adjustedIndex,
-              //                                   ),
-              //                                 ),
-              //                               )); 
-              //       // setState(() {
-              //       //   _isClicked = !_isClicked;
-              //       //   _tapPosition = details.globalPosition;
-              //       // });
-              //      },
-              //      child: Stack(
-              //       children: [
-              //         Container(
-              // height: double.infinity,
-              // decoration: const BoxDecoration(
-              //   image: DecorationImage(
-              //     fit: BoxFit.fill,
-              //     image: AssetImage('assets/images/Goldfinger.jpg'),
-              //   ),
-              // ),
-              // child: AnimatedOpacity(
-              //   duration: const Duration(seconds: 1),
-              //   opacity: opacity,
-              //   child: Lottie.asset('assets/lottie/anim.json'),
-              //  ),
-              //         ),
-              //         if (_isClicked && _tapPosition != null)
-              // Positioned(
-              //   left: _tapPosition!.dx - 1,
-              //   top: 0,
-              //   right: MediaQuery.of(context).size.width - _tapPosition!.dx - 1,
-              //   bottom: 0,
-              //   child: Container(
-              //     width: 2,
-              //     height: 10,
-              //     color: Colors.black,
-              //   ),
-              // ),
-              //       ],
-              //      ),
-              //       );
+              // }
+              // else if(state is ErrorEstekhareState ){
+              //    return Center(
+              //       child: Text(state.errorText));
+              // }
               
-                    
-            
-          }else if(state is ErrorEstekhareState ){
-             return Center(
-                child: Text(state.errorText));
-          }else{
      return Container();
-          }
-         // return Center(child: Container(height: 50,width: 50,color: Colors.amber,));
+              
+             // return Center(child: Container(height: 50,width: 50,color: Colors.amber,));
 
-        },
-        )
+            },
+            ),
+
+          
+          
+      
       //  body: GestureDetector(
       //  onTapDown: (TapDownDetails details) {
       //   setState(() {
@@ -580,11 +831,13 @@ int aaaa= 50;
      ),
    );
   }
-  
+  // nextNumber({required index})=>Random().nextInt();
  
 }
 
- nextNumber({required index})=>Random().nextInt(index);
+  // nextNumber({required index})=>Random().nextInt(index);
+  // nextR({required index})=>Random().nextInt(index);
+  // nextU({required index})=>Random().nextInt(index);
 
 
 

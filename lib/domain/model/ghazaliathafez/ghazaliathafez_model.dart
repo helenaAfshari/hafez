@@ -1,6 +1,7 @@
 
 class GhazalItemModelEntity {
   final int? id;
+  
   final String? title;
   final String? tafsir;
   final String? tafsirAudio;
@@ -8,6 +9,7 @@ class GhazalItemModelEntity {
   final bool? isLiked;
   GhazalItemModelEntity(
       {this.id,
+    
       this.title,
       this.tafsir,
       this.tafsirAudio,
@@ -17,6 +19,7 @@ class GhazalItemModelEntity {
       GhazalItemModelEntity(
         isLiked: false,
         id: json['id'],
+      
         title: json['title'],
         tafsir: json['tafsir'],
         tafsirAudio: json['tafsir_audio'],
@@ -26,6 +29,7 @@ class GhazalItemModelEntity {
   GhazalItemModelEntity copyWith({
     int? id,
     String? title,
+    int? ids,
     String? tafsir,
     String? tafsirAudio,
     String? firstStanza,
@@ -33,6 +37,7 @@ class GhazalItemModelEntity {
   }) {
     return GhazalItemModelEntity(
       id: id ?? this.id,
+ 
       title: title ?? this.title,
       tafsir: tafsir ?? this.tafsir,
       tafsirAudio: tafsirAudio ?? this.tafsirAudio,
@@ -44,6 +49,7 @@ class GhazalItemModelEntity {
   Map toJson() => {
         'id': id,
         'title': title,
+        
         'tafsir': tafsir,
         'tafsirAudio': tafsirAudio,
         'firstStanza': firstStanza,
@@ -51,7 +57,8 @@ class GhazalItemModelEntity {
 
       @override
   String toString() {
-    return 'GhazalItemModelEntity(id=$id, title=$title, tafsir=$tafsir, tafsirAudio=$tafsirAudio, firstStanza=$firstStanza, isLiked=$isLiked)';
+    return 
+    'GhazalItemModelEntity(id=$id, title=$title, tafsir=$tafsir, tafsirAudio=$tafsirAudio, firstStanza=$firstStanza, isLiked=$isLiked,)';
   }
 }
 // immutability
