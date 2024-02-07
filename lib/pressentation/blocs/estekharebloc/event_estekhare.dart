@@ -6,10 +6,13 @@ import 'package:flutter/widgets.dart';
 abstract class EstekhareEvent{}
 class EstekhareStart extends EstekhareEvent{}
 class EstekhareLoadedEvent extends EstekhareStart {
-  EstekhareLoadedEvent(this.selectEstekhareId);
+  EstekhareLoadedEvent(this.selectEstekhareId,);
    int selectEstekhareId;
+  //  bool cliccckkkeeddd;
+  //  Offset? tapPosition;
  
 }
+
 // class EstekhareLoadedEvent extends EstekhareStart{
 
 class EstekhareLoadedEventt extends EstekhareStart{
@@ -27,7 +30,10 @@ class EstekhareLoadedEventt extends EstekhareStart{
   ChangeTab(this.e);
   bool e ;
 }
+class ChangeTabgg extends EstekhareEvent {
+   ChangeTabgg();
 
+}
 // class ClickedEvent extends EstekhareStart{
 //   ClickedEvent(this.isClicked);
 

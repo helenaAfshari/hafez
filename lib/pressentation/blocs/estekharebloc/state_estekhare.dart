@@ -14,6 +14,8 @@ class SuccesEstekhareState extends StekharehState{
   // int a = Random().nextInt(2);
   SuccesEstekhareState(this.ghazaliatHafezEstekhare,);
    final List<GhazalItemModelEntity> ghazaliatHafezEstekhare;
+   // bool tabStatuse;
+    // Offset? tapPosition;
   //final int a;
   }
 
@@ -28,8 +30,9 @@ class SuccesEstekhareState extends StekharehState{
 // }
 
   class SuccesEstekhareStateTow extends StekharehState{
-  SuccesEstekhareStateTow(this.ghazaliatHafezEstekhare);
+  SuccesEstekhareStateTow(this.ghazaliatHafezEstekhare,);
   final List<GhazalItemModelEntity> ghazaliatHafezEstekhare;
+    //bool tabStatuse=false;
   }
   
 class LoadingEstekhareState extends StekharehState{
@@ -52,7 +55,10 @@ class ClickedState extends StekharehState {
   final bool Cliiiiccccc;
 }
 
-
+class ChangeTabb extends StekharehState{
+ChangeTabb(this.tabStatuse);
+   final bool tabStatuse;
+}
 
 
 

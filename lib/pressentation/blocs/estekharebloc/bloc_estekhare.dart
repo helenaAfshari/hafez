@@ -41,6 +41,8 @@ class BlocEstekhare extends Bloc<EstekhareEvent,StekharehState>{
     if (detailsGhazaliatResponse.statusCode == 200) {
             print("llllllHHHHHTTTYYYYYYY$ghazaliatHafez");
             emit(SuccesEstekhareState(ghazaliatHafez,));
+    
+
             print("Estekhareh${ghazaliatHafez}");
           } else {
             emit(ErrorEstekhareState("معتبر نیست"));
@@ -50,62 +52,12 @@ catch (e) {
     print("نیست به اینترت");
 }
     }
- });
+ }
+ );
+
   }
    int nextNumber({required int index}) => Random().nextInt(index);
 }
-
-
-
-
-//   abstract class EstekhareEvent {}
-
-// class EstekhareStart extends EstekhareEvent {}
-
-// class EstekhareLoadedEvent extends EstekhareStart {
-//   final int selectEstekhareId;
-
-//   EstekhareLoadedEvent(this.selectEstekhareId);
-// }
-
-// class EstekhareBloc extends Bloc<EstekhareEvent, EstekhareState> {
-//   EstekhareBloc() : super(InitialEstekhareState());
-
-//   @override
-//   Stream<EstekhareState> mapEventToState(
-//     EstekhareEvent event,
-//   ) async* {
-//     print(event);
-//     if (event is EstekhareLoadedEvent) {
-//       print("kkkkkk");
-//       try {
-//         print("llllll");
-//         yield LoadingEstekhareState();
-
-//         final detailsGhazaliatResponse = await serviceLocator<EstekhareRepository>()
-//             .estekhareRepository(event.selectEstekhareId);
-//         print("EEEEEEEEEEETTTTTTTT${detailsGhazaliatResponse}");
-
-//         List<GhazalItemModelEntity> ghazaliatHafez = [];
-//         if (detailsGhazaliatResponse.statusCode == 200) {
-//           ghazaliatHafez = (detailsGhazaliatResponse.data['data'] as List)
-//               .map((e) => GhazalItemModelEntity.fromJson(e))
-//               .toList();
-
-//           print("llllllHHHHHTTTYYYYYYY$ghazaliatHafez");
-//           yield SuccesEstekhareState(ghazaliatHafez);
-//           print("Estekhareh${ghazaliatHafez}");
-//         } else {
-//           yield ErrorEstekhareState("معتبر نیست");
-//         }
-//       } catch (e) {
-//         print("نیست به اینترت");
-//       }
-//     }
-//   }
-
-//   int nextNumber({required int index}) => Random().nextInt(index);
-// }
 
 
 //   class BlocEstekhare extends Bloc<EstekhareEvent,StekharehState>{
@@ -128,32 +80,7 @@ catch (e) {
 //     emit(SuccesEstekhareState(ghazaliatResponse,));
 // } 
 // catch (e) {
-//     print("نیست به اینترت");
-// }
-//     }
-//  });
-//   }
-// }
-//  on<EstekhareEvent>((event, emit) async {
-//       print(event);
-//       if (event is EstekhareLoadedEvent) {
-//         print("kkkkkk");
-//     try {
-//     print("llllll");
-//     emit(LoadingEstekhareState());
-//     final ghazaliatResponse =
-//         await serviceLocator<GhazaliatHafezRepository>()
-//             .ghazaliathafez(20, 100);
-//       // Random().nextInt(event.selectEstekhareId); // اینجا اضافه شده است
-//     emit(SuccesEstekhareState(ghazaliatResponse,));
-// } 
-// catch (e) {
-//     print("نیست به اینترت");
-// }
-//     }
-//  });
-//   }
- 
+
 
 
 

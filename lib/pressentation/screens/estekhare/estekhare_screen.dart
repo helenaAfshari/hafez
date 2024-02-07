@@ -47,13 +47,12 @@ int aaaa= 50;
  // BlocProvider.of<BlocEstekhare>(context).add(ClickedEvent(k.length,_isClicked,));
   //BlocProvider.of<BlocEstekhare>(context).add(ClickedEvent());
 //  BlocProvider.of<BlocEstekhare>(context).add(EstekhareLoadedEvent(widget.e!.id!));
-
+  
   }
   double opacity = 1.0;
-  bool _isClicked =false;
+  bool _isClicked =true;
   bool _isClickedd =false;
   Offset? _tapPosition;
-
 
 
 
@@ -290,13 +289,18 @@ int aaaa= 50;
   //                  );
   //                 }
      return 
-     Stack(
-  children: [
-    GestureDetector(
-      onTap: () {
-           print("شتلییزر");
-       //  int randomNumber = generateRandomNumber();
- BlocProvider.of<BlocEstekhare>(context).add(EstekhareLoadedEvent(
+    // bool isClicked = false; // متغیری برای نگهداری وضعیت کلیک
+
+GestureDetector(
+  onTapDown: (TapDownDetails details) {
+                      setState(() {
+                           _isClicked = !_isClicked;
+                           _tapPosition = details.globalPosition;
+                    });
+                    
+    //BlocProvider.of<BlocEstekhare>(context).add(ChangeTab());
+
+     BlocProvider.of<BlocEstekhare>(context).add(EstekhareLoadedEvent(
   nextNumber(index: state.ghazaliatHafezEstekhare[indext].id!)));
     Navigator.of(context).push(MaterialPageRoute(
   builder: (context) => BlocProvider.value(
@@ -306,46 +310,170 @@ int aaaa= 50;
       GhazaliatModel: state.ghazaliatHafezEstekhare[indext],
     // GhazaliatModel: model[].id,
     ),
-    
   ),
 ));
-
-// سپس شیء bloc را به `DetailsGhazaliatHafezScreen` منتقل می‌کنیم و همچنین از شماره تصادفی استفاده می‌کنیم
-// Navigator.of(context).push(MaterialPageRoute(
-//   builder: (context) => BlocProvider(
-//     create: (context) => BlocEstekhare(),
-//     child: DetailsGhazaliatHafezScreen(
-//       index: randomNumber,
-//       GhazaliatModel: model[randomNumber],
-//       //GhazaliatModel: model[5],
-//     ),
-//   ),
-// ));
-// Navigator.of(context).push(MaterialPageRoute(
-//   builder: (context) => DetailsGhazaliatHafezScreen(
-//      //GhazaliatModel: model[randomNumber],
-//      index: randomNumber
-//     ),));
-
-         // print("dynamicIndexxxx::$randomNumber");
-     // BlocProvider.of<BlocEstekhare>(context).add(EstekhareLoadedEvent(widget.e!.id!));
-
-      },
-      child: Container(
+    // اضافه کردن کدهای دیگر که می‌خواهید در زمان کلیک انجام دهید
+  },
+  child: Stack(
+    children: [
+      Container(
         height: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.fill,
             image: AssetImage('assets/images/Goldfinger.jpg'),
+            
           ),
         ),
         child: AnimatedOpacity(
-          duration: const Duration(seconds: 1),
+          duration: Duration(seconds: 1),
           opacity: opacity,
           child: Lottie.asset('assets/lottie/anim.json'),
         ),
       ),
-    ),
+          if (_isClicked && _tapPosition != null)
+        Positioned(
+          left: _tapPosition!.dx - 1,
+          top: 0,
+          right: MediaQuery.of(context).size.width - _tapPosition!.dx - 1,
+          bottom: 0,
+          child: Container(
+            width: 10,
+           // height: 10,
+            color:_isClicked? const Color.fromARGB(255, 243, 4, 4):Colors.blue,
+          ),
+        ),
+    ],
+  ),
+
+
+//      Stack(
+//   children: [
+//     GestureDetector(
+//       onTapDown: (TapDownDetails details){
+//          setState(() {
+//       _isClicked = true; // تنظیم وضعیت کلیک به true
+       
+//     });
+//            print("شتلییزر");
+//        //  int randomNumber = generateRandomNumber();
+//  BlocProvider.of<BlocEstekhare>(context).add(EstekhareLoadedEvent(
+//   nextNumber(index: state.ghazaliatHafezEstekhare[indext].id!)));
+//     Navigator.of(context).push(MaterialPageRoute(
+//   builder: (context) => BlocProvider.value(
+//     value: BlocProvider.of<BlocEstekhare>(context),
+//     child: DetailsGhazaliatHafezScreen(
+//       index:  state.ghazaliatHafezEstekhare[indext].id,
+//       GhazaliatModel: state.ghazaliatHafezEstekhare[indext],
+//     // GhazaliatModel: model[].id,
+//     ),
+    
+//   ),
+// ));
+
+// // سپس شیء bloc را به `DetailsGhazaliatHafezScreen` منتقل می‌کنیم و همچنین از شماره تصادفی استفاده می‌کنیم
+// // Navigator.of(context).push(MaterialPageRoute(
+// //   builder: (context) => BlocProvider(
+// //     create: (context) => BlocEstekhare(),
+// //     child: DetailsGhazaliatHafezScreen(
+// //       index: randomNumber,
+// //       GhazaliatModel: model[randomNumber],
+// //       //GhazaliatModel: model[5],
+// //     ),
+// //   ),
+// // ));
+// // Navigator.of(context).push(MaterialPageRoute(
+// //   builder: (context) => DetailsGhazaliatHafezScreen(
+// //      //GhazaliatModel: model[randomNumber],
+// //      index: randomNumber
+// //     ),));
+
+// //          print("dynamicIndexxxx::$randomNumber");
+// //      BlocProvider.of<BlocEstekhare>(context).add(EstekhareLoadedEvent(widget.e!.id!));
+
+//       },
+//       child: Container(
+//         height: double.infinity,
+//         decoration: const BoxDecoration(
+//           image: DecorationImage(
+//             fit: BoxFit.fill,
+//             image: AssetImage('assets/images/Goldfinger.jpg'),
+//           ),
+//         ),
+//         child: AnimatedOpacity(
+//           duration: const Duration(seconds: 1),
+//           opacity: opacity,
+//           child: Lottie.asset('assets/lottie/anim.json'),
+//         ),
+//       ),
+     
+//     ),
+
+
+
+
+// GestureDetector(
+//     child:  Stack(
+//     children: [
+//       Container(
+//         height: double.infinity,
+//         decoration: const BoxDecoration(
+//           image: DecorationImage(
+//             fit: BoxFit.fill,
+//             image: AssetImage('assets/images/Goldfinger.jpg'),
+//           ),
+//         ),
+//         child: AnimatedOpacity(
+//           duration: const Duration(seconds: 1),
+//           opacity: opacity,
+//           child: Lottie.asset('assets/lottie/anim.json'),
+//         ),
+//       ),
+//       // if (_isClicked && _tapPosition != null)
+//       //   Positioned(
+//       //     left: _tapPosition!.dx - 1,
+//       //     top: 0,
+//       //     right: MediaQuery.of(context).size.width - _tapPosition!.dx - 1,
+//       //     bottom: 0,
+//       //     child: Container(
+//       //       width: 2,
+//       //       height: 10,
+//       //       color: Colors.black,
+//       //     ),
+//       //   ),
+//     ],
+//   ),
+//   //                  onTapDown: (TapDownDetails details) {
+//   //                   // setState(() {
+//   //                   //        _isClicked = !_isClicked;
+//   //                   //        _tapPosition = details.globalPosition;
+//   //                   // });
+
+//   // //BlocProvider.of<BlocEstekhare>(context).add(ClickedEvent(k.length,true,Offset.zero));
+    
+   
+
+
+//   // print("WEsteWee");
+  
+//   //                  }
+//   ),
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Positioned(
     //   top: 0,
     //   left: 0,
@@ -446,10 +574,9 @@ int aaaa= 50;
 //     ),
 //   );
 // },),
-  ],
+  
 );
-
-              
+       
   
               
 

@@ -12,6 +12,7 @@ class EstekhareRepositoryImplement extends EstekhareRepository{
   Future<Response> estekhareRepository(int estekhareId)async {
 
        final estekhareResponse = await serviceLocator<EstekhareApi>().estekhare((estekhareId));
+
     return estekhareResponse;
   }
  

@@ -1,4 +1,4 @@
-// import 'package:equatable/equatable.dart';
+import 'package:equatable/equatable.dart';
 
 // abstract class AppEvents extends Equatable{
 //  const AppEvents();
@@ -11,3 +11,15 @@
 //   @override
 //   List<Object> get props=>[];
 // }
+
+
+abstract class AppEvents  {
+  const AppEvents();
+
+}
+
+class ChangeTabgg extends AppEvents {
+  const ChangeTabgg();
+
+}
+

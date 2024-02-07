@@ -45,6 +45,7 @@ void main() async {
   MyApp()
   );
 }
+ Offset? _tapPosition;
    BlocEstekhare blocEstekharee = BlocEstekhare();
 
 int clickCount = 0; // تعداد کلیک‌ها را حساب می‌کند
@@ -80,8 +81,7 @@ class MyApp extends StatelessWidget {
           DetailsGhazaliatHafezBloc()..add(LoadedddEvent(0))),
 
            BlocProvider<BlocEstekhare>(
-            create: (context) =>
-          BlocEstekhare()..add(EstekhareLoadedEvent(generateRandomNumber()))),
+create: (context) =>BlocEstekhare()..add(EstekhareLoadedEvent(generateRandomNumber()))),
 
     // BlocProvider<BlocEstekharee>(
     //         create: (context) =>
