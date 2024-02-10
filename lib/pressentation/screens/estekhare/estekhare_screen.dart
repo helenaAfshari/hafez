@@ -35,6 +35,7 @@ class _EstekhareScreenState extends State<EstekhareScreen> {
    int indexxxxx=0;
    int indext =0;
 int aaaa= 50;
+Color _colorContainer = Colors.transparent;
   @override
   void initState() {
     super.initState();
@@ -50,7 +51,7 @@ int aaaa= 50;
   
   }
   double opacity = 1.0;
-  bool _isClicked =true;
+  bool _isClicked =false;
   bool _isClickedd =false;
   Offset? _tapPosition;
 
@@ -294,10 +295,14 @@ int aaaa= 50;
 GestureDetector(
   onTapDown: (TapDownDetails details) {
                       setState(() {
-                           _isClicked = !_isClicked;
-                           _tapPosition = details.globalPosition;
-                    });
-                    
+          _isClicked = true;
+          _tapPosition = details.globalPosition;
+        });
+            //             setState(() {
+            //    _colorContainer = _colorContainer == Colors.red ? 
+            //          Colors.transparent : 
+            //          Colors.red;
+            //  });
     //BlocProvider.of<BlocEstekhare>(context).add(ChangeTab());
 
      BlocProvider.of<BlocEstekhare>(context).add(EstekhareLoadedEvent(
@@ -331,7 +336,22 @@ GestureDetector(
           child: Lottie.asset('assets/lottie/anim.json'),
         ),
       ),
-          if (_isClicked && _tapPosition != null)
+        //  Ink(
+        //     child: InkWell(
+        //     child: Container(
+        //     width: 200,
+        //     height: 200,
+        //     color: _colorContainer ,
+        //   ),
+        //   onTap: () {
+        //     setState(() {
+        //       _colorContainer = _colorContainer == Colors.red ? 
+        //             Colors.transparent : 
+        //             Colors.red;
+        //     });
+        //   },
+        // )),
+         if (_isClicked && _tapPosition != null)
         Positioned(
           left: _tapPosition!.dx - 1,
           top: 0,
