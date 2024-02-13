@@ -6,13 +6,13 @@ import 'package:hafez/pressentation/blocs/ghazaliathafezbloc/ghazaliat_hafez_sta
 import 'package:hafez/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> {
+class GhazaliatHafezBloc
+    extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> {
   int page = 1;
   int perPage = 50;
   List<GhazalItemModelEntity> ghazaliatHafez = [];
   List<DetailsGhazaliatHafezModel> detailsGhazaliatHafez = [];
   GhazaliatHafezBloc() : super(GhazaliatHafezInitialState()) {
-    
     on<GhazaliatHafezEvent>((event, emit) async {
       print(event);
       if (event is LoadedEvent) {
@@ -24,36 +24,36 @@ class GhazaliatHafezBloc extends Bloc<GhazaliatHafezEvent, GhazaliatHafezState> 
               await serviceLocator<GhazaliatHafezRepository>()
                   .ghazaliathafez(page, perPage);
           emit(GhazaliatHafezSuccesState(ghazaliatResponse));
-        } 
-       catch (e) {
-          print("نیست به اینترت");
+        } catch (e) {
+          print("have not interner");
         }
-      
-    }
+      }
     });
-    
-     on<ChangeColorButtomListClickedEventtt>((event, emit) async {
-        final todos = List<GhazalItemModelEntity>.from((state as GhazaliatHafezSuccesState).ghazaliatHafez);
+
+    on<ChangeColorButtomListClickedEventtt>(
+      (event, emit) async {
+        final todos = List<GhazalItemModelEntity>.from(
+            (state as GhazaliatHafezSuccesState).ghazaliatHafez);
         final todoIndex = todos.indexWhere((e) => e.id == event.id);
-              serviceLocator<GhazaliatHafezRepository>()
-                  .toggleFav(event.id, todos[todoIndex]);
-          final todo = todos[todoIndex];
-          todos[todoIndex] = todo.copyWith(isLiked: !(todo.isLiked ?? false));
-         emit(GhazaliatHafezSuccesState(todos));
-    },);
+        serviceLocator<GhazaliatHafezRepository>()
+            .toggleFav(event.id, todos[todoIndex]);
+        final todo = todos[todoIndex];
+        todos[todoIndex] = todo.copyWith(isLiked: !(todo.isLiked ?? false));
+        emit(GhazaliatHafezSuccesState(todos));
+      },
+    );
 
     on<LoadMoreEvent>((event, emit) async {
       page++;
-
-   try {
-          print("llllllTooogglllee");
-          final ghazaliatResponse =
-              await serviceLocator<GhazaliatHafezRepository>()
-                  .ghazaliathafez(page, perPage);
-  emit(GhazaliatHafezSuccesState(ghazaliatResponse));
-        }  catch (e) {
-        print(" 77777متصل نیست به اینترنت");
+      try {
+        print("llllllTooogglllee");
+        final ghazaliatResponse =
+            await serviceLocator<GhazaliatHafezRepository>()
+                .ghazaliathafez(page, perPage);
+        emit(GhazaliatHafezSuccesState(ghazaliatResponse));
+      } catch (e) {
+        print("have not interner");
       }
-        });
+    });
   }
 }

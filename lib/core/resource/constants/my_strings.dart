@@ -5,6 +5,7 @@ abstract class MyStrings {
    static const String suport = "پشتیبانی";
    static const String tafsirPoint = ":تفسیر";
    static const String close = "close";
+   static const String source = ":منبع";
    static const String websiteHafez = "وبسایت حافظ";
    static const String ghazaliatHafezText = "غزلیات حافظ";
    static const String shareText = """

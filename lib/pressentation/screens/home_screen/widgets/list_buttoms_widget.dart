@@ -1,20 +1,14 @@
 
-
 import 'package:hafez/core/components/customwidgets/custom_button.dart';
 import 'package:hafez/core/resource/constants/my_colors.dart';
 import 'package:hafez/core/resource/constants/my_strings.dart';
 import 'package:hafez/core/resource/constants/theme/my_theme.dart';
 import 'package:hafez/core/utils/ui_utils.dart';
-import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_favorite.dart';
 import 'package:hafez/pressentation/screens/ghazaliathafez/ghazaliat_hafez_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:hafez/route/names.dart';
 
 Widget listBottomsWidget(int index,BuildContext context,){
-  
-     
-  return 
-  CustomButtonWidget(
+  return CustomButtonWidget(
      margin: const EdgeInsets.only(left: 67.0,right: 67.0),
      height: UIUtils.getConvertedHeight(context,53),
      width: UIUtils.getConvertedWidth(context,226),
@@ -25,14 +19,5 @@ Widget listBottomsWidget(int index,BuildContext context,){
     textStyle:MyTHeme.lightTheme().textTheme.titleLarge,
     onPress: () {
          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const GhazaliatHafezScreen(),));
-
-        
-// controller.nextPage(
-//                     duration: Duration(milliseconds: 100), curve: Curves.ease);
-      //Navigator.pushNamed(context, ScreenNames.ghazaliatHafezScreen);
-  //   Navigator.push(
-  //   context,
-  //   MaterialPageRoute(builder: (context) => const GhazaliatFav()),
-  // );
   },);
 }

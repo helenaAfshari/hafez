@@ -19,13 +19,9 @@ class HomeScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
- 
-
- 
     //  PageController _pageController = PageController();
     return SafeArea(
   child: Scaffold(
- //bottomNavigationBar: MyBottomNavigation(),
     backgroundColor: MyColors.primaryColor,
     body: SizedBox(
       height:
@@ -42,7 +38,6 @@ class HomeScreen extends StatelessWidget {
               physics: const ScrollPhysics(),
               itemBuilder: (context, index) {
                return listBottomsWidget(index,context);
-
               },
               separatorBuilder: (context, index) =>  Gap(MyDimensions.small+1),
               itemCount: 1,
