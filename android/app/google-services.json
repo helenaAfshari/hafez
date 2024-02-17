@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "82379110110",
+    "project_id": "hafeznameh-new",
+    "storage_bucket": "hafeznameh-new.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82379110110:android:43d379967b67320dc1b44f",
+        "android_client_info": {
+          "package_name": "com.devapps.hafez"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "82379110110-bhceu4he02fmnmpj85cuaovf1c51dk4n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs3XMtn2WPQf-T70ilWU716ybbWxY7kWk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "82379110110-bhceu4he02fmnmpj85cuaovf1c51dk4n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
