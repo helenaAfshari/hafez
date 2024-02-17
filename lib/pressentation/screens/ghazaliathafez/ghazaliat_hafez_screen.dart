@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hafez/pressentation/screens/ghazaliathafez/widgets/list_ghazaliat_widget.dart';
 class GhazaliatHafezScreen extends StatefulWidget {
-  
   const GhazaliatHafezScreen({super.key});
   @override
   State<GhazaliatHafezScreen> createState() => _GhazaliatHafezScreenState();

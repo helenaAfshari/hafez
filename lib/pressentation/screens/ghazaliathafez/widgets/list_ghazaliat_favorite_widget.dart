@@ -78,14 +78,18 @@ class ListGhazaliatFavoriteWidget extends StatelessWidget {
                               StatefulBuilder(builder: (context, setState) {
                                 return Row(
                                   children: [
-                                    GestureDetector(
-                                      onTap: () async {
-                                        print("shareeee::::::::::");
-
-                                        await Share.share(MyStrings.shareText);
-                                      },
-                                      child:
-                                          Image.asset("assets/icons/share.png"),
+                                    SizedBox(
+                                     height: MyDimensions.semiLarge,
+                                      width: MyDimensions.semiLarge,
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          print("shareeee::::::::::");
+                                    
+                                          await Share.share(MyStrings.shareTextMyket);
+                                        },
+                                        child:
+                                            Image.asset("assets/icons/share.png"),
+                                      ),
                                     ),
                                   ],
                                 );

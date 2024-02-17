@@ -10,9 +10,15 @@ abstract class MyStrings {
    static const String ghazaliatHafezText = "غزلیات حافظ";
    static const String shareText = """
      به اپلیکیشن حافظ خوش امدید\n
-https://play.google.com/store/apps/details?id=com.devapps.hafez
+https://cafebazaar.ir/app/com.devapps.hafez/
+""";
+  static const String shareTextMyket = """
+     به اپلیکیشن حافظ خوش امدید\n
+https://myket.ir/app/com.devapps.hafez/
+
 """;
   static const String websiteLink ="https://hafezname.ir/";
+  static const String websiteLinkTafsirBazar ="https://cafebazaar.ir/app/com.devapps.hafez/";
   static const String supportLink ="https://telegram.me/crmapps";
   
 }

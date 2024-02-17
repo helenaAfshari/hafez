@@ -84,7 +84,6 @@ return 1;
             
           ),
         ),
-       
       ),
         Center(
           child: GestureDetector(
@@ -114,7 +113,6 @@ return 1;
                 image: DecorationImage(
               fit: BoxFit.fill,
               image: AssetImage('assets/images/GoldfingerTap.png'),
-              
             ),
               ),
                child: AnimatedOpacity(
@@ -122,7 +120,6 @@ return 1;
             opacity: opacity,
             child: Lottie.asset('assets/lottie/anim.json'),
             ),
-            
               ), 
           ),
         ),

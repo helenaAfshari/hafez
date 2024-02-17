@@ -1,8 +1,13 @@
 
 import 'dart:io';
+import 'dart:developer';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 import 'package:hafez/core/bottomnavigationbar/custom_buttom_navigation.dart';
 import 'package:hafez/core/resource/constants/theme/my_theme.dart';
+import 'package:hafez/firebase_options.dart';
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_bloc.dart';
 import 'package:hafez/pressentation/blocs/detailsghazaliathafezbloc/details_ghazaliat_hafez_event.dart';
 import 'package:hafez/pressentation/blocs/estekharebloc/bloc_estekhare.dart';
@@ -16,9 +21,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+
+  print("Handling a background message: ${message.messageId}");
+}
 
 void main() async {
+  WidgetsFlutterBinding();
    WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
      SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -27,12 +44,37 @@ void main() async {
   Hive.defaultDirectory = dir.path;
   }else{
     Hive.defaultDirectory = './';
+    // Isar.
   }
+  
   await injector();
-  runApp(
-  MyApp()
-  );
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  log("fcM token::::"+fcmToken!);
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // Pass all uncaught "fatal" errors from the framework to Crashlytics
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  runApp(MyApp());
 }
+// void main() async {
+  
+//    WidgetsFlutterBinding.ensureInitialized();
+   
+//      SystemChrome.setPreferredOrientations([
+//     DeviceOrientation.portraitUp,
+//   ]);
+//    if(!kIsWeb){
+// // if (!foundation.kIsWeb) {
+//  Directory dir = await getApplicationDocumentsDirectory();
+//   Hive.defaultDirectory = dir.path;
+//   }else{
+//     Hive.defaultDirectory = './';
+//   }
+//   await injector();
+
+//   runApp(
+//   MyApp()
+//   );
+// }
  Offset? _tapPosition;
    BlocEstekhare blocEstekharee = BlocEstekhare();
 
@@ -55,8 +97,7 @@ bool isLimitReached = false; // برای اطمینان از رسیدن به ح�
 }
 
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class BlocProviders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -65,22 +106,27 @@ class MyApp extends StatelessWidget {
           create: (context) => GhazaliatHafezBloc()..add(LoadedEvent()),
         ),
         BlocProvider<DetailsGhazaliatHafezBloc>(
-            create: (context) =>
-          DetailsGhazaliatHafezBloc()..add(LoadedddEvent(0))),
-
-           BlocProvider<BlocEstekhare>(
-create: (context) =>BlocEstekhare()..add(EstekhareLoadedEvent(generateRandomNumber()))),
-  
-          
+          create: (context) => DetailsGhazaliatHafezBloc()..add(LoadedddEvent(0))),
+        BlocProvider<BlocEstekhare>(
+          create: (context) => BlocEstekhare()..add(EstekhareLoadedEvent(generateRandomNumber()))),
       ],
-      child:  MaterialApp(
+      child: MaterialApp(
         theme: MyTHeme.lightTheme(),
-        home:  CustomBottomNavigation(),
-       // home:  SamplePageView(),
-        //  initialRoute: ScreenNames.homeScreen,
-        //  routes: routes,
+        home: CustomBottomNavigation(),
+        // home:  SamplePageView(),
+        // initialRoute: ScreenNames.homeScreen,
+        // routes: routes,
       ),
     );
   }
 }
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return BlocProviders();
+  }
+}
+
 
